@@ -248,63 +248,9 @@
 
             </div>
         </div>
-        <div class="col-md-12 col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="row">
-                            <h3><small>Detail Service Package</small></h3>
-                        </div>
-                        <div class="row">
-                            <table class="showDataTable" class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <!-- <th>Id Service Package</th>
-                                            <th>Id Package</th> -->
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $i = 0;
-                                    $count = count($detail_service_package['features']);
-                                    $count = $count - 1;
-                                    $start = 0;
-                                    while ($count >= $i) {
-                                    ?>
-
-                                        <tr>
-                                            <td width="80px"><?php
-                                                                echo ++$start ?></td>
-                                            <!-- <td><?= $detail_service_package['features'][$i]['properties']['id_service_package'] ?></td>
-                                                <td><?= $detail_service_package['features'][$i]['properties']['id_package'] ?></td> -->
-                                            <td><?= $detail_service_package['features'][$i]['properties']['status'] ?></td>
 
 
 
-                                            <td style="width: 80px;">
-                                                <span class="float-right">
-                                                    <!-- <a href="<?= base_url('detail_service_package/read/' . $detail_service_package['features'][$i]['properties']['id_service_package'] . "/" . $detail_service_package['features'][$i]['properties']['id_package']) ?>"><i class="fa-solid fa-bars"></i></a> -->
-                                                    <a href="<?= base_url('detail_service_package/update/' . $detail_service_package['features'][$i]['properties']['id_service_package'] . "/" . $detail_service_package['features'][$i]['properties']['id_package']) ?>"><i style="color:chocolate" class="fas fa-edit"></i></a>
-                                                    <!-- <a href="<?= base_url('detail_service_package/delete/' . $detail_service_package['features'][$i]['properties']['id_service_package'] . "/" . $detail_service_package['features'][$i]['properties']['id_package']) ?>" ><i style="color:red" class="fa fa-trash" aria-hidden="true"></i></a> -->
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    <?php
-
-                                        $i++;
-                                    } ?>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
 
     </div>
 </section>

@@ -1149,7 +1149,7 @@ class Tourism extends ResourcePresenter
             $min_capacity = 0;
             $contact_person = 0;
             $price = 0;
-            $description = 'CUSTOM BY USER';
+
 
             $queryList = array();
             $m = 0;
@@ -1188,8 +1188,11 @@ class Tourism extends ResourcePresenter
 
 
             $id_package = $id;
+            $user_name = $_SESSION['ses_name'];
 
-            $query = $db->query("INSERT INTO `package` (`id_package`,`name`,`min_capaity`,`contact_person`,`description`,`price`,`custom`) VALUES ('" . $id_package . "','" . $name . "','" . $min_capacity . "','" . $contact_person . "','" . $description . "','" . $price . "','1');");
+            $description = 'Custom order by ' . $user_name;
+
+            $query = $db->query("INSERT INTO `package` (`id_package`,`name`,`min_capaity`,`contact_person`,`description`,`price`,`custom`) VALUES ('" . $id_package . "','" . $user_name . "','" . $min_capacity . "','" . $contact_person . "','" . $description . "','" . $price . "','1');");
 
 
             // echo $statusUpload;

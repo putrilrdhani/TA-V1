@@ -213,6 +213,7 @@
                     position: posData,
                     map,
                     title: "Tourism Object",
+                    animation: google.maps.Animation.DROP,
                     info: contentString,
                     icon: urlAplikasi + "media/icon/marker_hs.png",
                 });
@@ -312,6 +313,7 @@
                     position: posData,
                     map,
                     title: "Tourism Object",
+                    animation: google.maps.Animation.DROP,
                     info: contentString,
                     icon: urlAplikasi + "media/icon/marker_cp.png",
                 });
@@ -410,6 +412,7 @@
                     position: posData,
                     map,
                     title: "Tourism Object",
+                    animation: google.maps.Animation.DROP,
                     info: contentString,
                     icon: urlAplikasi + "media/icon/marker_ev.png",
                 });
@@ -507,6 +510,7 @@
                     map,
                     title: "Tourism Object",
                     info: contentString,
+                    animation: google.maps.Animation.DROP,
                     icon: urlAplikasi + "media/icon/marker_wp.png",
                 });
 
@@ -606,6 +610,7 @@
                     map,
                     title: "Tourism Object",
                     info: contentString,
+                    animation: google.maps.Animation.DROP,
                     icon: urlAplikasi + "media/icon/marker_sp.png",
                 });
 
@@ -705,6 +710,7 @@
                 position: posData,
                 map,
                 title: "Tourism Object",
+                animation: google.maps.Animation.DROP,
                 info: contentString,
                 icon: urlAplikasi + "media/icon/marker_to.png",
             });

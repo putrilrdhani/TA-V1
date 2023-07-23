@@ -5,11 +5,10 @@
 <section class="section">
     <div class="row">
         <!--map-->
-        <div class="col-md-12 col-12">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header">
                     <div class="row align-items-center">
-
 
                         <!-- Isi Disini -->
 
@@ -17,9 +16,6 @@
                         <div class="row content">
                             <h1><?= $content; ?> Event</h1>
                         </div>
-
-                        <?= $this->include('web/layouts/map-body'); ?>
-
                         <?php
                         // echo $data['status']
 
@@ -262,8 +258,15 @@
             </div>
         </div>
 
-
-
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <?= $this->include('web/layouts/map-body'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

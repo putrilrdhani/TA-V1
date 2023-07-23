@@ -68,15 +68,11 @@ if (isset($selectData)) {
 <section class="section">
     <div class="row">
         <!--map-->
-        <div class="col-md-12 col-12">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header">
                     <div class="row align-items-center">
 
-
-                        <?= $this->include('web/layouts/map-body'); ?>
-
-                        <!-- Javascript untuk  memuat peta -->
                         <?php
                         // echo $data['status']
 
@@ -127,91 +123,84 @@ if (isset($selectData)) {
 
                                 <div class="row">
                                     <div class="col-sm-2"></div>
-                                    <div class="col-sm-8">
+                                    <div class="slidercontainer">
 
-
-
-                                        <div class="slidercontainer">
-
+                                        <?php
+                                        $countImage = count($data);
+                                        $image_i = 0;
+                                        while ($image_i < $countImage) {
+                                        ?>
                                             <?php
-                                            $countImage = count($data);
-                                            $image_i = 0;
-                                            while ($image_i < $countImage) {
+
+                                            if ($data[$image_i]->id_gallery == NULL) {
+                                            } else {
                                             ?>
-                                                <?php
-
-                                                if ($data[$image_i]->id_gallery == NULL) {
-                                                } else {
-                                                ?>
-                                                    <div class="showSlide">
-                                                        <img class="img img-fluid" src="<?php echo base_url("upload/" . $data[$image_i]->url); ?>" />
-                                                        <div class="contentx"><?php echo $data[$image_i]->name; ?></div>
-                                                        <a style="float:right" onclick="deleteImageTourism('<?php echo $data[$image_i]->id_gallery; ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
-                                                    </div>
-                                                <?php
-                                                }
-                                                ?>
-
-                                                <?php
-
-                                                if ($data[$image_i]->id_video == NULL) {
-                                                } else {
-                                                ?>
-                                                    <div class="showSlide">
-
-                                                        <video width="100%" height="100%" controls>
-                                                            <source src="<?php echo base_url("upload/" . $data[$image_i]->url_video); ?>" type="video/mp4">
-
-                                                            Your browser does not support the video tag.
-                                                        </video>
-                                                        <div class="contentx"><?php echo $data[$image_i]->name; ?></div>
-                                                        <a style="float:right" onclick="deleteVideoTourism('<?php echo $data[$image_i]->id_video; ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
-                                                    </div>
-                                                <?php
-                                                }
-                                                ?>
-
-
-
-
+                                                <div class="showSlide">
+                                                    <img class="img img-fluid" src="<?php echo base_url("upload/" . $data[$image_i]->url); ?>" />
+                                                    <a style="float:right" onclick="deleteImageTourism('<?php echo $data[$image_i]->id_gallery; ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
+                                                </div>
                                             <?php
-                                                $image_i++;
                                             }
                                             ?>
 
-                                            <!-- Navigation arrows -->
-                                            <a class="left" onclick="nextSlide(-1)"><i class="fa-solid fa-backward"></i>| </a>
-                                            <a class="right" onclick="nextSlide(1)"> |<i class="fa-solid fa-forward"></i></a>
-                                        </div>
+                                            <?php
 
-                                        <script type="text/javascript">
-                                            var slide_index = 1;
-                                            displaySlides(slide_index);
+                                            if ($data[$image_i]->id_video == NULL) {
+                                            } else {
+                                            ?>
+                                                <div class="showSlide">
 
-                                            function nextSlide(n) {
-                                                displaySlides(slide_index += n);
+                                                    <video width="100%" height="100%" controls>
+                                                        <source src="<?php echo base_url("upload/" . $data[$image_i]->url_video); ?>" type="video/mp4">
+
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                    <a style="float:right" onclick="deleteVideoTourism('<?php echo $data[$image_i]->id_video; ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
+                                                </div>
+                                            <?php
                                             }
+                                            ?>
 
-                                            function currentSlide(n) {
-                                                displaySlides(slide_index = n);
-                                            }
 
-                                            function displaySlides(n) {
-                                                var i;
-                                                var slides = document.getElementsByClassName("showSlide");
-                                                if (n > slides.length) {
-                                                    slide_index = 1
-                                                }
-                                                if (n < 1) {
-                                                    slide_index = slides.length
-                                                }
-                                                for (i = 0; i < slides.length; i++) {
-                                                    slides[i].style.display = "none";
-                                                }
-                                                slides[slide_index - 1].style.display = "block";
-                                            }
-                                        </script>
+
+
+                                        <?php
+                                            $image_i++;
+                                        }
+                                        ?>
+
+                                        <!-- Navigation arrows -->
+                                        <a class="left" onclick="nextSlide(-1)"><i class="fa-solid fa-backward"></i>| </a>
+                                        <a class="right" onclick="nextSlide(1)"> |<i class="fa-solid fa-forward"></i></a>
                                     </div>
+
+                                    <script type="text/javascript">
+                                        var slide_index = 1;
+                                        displaySlides(slide_index);
+
+                                        function nextSlide(n) {
+                                            displaySlides(slide_index += n);
+                                        }
+
+                                        function currentSlide(n) {
+                                            displaySlides(slide_index = n);
+                                        }
+
+                                        function displaySlides(n) {
+                                            var i;
+                                            var slides = document.getElementsByClassName("showSlide");
+                                            if (n > slides.length) {
+                                                slide_index = 1
+                                            }
+                                            if (n < 1) {
+                                                slide_index = slides.length
+                                            }
+                                            for (i = 0; i < slides.length; i++) {
+                                                slides[i].style.display = "none";
+                                            }
+                                            slides[slide_index - 1].style.display = "block";
+                                        }
+                                    </script>
                                     <div class="col-sm-2"></div>
                                 </div>
 
@@ -323,8 +312,18 @@ if (isset($selectData)) {
             </div>
         </div>
 
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
 
 
+                        <?= $this->include('web/layouts/map-body'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <!-- Direction section -->
     <?= $this->include('web/layouts/direction'); ?>

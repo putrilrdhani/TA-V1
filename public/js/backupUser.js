@@ -1,241 +1,205 @@
-let putCounter=0;
-let over=1;
-let urlAplikasi='http://localhost:8080/';
+let putCounter = 0;
+let over = 1;
+let urlAplikasi = "http://localhost:8080/";
 let map;
 let tempArray;
-let countArray=0;
+let countArray = 0;
 var infoWindow, markerA, markerB, drag_pos;
-let countDirection=0;
+let countDirection = 0;
 let directionsRenderer1;
 let directionsRenderer2;
 let directionsService;
 let markerRouteStart;
-let GPSLocation=null;
+let GPSLocation = null;
 let radiusCircle;
-let radiusStart=0;
-let markerArrayTemp= new Array();
+let radiusStart = 0;
+let markerArrayTemp = new Array();
 let centerCircle;
 function setBaseUrl(url) {
-    baseUrl = url;
+  baseUrl = url;
 }
 
-
 function initialize() {
-    map = new google.maps.Map(document.getElementById('googlemaps'), {
+  map = new google.maps.Map(document.getElementById("googlemaps"), {
     zoom: 14,
     center: new google.maps.LatLng(-0.7911133716096994, 100.60009746739821),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     disableDefaultUI: true,
-    zoomControl: true
+    zoomControl: true,
   });
 
   var polyOptions = {
     strokeWeight: 0,
     fillOpacity: 0.45,
-    editable: true
+    editable: true,
   };
-  
 
-
-
-  if(putCounter==0)
-  {
+  if (putCounter == 0) {
     // myTimeout = setTimeout(callAfterPut, 2000);
 
     callAfterPut();
- 
+  } else {
   }
-  else{
-
-  }
- 
 }
-google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, "load", initialize);
 
-function mapView(id)
-{
-
+function mapView(id) {
   var pos = {
-    lat: parseFloat('-0.7911133716096994'),
-    lng: parseFloat('100.60009746739821')
-};
+    lat: parseFloat("-0.7911133716096994"),
+    lng: parseFloat("100.60009746739821"),
+  };
   map.setCenter(pos);
   map.setZoom(14);
 
-setMapOnAll(null);
-if(countArray==0)
-{
+  setMapOnAll(null);
+  if (countArray == 0) {
+  } else {
+    tempArray.setMap(null);
+    countArray = 0;
+  }
+  if (countDirection == 0) {
+  } else {
+    markerA.setMap(null);
+    markerB.setMap(null);
+    directionsRenderer1.setMap(null);
+    directionsRenderer2.setMap(null);
 
+    countDirection = 0;
+  }
+
+  // setMapOnAll(map);
+  // markers.push(marker);
+  // Buat marker baru di sini
+  console.log(markerArray);
+  $.get(urlAplikasi + "web/select_id_tourism/" + id, function (data) {
+    xyPoint = JSON.parse(data);
+    console.log();
+    let x = xyPoint.features[0].properties["x"];
+    let y = xyPoint.features[0].properties["y"];
+    let posData = {
+      lat: parseFloat(y),
+      lng: parseFloat(x),
+    };
+    contentStringX =
+      '<table class="table">' +
+      "<thead>" +
+      "  <tr>" +
+      '    <th class="tg-0lax">Item</th>' +
+      '    <th class="tg-0lax">Info</th>' +
+      "  </tr>" +
+      "</thead>" +
+      "<tbody>" +
+      "  <tr>" +
+      '    <td class="tg-0lax">Name</td>' +
+      '    <td class="tg-0lax">' +
+      xyPoint.features[0].properties["name"] +
+      "</td>" +
+      "  </tr>" +
+      "  <tr>" +
+      '    <td class="tg-0lax">kshdkajhsdkahdjks</td>' +
+      '    <td class="tg-0lax">jkhadkahjdhjkdjkj</td>' +
+      "  </tr>" +
+      "  <tr>" +
+      '    <td class="tg-0lax"></td>' +
+      '    <td class="tg-0lax"></td>' +
+      "  </tr>" +
+      "  <tr>" +
+      '    <td class="tg-0lax"></td>' +
+      '    <td class="tg-0lax"></td>' +
+      "  </tr>" +
+      "</tbody>" +
+      "</table>" +
+      "<br/><button onclick='dirrectionPointX(" +
+      x +
+      "," +
+      y +
+      ")' class='btn btn-success'>Route</button>";
+    tempArray = new google.maps.Marker({
+      position: posData,
+      map,
+      title: "Hello World!",
+      animation: google.maps.Animation.DROP,
+      info: contentStringX,
+    });
+
+    infowindow = new google.maps.InfoWindow({
+      content: contentStringX,
+      ariaLabel: "Uluru",
+    });
+    google.maps.event.addListener(tempArray, "click", function () {
+      infowindow.setContent(this.info);
+      infowindow.open(map, this);
+    });
+  });
+
+  countArray = countArray + 1;
 }
-else
-{
-  tempArray.setMap(null);
-  countArray=0;
-}
-if(countDirection==0)
-{
-
-}
-else
-{
-  markerA.setMap(null);
-  markerB.setMap(null);
-  directionsRenderer1.setMap(null);
-  directionsRenderer2.setMap(null);
-
-  countDirection=0;
-}
-
-// setMapOnAll(map);
-// markers.push(marker);
-// Buat marker baru di sini
-console.log(markerArray);
-$.get(urlAplikasi+"web/select_id_tourism/"+id, function(data){
-  xyPoint=JSON.parse(data);
-  console.log();
-  let x = xyPoint.features[0].properties['x'];
-  let y = xyPoint.features[0].properties['y'];
-  let posData = {
-    lat: parseFloat(y),
-    lng: parseFloat(x)
-};
-contentStringX =
-    '<table class="table">' +
-    '<thead>' +
-    '  <tr>' +
-    '    <th class="tg-0lax">Item</th>' +
-    '    <th class="tg-0lax">Info</th>' +
-    '  </tr>' +
-    '</thead>' +
-    '<tbody>' +
-    '  <tr>' +
-    '    <td class="tg-0lax">Name</td>' +
-    '    <td class="tg-0lax">' + xyPoint.features[0].properties['name'] + '</td>' +
-    '  </tr>' +
-    '  <tr>' +
-    '    <td class="tg-0lax">kshdkajhsdkahdjks</td>' +
-    '    <td class="tg-0lax">jkhadkahjdhjkdjkj</td>' +
-    '  </tr>' +
-    '  <tr>' +
-    '    <td class="tg-0lax"></td>' +
-    '    <td class="tg-0lax"></td>' +
-    '  </tr>' +
-    '  <tr>' +
-    '    <td class="tg-0lax"></td>' +
-    '    <td class="tg-0lax"></td>' +
-    '  </tr>' +
-    '</tbody>' +
-    '</table>' + "<br/><button onclick='dirrectionPointX("+x+","+y+")' class='btn btn-success'>Route</button>";
-tempArray = new google.maps.Marker({
-    position: posData,
-    map,
-    title: "Hello World!",
-    info: contentStringX
-});
-
-
-infowindow = new google.maps.InfoWindow({
-    content: contentStringX,
-    ariaLabel: "Uluru",
-});
-  google.maps.event.addListener(tempArray, 'click', function() {
-
-                infowindow.setContent(this.info);
-                infowindow.open(map, this);
-
-            });
-});
-
-countArray=countArray+1;
-
-}
-function mapRoute(id)
-{
+function mapRoute(id) {
   Swal.fire({
-    title: 'Click on the map to add the position manually',
+    title: "Click on the map to add the position manually",
     allowOutsideClick: () => {
-      const popup = Swal.getPopup()
-      popup.classList.remove('swal2-show')
+      const popup = Swal.getPopup();
+      popup.classList.remove("swal2-show");
       setTimeout(() => {
-        popup.classList.add('animate__animated', 'animate__headShake')
-      })
+        popup.classList.add("animate__animated", "animate__headShake");
+      });
       setTimeout(() => {
-        popup.classList.remove('animate__animated', 'animate__headShake')
-      }, 500)
-      return false
-    }
-  })
+        popup.classList.remove("animate__animated", "animate__headShake");
+      }, 500);
+      return false;
+    },
+  });
 
-//  Rute dimana user memilih sendiri lokasinya
-google.maps.event.addListener(map, 'click', function(event) {
-  $.get(urlAplikasi+"web/select_id_tourism/"+id, function(data){
-  xyPoint=JSON.parse(data);
-  console.log();
-  let x = xyPoint.features[0].properties['x'];
-  let y = xyPoint.features[0].properties['y'];
+  //  Rute dimana user memilih sendiri lokasinya
+  google.maps.event.addListener(map, "click", function (event) {
+    $.get(urlAplikasi + "web/select_id_tourism/" + id, function (data) {
+      xyPoint = JSON.parse(data);
+      console.log();
+      let x = xyPoint.features[0].properties["x"];
+      let y = xyPoint.features[0].properties["y"];
 
-  placeMarker(event.latLng,x,y);
- 
+      placeMarker(event.latLng, x, y);
+    });
+  });
 
-});
-   
-});
+  setMapOnAll(null);
 
-setMapOnAll(null);
-
-console.log("test");
-
-
-
+  console.log("test");
 }
 
-function placeMarker(location,x,y) {
-  if(countArray==0)
-{
+function placeMarker(location, x, y) {
+  if (countArray == 0) {
+  } else {
+    markerB.setMap(null);
+    countArray = 0;
+  }
+  if (countDirection == 0) {
+  } else {
+    markerA.setMap(null);
+    markerB.setMap(null);
+    directionsRenderer1.setMap(null);
+    directionsRenderer2.setMap(null);
 
-}
-else
-{
-  markerB.setMap(null);
-  countArray=0;
-}
-if(countDirection==0)
-{
+    countDirection = 0;
+  }
 
-}
-else
-{
-  markerA.setMap(null);
-  markerB.setMap(null);
-  directionsRenderer1.setMap(null);
-  directionsRenderer2.setMap(null);
+  if (markerRouteStart == null) {
+    markerRouteStart = new google.maps.Marker({
+      position: location,
+      map: map,
+    });
+  } else {
+    markerRouteStart.setPosition(location);
+  }
+  console.log("MANUAL");
+  let lat_y = markerRouteStart.getPosition().lat();
+  let lng_x = markerRouteStart.getPosition().lng();
+  console.log(lat_y);
+  console.log(lng_x);
+  console.log(x);
+  console.log(y);
 
-  countDirection=0;
-}
-
-    if (markerRouteStart == null)
-    {
-          markerRouteStart = new google.maps.Marker({
-             position: location,
-             map: map
-          }); 
-    } 
-    else 
-    {
-        markerRouteStart.setPosition(location); 
-    } 
-console.log("MANUAL");
-let lat_y=markerRouteStart.getPosition().lat();
-let lng_x=markerRouteStart.getPosition().lng();
-console.log(lat_y)
-console.log(lng_x)
-console.log(x)
-console.log(y)
-
-
-    dirrectionManual(x,y,lat_y,lng_x);
-
-
+  dirrectionManual(x, y, lat_y, lng_x);
 }
 
 function setMapOnAll(map) {
@@ -256,62 +220,59 @@ function showMarkers() {
   setMapOnAll(map);
 }
 
-
-function dirrectionPointX(x,y)
-{
-  $('#panelRender').empty();
+function dirrectionPointX(x, y) {
+  $("#panelRender").empty();
   markerA = new google.maps.Marker({
-    map: map
-});
-if(tempArray== undefined)
-{
-  centerCircle= new google.maps.Marker({
-    position: GPSLocation,
-    title:"Your Location!"
-});
-
-tempArray= centerCircle;
-
-}
-markerB = tempArray;
-infoWindow = new google.maps.InfoWindow;
- directionsService = new google.maps.DirectionsService();
- directionsRenderer1 = new google.maps.DirectionsRenderer({
     map: map,
-    suppressMarkers: true
-});
-directionsRenderer2 = new google.maps.DirectionsRenderer({
+  });
+  if (tempArray == undefined) {
+    centerCircle = new google.maps.Marker({
+      position: GPSLocation,
+      title: "Your Location!",
+    });
+
+    tempArray = centerCircle;
+  }
+  markerB = tempArray;
+  infoWindow = new google.maps.InfoWindow();
+  directionsService = new google.maps.DirectionsService();
+  directionsRenderer1 = new google.maps.DirectionsRenderer({
+    map: map,
+    suppressMarkers: true,
+  });
+  directionsRenderer2 = new google.maps.DirectionsRenderer({
     map: map,
     suppressMarkers: true,
     polylineOptions: {
-        strokeColor: "gray"
-    }
-});
-directionsRenderer1.setPanel(document.getElementById("panelRender"));
+      strokeColor: "gray",
+    },
+  });
+  directionsRenderer1.setPanel(document.getElementById("panelRender"));
 
-// Try HTML5 geolocation.
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
         var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
         };
 
         map.setCenter(pos);
         map.setZoom(15);
         //Put markers on the place
-        infoWindow.setContent('Your Location');
+        infoWindow.setContent("Your Location");
         markerA.setPosition(pos);
         markerA.setVisible(true);
-        markerA.setLabel('A');
-        markerA.addListener('click', function() {
-            infoWindow.open(map, markerA);
+        markerA.setLabel("A");
+        markerA.addListener("click", function () {
+          infoWindow.open(map, markerA);
         });
 
         //Get new lat long to put marker B 500m above Marker A
         var earth = 6378.137, //radius of the earth in kilometer
-            pi = Math.PI,
-            m = (1 / ((2 * pi / 360) * earth)) / 1000; //1 meter in degree
+          pi = Math.PI,
+          m = 1 / (((2 * pi) / 360) * earth) / 1000; //1 meter in degree
 
         // var new_latitude = pos.lat + (500 * m);
         // var new_pos = {
@@ -321,189 +282,180 @@ if (navigator.geolocation) {
 
         // markerB.setPosition(new_pos, );
         markerB.setVisible(true);
-        markerB.setLabel('B');
+        markerB.setLabel("B");
         // markerB.setDraggable(true);
 
         //Everytime MarkerB is drag Directions Service is use to get all the route
         // google.maps.event.addListener(markerB, 'dragend', function(evt) {
-            // var drag_pos1 = {
-            //     lat: evt.latLng.lat(),
-            //     lng: evt.latLng.lng()
-            // };
-            // Koordinat tujuan
-            let posData = {
-              lat: parseFloat(y),
-              lng: parseFloat(x)
-          };
+        // var drag_pos1 = {
+        //     lat: evt.latLng.lat(),
+        //     lng: evt.latLng.lng()
+        // };
+        // Koordinat tujuan
+        let posData = {
+          lat: parseFloat(y),
+          lng: parseFloat(x),
+        };
 
-            directionsService.route({
-                    origin: pos,
-                    destination: posData,
-                    travelMode: 'DRIVING',
-                    provideRouteAlternatives: true
-                },
-                function(response, status) {
-                    if (status === 'OK') {
-
-                        for (var i = 0, len = response.routes.length; i < len; i++) {
-                            if (i === 0) {
-                                directionsRenderer1.setDirections(response);
-                                directionsRenderer1.setRouteIndex(i);
-
-                            } else {
-
-                                directionsRenderer2.setDirections(response);
-                                directionsRenderer2.setRouteIndex(i);
-                            }
-                        }
-                        console.log(response);
-                    } else {
-                        window.alert('Directions request failed due to ' + status);
-                    }
-                });
-                directionsService
-                .route({
-                  origin: pos,
-                  destination: posData,
-                  travelMode: google.maps.TravelMode.DRIVING,
-                })
-                .then((response) => {
+        directionsService.route(
+          {
+            origin: pos,
+            destination: posData,
+            travelMode: "DRIVING",
+            provideRouteAlternatives: true,
+          },
+          function (response, status) {
+            if (status === "OK") {
+              for (var i = 0, len = response.routes.length; i < len; i++) {
+                if (i === 0) {
                   directionsRenderer1.setDirections(response);
-                })
-                .catch((e) => window.alert("Directions request failed due to " + status));
+                  directionsRenderer1.setRouteIndex(i);
+                } else {
+                  directionsRenderer2.setDirections(response);
+                  directionsRenderer2.setRouteIndex(i);
+                }
+              }
+              console.log(response);
+            } else {
+              window.alert("Directions request failed due to " + status);
+            }
+          }
+        );
+        directionsService
+          .route({
+            origin: pos,
+            destination: posData,
+            travelMode: google.maps.TravelMode.DRIVING,
+          })
+          .then((response) => {
+            directionsRenderer1.setDirections(response);
+          })
+          .catch((e) =>
+            window.alert("Directions request failed due to " + status)
+          );
         // });
-        countDirection=countDirection+1;
-    }, function() {
+        countDirection = countDirection + 1;
+      },
+      function () {
         handleLocationError(true, infoWindow, map.getCenter());
-    });
-} else {
+      }
+    );
+  } else {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
-}
+  }
 }
 
-function dirrectionManual(x,y,lat_y,lng_x)
-{
+function dirrectionManual(x, y, lat_y, lng_x) {
   // Tambahkan panel informasi arah yang bisa diambil
-  $('#panelRender').empty();
-
+  $("#panelRender").empty();
 
   markerA = new google.maps.Marker({
-    map: map
-});
-markerB = new google.maps.Marker({
-    map: map
-});;
-infoWindow = new google.maps.InfoWindow;
- directionsService = new google.maps.DirectionsService();
- directionsRenderer1 = new google.maps.DirectionsRenderer({
     map: map,
-    suppressMarkers: true
-});
-directionsRenderer2 = new google.maps.DirectionsRenderer({
+  });
+  markerB = new google.maps.Marker({
+    map: map,
+  });
+  infoWindow = new google.maps.InfoWindow();
+  directionsService = new google.maps.DirectionsService();
+  directionsRenderer1 = new google.maps.DirectionsRenderer({
+    map: map,
+    suppressMarkers: true,
+  });
+  directionsRenderer2 = new google.maps.DirectionsRenderer({
     map: map,
     suppressMarkers: true,
     polylineOptions: {
-        strokeColor: "gray"
+      strokeColor: "gray",
+    },
+  });
+  directionsRenderer1.setPanel(document.getElementById("panelRender"));
+
+  var pos = {
+    lat: parseFloat(lat_y),
+    lng: parseFloat(lng_x),
+  };
+
+  map.setCenter(pos);
+  map.setZoom(15);
+  //Put markers on the place
+  infoWindow.setContent("Your Location");
+  markerA.setPosition(pos);
+  markerA.setVisible(true);
+  markerA.setLabel("A");
+  markerA.addListener("click", function () {
+    infoWindow.open(map, markerA);
+  });
+
+  //Get new lat long to put marker B 500m above Marker A
+  var earth = 6378.137, //radius of the earth in kilometer
+    pi = Math.PI,
+    m = 1 / (((2 * pi) / 360) * earth) / 1000; //1 meter in degree
+
+  // var new_latitude = pos.lat + (500 * m);
+  // var new_pos = {
+  //     lat: new_latitude,
+  //     lng: position.coords.longitude
+  // };
+
+  // markerB.setPosition(new_pos, );
+  let posData = {
+    lat: parseFloat(y),
+    lng: parseFloat(x),
+  };
+  markerA.setPosition(posData);
+  markerB.setVisible(true);
+  markerB.setLabel("B");
+  // markerB.setDraggable(true);
+
+  //Everytime MarkerB is drag Directions Service is use to get all the route
+  // google.maps.event.addListener(markerB, 'dragend', function(evt) {
+  // var drag_pos1 = {
+  //     lat: evt.latLng.lat(),
+  //     lng: evt.latLng.lng()
+  // };
+  // Koordinat tujuan
+
+  directionsService.route(
+    {
+      origin: pos,
+      destination: posData,
+      travelMode: "DRIVING",
+      provideRouteAlternatives: true,
+    },
+    function (response, status) {
+      if (status === "OK") {
+        for (var i = 0, len = response.routes.length; i < len; i++) {
+          if (i === 0) {
+            directionsRenderer1.setDirections(response);
+            directionsRenderer1.setRouteIndex(i);
+          } else {
+            directionsRenderer2.setDirections(response);
+            directionsRenderer2.setRouteIndex(i);
+          }
+        }
+        console.log(response);
+      } else {
+        window.alert("Directions request failed due to " + status);
+      }
     }
-});
-directionsRenderer1.setPanel(document.getElementById("panelRender"));
+  );
 
-
-    
-        var pos = {
-            lat: parseFloat(lat_y),
-            lng: parseFloat(lng_x)
-        };
-
-        map.setCenter(pos);
-        map.setZoom(15);
-        //Put markers on the place
-        infoWindow.setContent('Your Location');
-        markerA.setPosition(pos);
-        markerA.setVisible(true);
-        markerA.setLabel('A');
-        markerA.addListener('click', function() {
-            infoWindow.open(map, markerA);
-        });
-
-        //Get new lat long to put marker B 500m above Marker A
-        var earth = 6378.137, //radius of the earth in kilometer
-            pi = Math.PI,
-            m = (1 / ((2 * pi / 360) * earth)) / 1000; //1 meter in degree
-
-        // var new_latitude = pos.lat + (500 * m);
-        // var new_pos = {
-        //     lat: new_latitude,
-        //     lng: position.coords.longitude
-        // };
-
-        // markerB.setPosition(new_pos, );
-           let posData = {
-              lat: parseFloat(y),
-              lng: parseFloat(x)
-          };
-         markerA.setPosition(posData);
-        markerB.setVisible(true);
-        markerB.setLabel('B');
-        // markerB.setDraggable(true);
-
-        //Everytime MarkerB is drag Directions Service is use to get all the route
-        // google.maps.event.addListener(markerB, 'dragend', function(evt) {
-            // var drag_pos1 = {
-            //     lat: evt.latLng.lat(),
-            //     lng: evt.latLng.lng()
-            // };
-            // Koordinat tujuan
-         
-
-          
-
-            directionsService.route({
-                    origin: pos,
-                    destination: posData,
-                    travelMode: 'DRIVING',
-                    provideRouteAlternatives: true
-                },
-                function(response, status) {
-                    if (status === 'OK') {
-
-                        for (var i = 0, len = response.routes.length; i < len; i++) {
-                            if (i === 0) {
-                                directionsRenderer1.setDirections(response);
-                                directionsRenderer1.setRouteIndex(i);
-
-                            } else {
-
-                                directionsRenderer2.setDirections(response);
-                                directionsRenderer2.setRouteIndex(i);
-                            }
-                        }
-                        console.log(response);
-                    } else {
-                        window.alert('Directions request failed due to ' + status);
-                    }
-                });
-
-                directionsService
-                .route({
-                  origin: pos,
-                  destination: posData,
-                  travelMode: google.maps.TravelMode.DRIVING,
-                })
-                .then((response) => {
-                  directionsRenderer1.setDirections(response);
-                })
-                .catch((e) => window.alert("Directions request failed due to " + status));
-        // });
-        countDirection=countDirection+1;
-   
-
+  directionsService
+    .route({
+      origin: pos,
+      destination: posData,
+      travelMode: google.maps.TravelMode.DRIVING,
+    })
+    .then((response) => {
+      directionsRenderer1.setDirections(response);
+    })
+    .catch((e) => window.alert("Directions request failed due to " + status));
+  // });
+  countDirection = countDirection + 1;
 }
 
-function radiusGPS()
-{
-
+function radiusGPS() {
   infoWindow = new google.maps.InfoWindow();
 
   const locationButton = document.createElement("button");
@@ -538,195 +490,177 @@ function radiusGPS()
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
-  
 }
 
-function radiusManual()
-{
+function radiusManual() {}
 
-}
+function radiusChange() {
+  // Ubah ukuran circle
+  if (radiusStart == 0) {
+  } else {
+    radiusCircle.setMap(null);
+  }
 
-function radiusChange()
-{
-// Ubah ukuran circle
-if(radiusStart==0)
-{
+  let radiusValue = $("#customRadius").val();
+  $("#valueMeter").text(radiusValue + " Meter");
+  $("#typeRadius").val(radiusValue);
+  if (GPSLocation == null) {
+    alert("Select Geolocation or Add Coordinate Manually First");
+    radiusValue = $("#customRadius").val("0");
+    $("#typeRadius").val(0);
+    $("#valueMeter").text("0 M");
+  } else {
+    // Panggil pakai AJAX ke database pakai fungsi spasial
 
-}
-else
-{
-  radiusCircle.setMap(null);
-}
+    // Ubah GPSLocation menjadi string
 
-let radiusValue=$("#customRadius").val();
-$("#valueMeter").text(radiusValue+" Meter");
-$("#typeRadius").val(radiusValue);
-if(GPSLocation==null)
-{
-  alert("Select Geolocation or Add Coordinate Manually First");
-  radiusValue=$("#customRadius").val("0");
-  $("#typeRadius").val(0);
-$("#valueMeter").text("0 M");
+    gpsText = GPSLocation.lat + "A" + GPSLocation.lng;
 
-}
-else
-{
-  // Panggil pakai AJAX ke database pakai fungsi spasial
+    $.get(
+      urlAplikasi + "web/radius_data/" + radiusValue + "/" + gpsText,
+      function (data) {
+        console.log(
+          urlAplikasi + "web/radius_data/" + radiusValue + "/" + gpsText
+        );
+        // console.log(data);
+        // Hapus semua marker lebih dahulu
+        // setMapOnAll(null);
+        hideMarkers();
+        // console.log(data.length);
+        setMapOnAllTemp(null);
 
-  // Ubah GPSLocation menjadi string
+        if (data.length > 42) {
+          // Marker Array Temporary
 
-  gpsText=GPSLocation.lat+"A"+GPSLocation.lng;
+          let dataData = JSON.parse(data);
+          console.log(dataData);
+          let i = 0;
+          let length = dataData.features.length;
 
-  $.get(urlAplikasi+"web/radius_data/"+radiusValue+"/"+gpsText, function(data){
-    console.log(urlAplikasi+"web/radius_data/"+radiusValue+"/"+gpsText)
-    // console.log(data);
-    // Hapus semua marker lebih dahulu
-    // setMapOnAll(null);
-    hideMarkers();
-    // console.log(data.length);
-    setMapOnAllTemp(null);
-   
-    if (data.length>42)
-    {
-// Marker Array Temporary
+          while (i < length) {
+            console.log("GPSLocation");
+            console.log(GPSLocation);
+            console.log("GPSLocation");
 
+            let x = dataData.features[i].properties["x"];
+            let y = dataData.features[i].properties["y"];
+            let posData = {
+              lat: parseFloat(y),
+              lng: parseFloat(x),
+            };
 
+            contentString =
+              '<table class="table">' +
+              "<thead>" +
+              "  <tr>" +
+              '    <th class="tg-0lax">Item</th>' +
+              '    <th class="tg-0lax">Info</th>' +
+              "  </tr>" +
+              "</thead>" +
+              "<tbody>" +
+              "  <tr>" +
+              '    <td class="tg-0lax">Name</td>' +
+              '    <td class="tg-0lax">' +
+              dataData.features[0].properties["name"] +
+              "</td>" +
+              "  </tr>" +
+              "  <tr>" +
+              '    <td class="tg-0lax">kshdkajhsdkahdjks</td>' +
+              '    <td class="tg-0lax">jkhadkahjdhjkdjkj</td>' +
+              "  </tr>" +
+              "  <tr>" +
+              '    <td class="tg-0lax"></td>' +
+              '    <td class="tg-0lax"></td>' +
+              "  </tr>" +
+              "  <tr>" +
+              '    <td class="tg-0lax"></td>' +
+              '    <td class="tg-0lax"></td>' +
+              "  </tr>" +
+              "</tbody>" +
+              "</table>" +
+              "<br/><button onclick='dirrectionPointX(" +
+              x +
+              "," +
+              y +
+              ")' class='btn btn-success'>Route</button>";
+            markerArrayTemp[i] = new google.maps.Marker({
+              position: posData,
+              map,
+              title: "Hello World!",
+              info: contentString,
+            });
 
-let dataData= JSON.parse(data);
-console.log(dataData);
-let i=0;
-let length=dataData.features.length;
+            infowindow = new google.maps.InfoWindow({
+              content: contentString,
+              ariaLabel: "Uluru",
+            });
 
-while (i < length) {
+            google.maps.event.addListener(
+              markerArrayTemp[i],
+              "click",
+              function () {
+                infowindow.setContent(this.info);
+                infowindow.open(map, this);
+              }
+            );
+            i++;
+          }
+        } else {
+          // Jangan lakukan apa-apa
+        }
+      }
+    );
 
-  console.log("GPSLocation");
-  console.log(GPSLocation);
-  console.log("GPSLocation");
-
- 
-  let x = dataData.features[i].properties['x'];
-  let y = dataData.features[i].properties['y'];
-  let posData = {
-      lat: parseFloat(y),
-      lng: parseFloat(x)
-  };
-
-contentString =
-    '<table class="table">' +
-    '<thead>' +
-    '  <tr>' +
-    '    <th class="tg-0lax">Item</th>' +
-    '    <th class="tg-0lax">Info</th>' +
-    '  </tr>' +
-    '</thead>' +
-    '<tbody>' +
-    '  <tr>' +
-    '    <td class="tg-0lax">Name</td>' +
-    '    <td class="tg-0lax">' + dataData.features[0].properties['name'] + '</td>' +
-    '  </tr>' +
-    '  <tr>' +
-    '    <td class="tg-0lax">kshdkajhsdkahdjks</td>' +
-    '    <td class="tg-0lax">jkhadkahjdhjkdjkj</td>' +
-    '  </tr>' +
-    '  <tr>' +
-    '    <td class="tg-0lax"></td>' +
-    '    <td class="tg-0lax"></td>' +
-    '  </tr>' +
-    '  <tr>' +
-    '    <td class="tg-0lax"></td>' +
-    '    <td class="tg-0lax"></td>' +
-    '  </tr>' +
-    '</tbody>' +
-    '</table>' + "<br/><button onclick='dirrectionPointX("+x+","+y+")' class='btn btn-success'>Route</button>";
-  markerArrayTemp[i] = new google.maps.Marker({
-      position: posData,
+    radiusCircle = new google.maps.Circle({
+      strokeColor: "#FF0000",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#FF0000",
+      fillOpacity: 0.35,
       map,
-      title: "Hello World!",
-      info: contentString
-  });
+      center: GPSLocation,
+      radius: parseInt(radiusValue),
+    });
 
-
-  infowindow = new google.maps.InfoWindow({
-      content: contentString,
-      ariaLabel: "Uluru",
-  });
-
-
-
-  google.maps.event.addListener(markerArrayTemp[i], 'click', function() {
-
-      infowindow.setContent(this.info);
-      infowindow.open(map, this);
-
-  });
-  i++;
-}
-    }
-    else
-    {
-      // Jangan lakukan apa-apa
-    }
-  });
-
-  radiusCircle = new google.maps.Circle({
-    strokeColor: "#FF0000",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#FF0000",
-    fillOpacity: 0.35,
-    map,
-    center: GPSLocation,
-    radius: parseInt(radiusValue),
-  });
-
-  radiusStart++;
-}
-console.log("GPS LOCATION");
-console.log(GPSLocation);
-// alert(radiusValue);
+    radiusStart++;
+  }
+  console.log("GPS LOCATION");
+  console.log(GPSLocation);
+  // alert(radiusValue);
 }
 
-function radiusChangeType()
-{
-// Ubah ukuran circle
-if(radiusStart==0)
-{
+function radiusChangeType() {
+  // Ubah ukuran circle
+  if (radiusStart == 0) {
+  } else {
+    radiusCircle.setMap(null);
+  }
 
-}
-else
-{
-  radiusCircle.setMap(null);
-}
+  let radiusValue = $("#typeRadius").val();
+  $("#valueMeter").text(radiusValue + " Meter");
+  $("#customRadius").val(radiusValue);
+  if (GPSLocation == null) {
+    alert("Select Geolocation or Add Coordinate Manually First");
+    radiusValue = $("#typeRadius").val(0);
+    $("#customRadius").val(0);
+    $("#valueMeter").text("0 M");
+  } else {
+    // Panggil pakai AJAX ke database pakai fungsi spasial
+    radiusCircle = new google.maps.Circle({
+      strokeColor: "#FF0000",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#FF0000",
+      fillOpacity: 0.35,
+      map,
+      center: GPSLocation,
+      radius: parseInt(radiusValue),
+    });
 
-let radiusValue=$("#typeRadius").val();
-$("#valueMeter").text(radiusValue+" Meter");
-$("#customRadius").val(radiusValue);
-if(GPSLocation==null)
-{
-  alert("Select Geolocation or Add Coordinate Manually First");
-  radiusValue=$("#typeRadius").val(0);
-  $("#customRadius").val(0);
-$("#valueMeter").text("0 M");
-
-}
-else
-{
-  // Panggil pakai AJAX ke database pakai fungsi spasial
-  radiusCircle = new google.maps.Circle({
-    strokeColor: "#FF0000",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#FF0000",
-    fillOpacity: 0.35,
-    map,
-    center: GPSLocation,
-    radius: parseInt(radiusValue),
-  });
-
-  radiusStart++;
-}
-console.log(GPSLocation);
-// alert(radiusValue);
+    radiusStart++;
+  }
+  console.log(GPSLocation);
+  // alert(radiusValue);
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {

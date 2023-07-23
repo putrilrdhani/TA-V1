@@ -3,6 +3,7 @@
 
 <h1><?= $this->section('content') ?></h1>
 
+
 <section class="section">
     <div class="row">
         <div style="margin-bottom: 40px; margin-top: 20px" class="col-md-10">

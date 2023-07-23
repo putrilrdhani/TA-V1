@@ -64,12 +64,10 @@ if (isset($selectData)) {
 <section class="section">
     <div class="row">
         <!--map-->
-        <div class="col-md-12 col-12">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header">
                     <div class="row align-items-center">
-
-                        <?= $this->include('web/layouts/map-body'); ?>
 
                         <!-- Javascript untuk  memuat peta -->
                         <?php
@@ -290,6 +288,16 @@ if (isset($selectData)) {
             </div>
         </div>
 
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+
+                        <?= $this->include('web/layouts/map-body'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </div>

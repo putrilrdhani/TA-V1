@@ -144,6 +144,7 @@ function routeWayPoints() {
       position: pgPos,
       map,
       title: waypointsMarker[fd].des,
+      animation: google.maps.Animation.DROP,
     });
     packageMarker[fd].setZIndex(fd);
     packageMarker[fd].setLabel((fd + 1).toString());

@@ -357,6 +357,7 @@ function routeWayPoints_User() {
     packageMarker[fd] = new google.maps.Marker({
       position: pgPos,
       map,
+      animation: google.maps.Animation.DROP,
       title: waypointsMarker[fd].des,
     });
     packageMarker[fd].setZIndex(fd);
@@ -434,6 +435,7 @@ function routeWayPoints() {
     packageMarker[fd] = new google.maps.Marker({
       position: pgPos,
       map,
+      animation: google.maps.Animation.DROP,
       title: waypointsMarker[fd].des,
     });
     packageMarker[fd].setZIndex(fd);
@@ -634,6 +636,7 @@ function facilityMap() {
   markerFacilityTemp[0] = new google.maps.Marker({
     position: GPSLocation,
     map,
+    animation: google.maps.Animation.DROP,
     title: "Tourism Object",
     info: contentString,
   });
@@ -755,6 +758,7 @@ function facilityMap() {
           markerWorship[b] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Worship Place",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_wp.png",
@@ -921,6 +925,7 @@ function facilityMap() {
           markerCulinary[i] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Culinary Place",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_cp.png",
@@ -1088,6 +1093,7 @@ function facilityMap() {
           markerHomestay[i] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Homestay",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_hs.png",
@@ -1263,6 +1269,7 @@ function facilityMap() {
           markerEvent[i] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Event",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_ev.png",
@@ -1421,6 +1428,7 @@ function facilityMap() {
           markerSouvenir[i] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Souvenir",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_sp.png",
@@ -1578,6 +1586,7 @@ function facilityMap() {
             position: posData,
             map,
             title: "Tourism Object",
+            animation: google.maps.Animation.DROP,
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_to.png",
           });
@@ -1671,6 +1680,7 @@ function facilityMapAll() {
   markerFacilityTemp[0] = new google.maps.Marker({
     position: GPSLocation,
     map,
+    animation: google.maps.Animation.DROP,
     title: "Tourism Object",
     info: contentString,
   });
@@ -1794,6 +1804,7 @@ function facilityMapAll() {
           markerWorship[b] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Worship Place",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_wp.png",
@@ -1960,6 +1971,7 @@ function facilityMapAll() {
           markerCulinary[i] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Culinary Place",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_cp.png",
@@ -2127,6 +2139,7 @@ function facilityMapAll() {
           markerHomestay[i] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Homestay",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_hs.png",
@@ -2302,6 +2315,7 @@ function facilityMapAll() {
           markerEvent[i] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Event",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_ev.png",
@@ -2460,6 +2474,7 @@ function facilityMapAll() {
           markerSouvenir[i] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Souvenir",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_sp.png",
@@ -2616,6 +2631,7 @@ function facilityMapAll() {
           markerFacility[i] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Tourism Object",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_to.png",
@@ -2704,6 +2720,7 @@ function facilityMapAgro() {
   markerFacilityTemp[0] = new google.maps.Marker({
     position: GPSLocation,
     map,
+    animation: google.maps.Animation.DROP,
     title: "Tourism Object",
     info: contentString,
   });
@@ -2824,6 +2841,7 @@ function facilityMapAgro() {
           markerWorship[b] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Worship Place",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_wp.png",
@@ -2990,6 +3008,7 @@ function facilityMapAgro() {
           markerCulinary[i] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Culinary Place",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_cp.png",
@@ -3157,6 +3176,7 @@ function facilityMapAgro() {
           markerHomestay[i] = new google.maps.Marker({
             position: posData,
             map,
+            animation: google.maps.Animation.DROP,
             title: "Homestay",
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_hs.png",
@@ -3333,6 +3353,7 @@ function facilityMapAgro() {
             position: posData,
             map,
             title: "Event",
+            animation: google.maps.Animation.DROP,
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_ev.png",
           });
@@ -3491,6 +3512,7 @@ function facilityMapAgro() {
             position: posData,
             map,
             title: "Souvenir",
+            animation: google.maps.Animation.DROP,
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_sp.png",
           });
@@ -3647,6 +3669,7 @@ function facilityMapAgro() {
             position: posData,
             map,
             title: "Tourism Object",
+            animation: google.maps.Animation.DROP,
             info: contentString,
             icon: urlAplikasi + "media/icon/marker_to.png",
           });
@@ -3927,6 +3950,7 @@ function mapView(id) {
       position: posData,
       map,
       title: "Tourism Object",
+      animation: google.maps.Animation.DROP,
       info: contentStringX,
       icon: urlAplikasi + "media/icon/marker_to.png",
     });
@@ -4091,6 +4115,7 @@ function dirrectionPointX(x, y) {
   $("#panelRender").empty();
   markerA = new google.maps.Marker({
     map: map,
+    animation: google.maps.Animation.DROP,
     icon: urlAplikasi + "media/icon/marker_rs.png",
   });
 
@@ -4269,11 +4294,12 @@ function dirrectionPointTemp(x, y) {
   markerA = new google.maps.Marker({
     map: map,
     icon: urlAplikasi + "media/icon/marker_rs.png",
+    animation: google.maps.Animation.DROP,
   });
 
   markerB = new google.maps.Marker({
     map: map,
-    icon: urlAplikasi + "media/icon/marker_to.png",
+    animation: google.maps.Animation.DROP,
   });
   infoWindow = new google.maps.InfoWindow();
   directionsService = new google.maps.DirectionsService();
@@ -4442,10 +4468,12 @@ function dirrectionManual(x, y, lat_y, lng_x) {
 
   markerA = new google.maps.Marker({
     map: map,
-    // icon: urlAplikasi + "media/icon/marker_to.png",
+    animation: google.maps.Animation.DROP,
+    // icon: urlAplikasi + "media/icon/marker_to.png"
   });
   markerB = new google.maps.Marker({
     map: map,
+    animation: google.maps.Animation.DROP,
   });
   infoWindow = new google.maps.InfoWindow();
   directionsService = new google.maps.DirectionsService();
@@ -4611,6 +4639,7 @@ function radiusGPS() {
         markerposition = new google.maps.Marker({
           position: GPSLocation,
           map: map,
+          animation: google.maps.Animation.DROP,
         });
         map.setCenter(GPSLocation);
         // infoWindow.setPosition(GPSLocation);
@@ -4654,6 +4683,7 @@ function radiusManual() {
     manualmarker[0] = new google.maps.Marker({
       position: event.latLng,
       map: map,
+      animation: google.maps.Animation.DROP,
     });
     let lat = event.latLng.lat();
     let lng = event.latLng.lng();
@@ -4898,6 +4928,7 @@ function radiusChangeTourism() {
               title: "Tourism Object",
               info: contentString,
               icon: urlAplikasi + "media/icon/marker_to.png",
+              animation: google.maps.Animation.DROP,
             });
 
             infowindow = new google.maps.InfoWindow({
@@ -5156,6 +5187,7 @@ function radiusChange() {
               title: "Tourism Object",
               info: contentString,
               icon: urlAplikasi + "media/icon/marker_to.png",
+              animation: google.maps.Animation.DROP,
             });
 
             infowindow = new google.maps.InfoWindow({
@@ -5303,6 +5335,7 @@ function radiusChangeType() {
               title: "Tourism Obect",
               info: contentString,
               icon: urlAplikasi + "media/icon/marker_to.png",
+              animation: google.maps.Animation.DROP,
             });
 
             // Tambahkan tabel ke bagian samping
@@ -5485,6 +5518,7 @@ function radiusChangeTypeTourism() {
               title: "Tourism Object",
               info: contentString,
               icon: urlAplikasi + "media/icon/marker_to.png",
+              animation: google.maps.Animation.DROP,
             });
 
             infowindow = new google.maps.InfoWindow({

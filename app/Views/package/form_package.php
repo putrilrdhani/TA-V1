@@ -46,10 +46,6 @@
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="<?php echo $data[0]->name; ?>" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="date">Date</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="date" id="date" placeholder="Date" value="<?php echo $data[0]->date; ?>" />
-                                </div>
-                                <div class="form-group">
                                     <label for="int">Min Capaity</label>
                                     <input type="text" class="form-control" autocomplete="off" name="min_capaity" id="min_capaity" placeholder="Min Capaity" value="<?php echo $data[0]->min_capaity; ?>" />
                                 </div>
@@ -142,10 +138,6 @@
                                 <div class="form-group">
                                     <label for="varchar">Name</label>
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="date">Date</label>
-                                    <input type="date" class="form-control" autocomplete="off" name="date" id="date" placeholder="Date" value="" />
                                 </div>
                                 <div class="form-group">
                                     <label for="int">Min Capaity</label>

@@ -119,7 +119,7 @@
 									<div class="row align-items-center">
 										<div class="col-sm-2"></div>
 										<div class="outerLayer">
-											<div class="slidercontainer">
+											<div class="slidercontainer ">
 
 												<?php
 												$countImage = count($data);
@@ -132,7 +132,10 @@
 													} else {
 													?>
 														<div class="showSlide">
-															<img class="img img-fluid" src="<?php echo base_url("upload/" . $data[$image_i]->url); ?>" />
+															<div class="d-flex justify-content-center">
+																<img class="img img-fluid" style="max-height: 90vh;" src="<?php echo base_url("upload/" . $data[$image_i]->url); ?>" />
+
+															</div>
 
 														</div>
 													<?php
@@ -213,7 +216,6 @@
 					<style>
 						.outerLayer {
 							position: relative;
-							background: #eee;
 							height: 100%;
 						}
 
@@ -232,7 +234,12 @@
 							padding: 8px 16px;
 						}
 
-						a:hover {
+						.right:hover {
+							background-color: #ddd;
+							color: black;
+						}
+
+						.left:hover {
 							background-color: #ddd;
 							color: black;
 						}
@@ -243,8 +250,8 @@
 						}
 
 						.right {
-							background-color: #04AA6D;
-							color: white;
+							background-color: #f1f1f1;
+							color: black;
 						}
 
 						.round {
