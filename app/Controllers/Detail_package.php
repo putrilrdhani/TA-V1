@@ -61,7 +61,7 @@ class Detail_package extends BaseController
 	public function create()
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT * FROM package_day');
+		$query   = $db->query('SELECT * FROM package JOIN package_day ON package_day.id_package = package.id_package WHERE package.custom = "0"');
 
 		$tourism_object   = $db->query('SELECT id, name FROM tourism_object');
 		$culinary   = $db->query('SELECT id, name FROM culinary');
@@ -78,8 +78,8 @@ class Detail_package extends BaseController
 				'type' => 'Feature',
 				'properties' => array(
 					'id_package' => $row['id_package'],
+					'name' => $row['name'],
 					'day' => $row['day'],
-					'description' => $row['description'],
 				)
 			);
 			array_push($hasil['features'], $features);
@@ -94,6 +94,7 @@ class Detail_package extends BaseController
 				'properties' => array(
 					'id' => $row['id'],
 					'name' => $row['name'],
+					'type' => 'T',
 				)
 			);
 			array_push($hasil1['features'], $features);
@@ -108,6 +109,7 @@ class Detail_package extends BaseController
 				'properties' => array(
 					'id' => $row['id'],
 					'name' => $row['name'],
+					'type' => 'C',
 				)
 			);
 			array_push($hasil2['features'], $features);
@@ -122,6 +124,7 @@ class Detail_package extends BaseController
 				'properties' => array(
 					'id' => $row['id'],
 					'name' => $row['name'],
+					'type' => 'E',
 				)
 			);
 			array_push($hasil3['features'], $features);
@@ -136,6 +139,7 @@ class Detail_package extends BaseController
 				'properties' => array(
 					'id' => $row['id'],
 					'name' => $row['name'],
+					'type' => 'H',
 				)
 			);
 			array_push($hasil4['features'], $features);
@@ -150,6 +154,7 @@ class Detail_package extends BaseController
 				'properties' => array(
 					'id' => $row['id'],
 					'name' => $row['name'],
+					'type' => 'S',
 				)
 			);
 			array_push($hasil5['features'], $features);
@@ -164,13 +169,14 @@ class Detail_package extends BaseController
 				'properties' => array(
 					'id' => $row['id'],
 					'name' => $row['name'],
+					'type' => 'W',
 				)
 			);
 			array_push($hasil6['features'], $features);
 		}
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Create Pages',
+			'content' => 'Create ',
 			'action' => site_url('detail_package/create_action'),
 			'data' =>   [
 				'id_package' => set_value('id_package'),
@@ -216,7 +222,7 @@ class Detail_package extends BaseController
 	}
 
 	//UPDATE
-	public function update($id_package, $day)
+	public function update($id_package, $day, $activity)
 	{
 		$db = \Config\Database::connect();
 		$query   = $db->query('SELECT * FROM package_day');
@@ -332,9 +338,9 @@ class Detail_package extends BaseController
 		}
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Edite Pages',
+			'content' => 'Edit ',
 			'action' => 'detail_package/update_action',
-			'data' => $this->Model->getData($id_package, $day),
+			'data' => $this->Model->getData($id_package, $day, $activity),
 			'status' => 'Visible',
 			'package_day' => $hasil,
 			'tourism_object' => $hasil1,
@@ -362,7 +368,16 @@ class Detail_package extends BaseController
 			'id_object' => $this->request->getVar('id_object'),
 			'description' => $this->request->getVar('description'),
 		];
-		$this->Model->save($data);
+		$id_package = $this->request->getVar('id_package');
+		$day = $this->request->getVar('day');
+		$activity = $this->request->getVar('activity');
+		$activity_type = $this->request->getVar('activity_type');
+		$id_object = $this->request->getVar('id_object');
+		$description = $this->request->getVar('description');
+
+		$db = \Config\Database::connect();
+		$query = $db->query("UPDATE `detail_package` SET `activity_type` = '" . $activity_type . "', `id_object` = '" . $id_object . "', `description` = '" . $description . "' WHERE `detail_package`.`id_package` = '" . $id_package . "' AND `detail_package`.`day` = '" . $day . "' AND `detail_package`.`activity` = '" . $activity . "'; ");
+		// $this->Model->save($data);
 		session()->setFlashdata('message', 'Update Record Success');
 
 		return redirect()->to(base_url('package'));

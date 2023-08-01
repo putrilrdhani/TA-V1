@@ -30,9 +30,11 @@ class Detail_service_packageModel extends Model
             return $query->getResult();
         }
         $builder = $this->db->table('detail_service_package');
-        $builder->select('id_service_package,id_package,status', false);
-        $builder->where('id_service_package', $id_service_package);
-        $builder->where('id_package', $id_package);
+        $builder->select('detail_service_package.id_service_package as id_service_package,detail_service_package.id_package as id_package,status,package.name as name, service_package.name as service_name', false);
+        $builder->join('package', 'detail_service_package.id_package=package.id_package', 'LEFT');
+        $builder->join('service_package', 'detail_service_package.id_service_package=service_package.id_service_package', 'LEFT');
+        $builder->where('detail_service_package.id_service_package', $id_service_package);
+        $builder->where('package.id_package', $id_package);
 
         $query = $builder->get();
         return $query->getResult();

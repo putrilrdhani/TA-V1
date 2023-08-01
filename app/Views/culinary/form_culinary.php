@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="int">Capacity</label>
-                                    <input type="number" class="form-control" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="<?php echo $data[0]->capacity; ?>" />
+                                    <input type="number" min="0" class="form-control" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="<?php echo $data[0]->capacity; ?>" />
                                 </div>
                                 <div class="form-group">
                                     <label for="time">Open</label>
@@ -146,7 +146,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="int">Capacity</label>
-                                    <input type="number" class="form-control" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="" />
+                                    <input type="number" min="0" class="form-control" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="" />
                                 </div>
                                 <div class="form-group">
                                     <label for="time">Open</label>

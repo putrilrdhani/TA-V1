@@ -24,7 +24,6 @@
                                 <th width="15%" style="text-align: left;">Name</th>
                                 <td>: <?php echo $data[0]->name; ?></td>
                             </tr>
-
                             <tr>
                                 <th width="15%" style="text-align: left;">Min Capaity</th>
                                 <td>: <?php echo $data[0]->min_capaity; ?></td>
@@ -42,10 +41,6 @@
                                 <td>: <?php if (isset($package_day['features'][0]['properties']['day'])) {
                                             echo $package_day['features'][0]['properties']['day'];
                                         } ?></td>
-                            </tr>
-                            <tr>
-                                <th width="15%" style="text-align: left;">Brosur Url</th>
-                                <td>: <?php echo $data[0]->brosur_url; ?></td>
                             </tr>
                             <tr>
                                 <th width="15%" style="text-align: left;">Price</th>
@@ -182,6 +177,7 @@ while ($i < $count) {
 <script>
     $('#direction-row').hide();
     $('#panel').hide();
+    $('#coorAdmin').hide();
     $('#legend').hide();
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();

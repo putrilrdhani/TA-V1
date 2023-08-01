@@ -135,7 +135,7 @@
                             <?php
                             } else {
                             ?>
-                                <h5><b>Package</b></h5>
+                                <h5><b> Create Package</b></h5>
                                 <div class="form-group">
                                     <label for="varchar">Name
                                     </label>

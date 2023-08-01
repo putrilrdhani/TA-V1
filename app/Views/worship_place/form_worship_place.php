@@ -8,42 +8,28 @@
 <section class="section">
     <div class="row">
         <!--map-->
-        <div class="col-md-12 col-12">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header">
                     <div class="row align-items-center">
-
-
-                        <?= $this->include('web/layouts/map-body'); ?>
-
-                        <!-- Javascript untuk  memuat peta -->
                         <?php
-                        // echo $data['status']
-
-
                         if ($status == "Not Visible") {
-
                             echo $this->include('web/layouts/noJsLoad');
                         } else {
                             // Load file jsLoad disini
                             echo $this->include('web/layouts/jsLoad');
                         }
-
-
                         ?>
-
-                        <script>
-                            $("#legend").hide();
-                        </script>
-
-                        <!-- Isi Disini -->
                         <div class="row content">
-                            <h3><small><?= $content; ?></small></h3>
+                            <h3><small><?= $content; ?> Worship Place</small></h3>
                         </div>
                         <form action="<?= base_url($action) ?>" method="post" enctype="multipart/form-data">
                             <?php
                             if (isset($data[0]->id_true)) {
                             ?>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" required />
+                                </div>
                                 <div class="form-group">
                                     <label for="varchar">Name</label>
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="<?php echo $data[0]->name; ?>" required />
@@ -54,10 +40,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="int">Capacity</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="<?php echo $data[0]->capacity; ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" style="display: none;" required />
+                                    <input type="number" class="form-control" min="1" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="<?php echo $data[0]->capacity; ?>" />
                                 </div>
                                 <!-- Uji Slider -->
 
@@ -131,19 +114,19 @@
                             } else {
                             ?>
                                 <div class="form-group">
+                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" required />
+                                </div>
+                                <div class="form-group">
                                     <label for="varchar">Name</label>
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="" required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="int">Address</label>
+                                    <label for="varchar">Address</label>
                                     <input type="text" class="form-control" autocomplete="off" name="address" id="address" placeholder="Address" value="" />
                                 </div>
                                 <div class="form-group">
                                     <label for="int">Capacity</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" style="display: none;" required />
+                                    <input type="number" class="form-control" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="" />
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">Image</label>
@@ -168,12 +151,17 @@
 
             </div>
         </div>
+        <div class="col-md-7">
 
-
-
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <?= $this->include('web/layouts/map-body'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- Direction section -->
-    <?= $this->include('web/layouts/direction'); ?>
 </section>
 
 <?= $this->endSection() ?>
@@ -183,6 +171,6 @@
     $('#direction-row').hide();
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();
-    $('legend').hide();
+    $('#legend').hide();
 </script>
 <?= $this->endSection() ?>

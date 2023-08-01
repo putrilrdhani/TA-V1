@@ -102,5 +102,6 @@
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();
     $('#legend').hide();
+    $('#coorAdmin').hide();
 </script>
 <?= $this->endSection() ?>

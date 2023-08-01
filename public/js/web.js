@@ -15,6 +15,7 @@ let map;
 let putCounter = 0;
 let over = 1;
 let urlAplikasi = "http://localhost:8080/";
+let adminMarker;
 
 function setBaseUrl(url) {
   baseUrl = url;
@@ -81,6 +82,157 @@ let waypoints = new Array();
 let waypointsMarker = new Array();
 let packageMarker = new Array();
 
+function setPositionAdmin() {
+  if (typeof adminMarker === "undefined") {
+  } else {
+    adminMarker.setMap(null);
+  }
+  $lat = $("#lat_admin").val();
+  $lng = $("#lng_admin").val();
+
+  if ($lat == "" || $lng == "") {
+    alert("Please Input Coordinate");
+  } else {
+    // Make new Marker
+
+    var pgPos = {
+      lat: parseFloat($lat),
+      lng: parseFloat($lng),
+    };
+
+    adminMarker = new google.maps.Marker({
+      position: pgPos,
+      map,
+      title: "Coordinate Position",
+      animation: google.maps.Animation.DROP,
+    });
+
+    map.setCenter(pgPos, 20);
+  }
+}
+
+function dirrectionManual_User(x, y, des) {
+  console.log("GGGGGG");
+  console.log("X" + x + "Y" + y + "DES" + des);
+  console.log("GGGGGG");
+
+  // Tambahkan panel informasi arah yang bisa diambil
+  // directionDisplay = new google.maps.DirectionsRenderer();
+  // directionDisplay.setMap(map);
+
+  // [{location: first, stopover: false},
+  //   {location: second, stopover: false}]
+
+  var first = new google.maps.LatLng(parseFloat(y), parseFloat(x));
+  waypoints.push({ location: first, stopover: true });
+  waypointsMarker.push({ lat: y, lng: x, des: des });
+  console.log(waypoints);
+  // var second = new google.maps.LatLng(42.496401, -124.413126);
+
+  // var request = {
+  //     origin: first,
+  //     destination: "San Diego, CA",
+  //     waypoints: waypoints,
+  //     optimizeWaypoints: true,
+  //     travelMode: google.maps.DirectionsTravelMode.WALKING
+  // };
+  // directionsService.route(request, function (response, status) {
+  //     if (status == google.maps.DirectionsStatus.OK) {
+  //         directionDisplay.setDirections(response);
+  //         var route = response.routes[0];
+  //         var summaryPanel = document.getElementById("panelRenderX");
+  //         summaryPanel.innerHTML = "";
+  //         // For each route, display summary information.
+  //         for (var i = 0; i < route.legs.length; i++) {
+  //             var routeSegment = i + 1;
+  //             summaryPanel.innerHTML += "<b>Route Segment: " + routeSegment + "</b><br />";
+  //             summaryPanel.innerHTML += route.legs[i].start_address + " to ";
+  //             summaryPanel.innerHTML += route.legs[i].end_address + "<br />";
+  //             summaryPanel.innerHTML += route.legs[i].distance.text + "<br /><br />";
+  //         }
+  //     } else {
+  //         alert("directions response " + status);
+  //     }
+  // });
+}
+
+function routeWayPoints_User() {
+  directionDisplay = new google.maps.DirectionsRenderer();
+  directionDisplay.setMap(map);
+  directionsRenderer.setMap(map);
+
+  let upMarker = waypointsMarker.length;
+  let fd = 0;
+  while (fd < upMarker) {
+    var pgPos = {
+      lat: parseFloat(waypointsMarker[fd].lat),
+      lng: parseFloat(waypointsMarker[fd].lng),
+    };
+
+    packageMarker[fd] = new google.maps.Marker({
+      position: pgPos,
+      map,
+
+      title: waypointsMarker[fd].des,
+    });
+    packageMarker[fd].setZIndex(fd);
+    packageMarker[fd].setLabel((fd + 1).toString());
+    // console.log(packageMarker);
+    fd++;
+  }
+
+  wayLength = waypoints.length;
+  wayLength = wayLength - 1;
+  console.log(waypoints[0].location.lat());
+
+  var origin = {
+    lat: parseFloat(waypoints[0].location.lat()),
+    lng: parseFloat(waypoints[0].location.lng()),
+  };
+
+  var destination = {
+    lat: parseFloat(waypoints[wayLength].location.lat()),
+    lng: parseFloat(waypoints[wayLength].location.lng()),
+  };
+
+  console.log({
+    origin: origin,
+    destination: destination,
+    waypoints: waypoints,
+
+    travelMode: google.maps.TravelMode.DRIVING,
+  });
+
+  directionsServicePackage
+    .route({
+      origin: origin,
+      destination: destination,
+      waypoints: waypoints,
+
+      travelMode: google.maps.TravelMode.DRIVING,
+    })
+    .then((response) => {
+      directionsRenderer.setDirections(response);
+
+      // const route = response.routes[0];
+      // const summaryPanel = document.getElementById("panelRenderX");
+
+      // summaryPanel.innerHTML = "";
+
+      // // For each route, display summary information.
+      // for (let i = 0; i < route.legs.length; i++) {
+      //   const routeSegment = i + 1;
+
+      //   summaryPanel.innerHTML +=
+      //     "<b>Route Segment: " + routeSegment + "</b><br>";
+      //   summaryPanel.innerHTML += route.legs[i].start_address + " to ";
+      //   summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
+      //   summaryPanel.innerHTML += route.legs[i].distance.text + "<br><br>";
+      // }
+    })
+    .catch((e) => window.alert("Directions request failed due to " + status));
+}
+
 function dirrectionManual(x, y, des) {
   // Tambahkan panel informasi arah yang bisa diambil
   // directionDisplay = new google.maps.DirectionsRenderer();
@@ -124,6 +276,45 @@ function dirrectionManual(x, y, des) {
 
 function detail_booking(id_package) {
   window.location.href = urlAplikasi + "/package/booking_read/" + id_package;
+}
+
+function routeDayShow(id_package, day) {
+  // route by day
+
+  $.get(
+    urlAplikasi + "web/day_route/" + id_package + "/" + day,
+    function (data) {
+      // location.reload();
+      data = JSON.parse(data);
+      console.log(data);
+
+      let data_length = data.finalArray.bulk.length;
+      let x = 0;
+      let x_coor;
+      let y_coor;
+      let desc_coor;
+      if (typeof packageMarker === "undefined") {
+      } else {
+        for (let i = 0; i < packageMarker.length; i++) {
+          packageMarker[i].setMap(null);
+        }
+      }
+
+      // kosongkan waypoints disini
+      waypoints = [];
+      waypointsMarker = [];
+
+      while (x < data_length) {
+        x_coor = data.finalArray.bulk[x].properties.x;
+        y_coor = data.finalArray.bulk[x].properties.y;
+        desc_coor = data.finalArray.bulk[x].properties.description;
+
+        dirrectionManual_User(x_coor, y_coor, desc_coor);
+        x++;
+      }
+      routeWayPoints_User();
+    }
+  );
 }
 
 function routeWayPoints() {
@@ -273,6 +464,7 @@ let textData = "";
 function getNameField() {
   $("#submitName").attr("disabled", false);
   arrayName = [];
+  textData = "";
   $("#dynamicForm input, #dynamicForm select, #dynamicForm textarea").each(
     function (index) {
       var input = $(this);
@@ -1313,6 +1505,13 @@ function viewLegend() {
   } else {
     $("#legend").hide();
   }
+}
+
+function changeActivityType() {
+  let data_id = $("#get_id_object").val();
+  data_id = data_id.charAt(0);
+  $("#activity_type").val(data_id);
+  // alert(data_id);
 }
 
 // Validate if star rating picked yet

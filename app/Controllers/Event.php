@@ -98,7 +98,7 @@ class Event extends BaseController
 				'ticket_price' => set_value('ticket_price'),
 				'contact_person' => set_value('contact_person'),
 			],
-			'status' => "Visible",
+			'status' => "Not Visible",
 			'category' => $selectCategory //tambahkan ini di setiap crewat dan update untuk kategori
 		];
 

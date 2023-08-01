@@ -164,7 +164,7 @@ class Culinary extends BaseController
 
 		];
 
-		$idx = "CU" . $id;
+		$idx = "C" . $id;
 		$namex = $this->request->getVar('name');
 		$addressx = $this->request->getVar('address');
 		$contact_personx = $this->request->getVar('contact_person');

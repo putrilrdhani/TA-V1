@@ -16,8 +16,8 @@
                             <div class="col">
                                 <div class="row">
                                     <div class="col d-flex">
-                                        <button onclick="radiusGPS()" data-toggle="tooltip" data-placement="bottom" title="Current Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-location"></i></button>
-                                        <button onclick="radiusManual()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-map-marker-alt"></i></button>
+                                        <button onclick="radiusGPS_NR()" data-toggle="tooltip" data-placement="bottom" title="Current Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-location"></i></button>
+                                        <button onclick="radiusManual_NR()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-map-marker-alt"></i></button>
 
                                         <button onclick="hideElement()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
                                     </div>
@@ -72,7 +72,7 @@
                     <table id="makeTable" class="table">
                         <thead>
                             <tr>
-                                <th colspan="3">Around You</th>
+                                <th colspan="3">Result</th>
 
 
 
@@ -117,8 +117,8 @@
 <script>
     $('#direction-row').hide();
     $('#check-nearby-col').hide();
-    $('#coorAdmin').hide();
     $('#result-nearby-col').hide();
     $('#dinamisDistance').hide();
+    $('#coorAdmin').hide();
 </script>
 <?= $this->endSection() ?>

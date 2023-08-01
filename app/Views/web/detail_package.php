@@ -195,6 +195,7 @@ while ($i < $count) {
 <script>
     $('#direction-row').hide();
     $('#check-nearby-col').hide();
+    $('#coorAdmin').hide();
     $('#result-nearby-col').hide();
 </script>
 <script>

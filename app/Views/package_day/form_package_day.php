@@ -18,10 +18,7 @@
                             <h3><?= $content; ?> Package Day</h3>
                         </div>
 
-
                         <?php
-                        // echo $data['status']
-
 
                         if ($status == "Not Visible") {
 

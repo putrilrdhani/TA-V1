@@ -936,6 +936,187 @@ class Tourism extends ResourcePresenter
         echo 'masuk';
     }
 
+    public function day_route($id_package, $day)
+    {
+
+
+        $db = \Config\Database::connect();
+        $query_filter   = $db->query('SELECT * FROM detail_package WHERE id_package="' . $id_package . '" AND day="' . $day . '" ORDER BY CAST(activity AS SIGNED) ASC');
+        $rows_total = $query_filter->getNumRows();
+        $in = 0;
+
+        $P = 0;
+        $finalArray = array(
+            'bulk' => array()
+        );
+        $hasil_pop = array(
+
+            'data' => array()
+        );
+
+        if ($this->auth->check()) {
+
+            $log = "login";
+        } else {
+            $log = "logout";
+        }
+
+
+        while ($in < $rows_total) {
+
+            $row = $query_filter->getResultArray();
+
+            // Jika id_object dapat
+            // Periksa tabel sesuai id object
+            // var_dump($row[$in]['id_object']);
+            if (str_contains($row[$in]['id_object'], "T")) {
+                $query_pop = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y, id_package, day, activity, activity_type, description FROM detail_package INNER JOIN tourism_object ON detail_package.id_object=tourism_object.id WHERE id_object="' . $row[$in]['id_object'] . '" ');;
+                $rows_totalT = $query_pop->getNumRows();
+                $rowT = $query_pop->getResultArray();
+                if ($rows_totalT > 0) {
+                    $features = array(
+                        'type' => 'Feature',
+                        'properties' => array(
+                            'id_package' => $rowT[0]['id_package'],
+                            'day' => $rowT[0]['day'],
+                            'activity' => $rowT[0]['activity'],
+                            'activity_type' => $rowT[0]['activity_type'],
+
+                            'description' => $rowT[0]['description'],
+                            'x' => $rowT[0]['x'],
+                            'y' => $rowT[0]['y']
+                        )
+                    );
+                    array_push($finalArray['bulk'], $features);
+                } else {
+                    // Jangan lakukan apa-apa
+                }
+            } else if (str_contains($row[$in]['id_object'], "H")) {
+                $query_pop = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y, id_package, day, activity, activity_type, description FROM detail_package INNER JOIN homestay ON detail_package.id_object=homestay.id WHERE id_object="' . $row[$in]['id_object'] . '" ');;
+                $rows_totalT = $query_pop->getNumRows();
+                $rowT = $query_pop->getResultArray();
+                if ($rows_totalT > 0) {
+                    $features = array(
+                        'type' => 'Feature',
+                        'properties' => array(
+                            'id_package' => $rowT[0]['id_package'],
+                            'day' => $rowT[0]['day'],
+                            'activity' => $rowT[0]['activity'],
+                            'activity_type' => $rowT[0]['activity_type'],
+
+                            'description' => $rowT[0]['description'],
+                            'x' => $rowT[0]['x'],
+                            'y' => $rowT[0]['y']
+                        )
+                    );
+                    array_push($finalArray['bulk'], $features);
+                } else {
+                    // Jangan lakukan apa-apa
+                }
+            } else if (str_contains($row[$in]['id_object'], "W")) {
+                $query_pop = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y, id_package, day, activity, activity_type, description FROM detail_package INNER JOIN worship_place ON detail_package.id_object=worship_place.id WHERE id_object="' . $row[$in]['id_object'] . '" ');;
+                $rows_totalT = $query_pop->getNumRows();
+                $rowT = $query_pop->getResultArray();
+                if ($rows_totalT > 0) {
+                    $features = array(
+                        'type' => 'Feature',
+                        'properties' => array(
+                            'id_package' => $rowT[0]['id_package'],
+                            'day' => $rowT[0]['day'],
+                            'activity' => $rowT[0]['activity'],
+                            'activity_type' => $rowT[0]['activity_type'],
+
+                            'description' => $rowT[0]['description'],
+                            'x' => $rowT[0]['x'],
+                            'y' => $rowT[0]['y']
+                        )
+                    );
+                    array_push($finalArray['bulk'], $features);
+                } else {
+                    // Jangan lakukan apa-apa
+                }
+            } else if (str_contains($row[$in]['id_object'], "C")) {
+                $query_pop = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y, id_package, day, activity, activity_type, description FROM detail_package INNER JOIN culinary ON detail_package.id_object=culinary.id WHERE id_object="' . $row[$in]['id_object'] . '" ');;
+                $rows_totalT = $query_pop->getNumRows();
+                $rowT = $query_pop->getResultArray();
+                if ($rows_totalT > 0) {
+                    $features = array(
+                        'type' => 'Feature',
+                        'properties' => array(
+                            'id_package' => $rowT[0]['id_package'],
+                            'day' => $rowT[0]['day'],
+                            'activity' => $rowT[0]['activity'],
+                            'activity_type' => $rowT[0]['activity_type'],
+
+                            'description' => $rowT[0]['description'],
+                            'x' => $rowT[0]['x'],
+                            'y' => $rowT[0]['y']
+                        )
+                    );
+                    array_push($finalArray['bulk'], $features);
+                } else {
+                    // Jangan lakukan apa-apa
+                }
+            } else if (str_contains($row[$in]['id_object'], "S")) {
+                $query_pop = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y, id_package, day, activity, activity_type, description FROM detail_package INNER JOIN souvenir_place ON detail_package.id_object=souvenir_place.id WHERE id_object="' . $row[$in]['id_object'] . '" ');;
+                $rows_totalT = $query_pop->getNumRows();
+                $rowT = $query_pop->getResultArray();
+                if ($rows_totalT > 0) {
+                    $features = array(
+                        'type' => 'Feature',
+                        'properties' => array(
+                            'id_package' => $rowT[0]['id_package'],
+                            'day' => $rowT[0]['day'],
+                            'activity' => $rowT[0]['activity'],
+                            'activity_type' => $rowT[0]['activity_type'],
+
+                            'description' => $rowT[0]['description'],
+                            'x' => $rowT[0]['x'],
+                            'y' => $rowT[0]['y']
+                        )
+                    );
+                    array_push($finalArray['bulk'], $features);
+                } else {
+                    // Jangan lakukan apa-apa
+                }
+            } else if (str_contains($row[$in]['id_object'], "E")) {
+                $query_pop = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y, id_package, day, activity, activity_type, detail_package.description as description FROM detail_package INNER JOIN event ON detail_package.id_object=event.id WHERE id_object="' . $row[$in]['id_object'] . '" ');;
+                $rows_totalT = $query_pop->getNumRows();
+                $rowT = $query_pop->getResultArray();
+                if ($rows_totalT > 0) {
+                    $features = array(
+                        'type' => 'Feature',
+                        'properties' => array(
+                            'id_package' => $rowT[0]['id_package'],
+                            'day' => $rowT[0]['day'],
+                            'activity' => $rowT[0]['activity'],
+                            'activity_type' => $rowT[0]['activity_type'],
+
+                            'description' => $rowT[0]['description'],
+                            'x' => $rowT[0]['x'],
+                            'y' => $rowT[0]['y']
+                        )
+                    );
+                    array_push($finalArray['bulk'], $features);
+                } else {
+                    // Jangan lakukan apa-apa
+                }
+            }
+            $in++;
+        }
+
+
+
+        $data = [
+
+            'finalArray' => $finalArray,
+
+            //find on data
+        ];
+
+        echo json_encode($data);
+    }
+
     public function buy_package($id_package, $total_member, $comment, $date)
     {
 
@@ -1145,11 +1326,12 @@ class Tourism extends ResourcePresenter
             //PUTRI   MASUKKAN NAMA USER KE NAMA PAKET BOOKING
             $name = $id_user;
             $total_member = $this->request->getVar('total_member');
+
             $comment = $this->request->getVar('comment');
-            $min_capacity = 0;
+            $min_capacity = $total_member;
             $contact_person = 0;
             $price = 0;
-
+            $phone =  $_SESSION['phone'];
 
             $queryList = array();
             $m = 0;
@@ -1192,7 +1374,7 @@ class Tourism extends ResourcePresenter
 
             $description = 'Custom order by ' . $user_name;
 
-            $query = $db->query("INSERT INTO `package` (`id_package`,`name`,`min_capaity`,`contact_person`,`description`,`price`,`custom`) VALUES ('" . $id_package . "','" . $user_name . "','" . $min_capacity . "','" . $contact_person . "','" . $description . "','" . $price . "','1');");
+            $query = $db->query("INSERT INTO `package` (`id_package`,`name`,`min_capaity`,`contact_person`,`description`,`price`,`custom`) VALUES ('" . $id_package . "','" . $user_name . "','" . $min_capacity . "','" . $phone . "','" . $description . "','" . $price . "','1');");
 
 
             // echo $statusUpload;
@@ -1216,6 +1398,7 @@ class Tourism extends ResourcePresenter
 
 
                 if (str_contains($getData[$i], 'package_day')) {
+                    $activity_count = 0;
 
                     $tempDay = explode("_", $getData[$i]);
                     $tempSatu = $tempDay[1];
@@ -1225,9 +1408,10 @@ class Tourism extends ResourcePresenter
                     $day = $getValue;
                     $dayArray[$tempDay] = $day;
                     $dayArrayT[$tempDay] = $tempDay;
+                    $description_day = 'Custom order by ' . $user_name;
 
                     // var_dump($dayArrayT);
-                    $query_Day = $db->query("INSERT INTO `package_day` (`id_package`, `day`, `description`) VALUES ('" . $id_package . "', '" . $getValue . "', 'USER INPUT');");
+                    $query_Day = $db->query("INSERT INTO `package_day` (`id_package`, `day`, `description`) VALUES ('" . $id_package . "', '" . $getValue . "', '$description_day');");
                     // echo "INSERT INTO `package_day` (`id_package`, `day`, `description`) VALUES ('" . $id_package . "', '" . $getValue . "', 'USER INPUT');";
                     // echo "<br/>";
                     // $queryList[$m] = $query_Day;
@@ -1238,9 +1422,12 @@ class Tourism extends ResourcePresenter
                     $id_object = $this->request->getVar($getData[$i]);
 
 
+
                     // var_dump($textEx[2]);
 
                     if ($textEx[2] == $tempDay) {
+
+                        $activity_order = $textEx[3] + 1;
 
                         $activity_count = $activity_count + 1;
                         // echo $activity_count . "<br/>";
@@ -1249,25 +1436,31 @@ class Tourism extends ResourcePresenter
 
                         // Check if Objecy dahulu
                         if (str_contains($id_object, 'S')) {
-                            $query = $db->query("SELECT * FROM `souvenir` WHERE id='" . $id_object . "' ");
+                            $query = $db->query("SELECT * FROM `souvenir_place` WHERE id='" . $id_object . "' ");
                             $query = $query->getFirstRow();
+                            $type = 'S';
                         } else if (str_contains($id_object, 'T')) {
                             $query = $db->query("SELECT * FROM `tourism_object` WHERE id='" . $id_object . "' ");
                             $query = $query->getFirstRow();
+                            $type = 'T';
                         } else if (str_contains($id_object, 'W')) {
                             $query = $db->query("SELECT * FROM `worship_place` WHERE id='" . $id_object . "' ");
                             $query = $query->getFirstRow();
+                            $type = 'W';
                         } else if (str_contains($id_object, 'H')) {
                             $query = $db->query("SELECT * FROM `homestay` WHERE id='" . $id_object . "' ");
                             $query = $query->getFirstRow();
+                            $type = 'H';
                         } else if (str_contains($id_object, 'E')) {
                             $query = $db->query("SELECT * FROM `event` WHERE id='" . $id_object . "' ");
                             $query = $query->getFirstRow();
+                            $type = 'E';
                         } else if (str_contains($id_object, 'C')) {
                             $query = $db->query("SELECT * FROM `culinary` WHERE id='" . $id_object . "' ");
                             $query = $query->getFirstRow();
+                            $type = 'C';
                         }
-
+                        $act_type = $type;
                         $desc_auto = $query->name;
 
 
@@ -1289,7 +1482,7 @@ class Tourism extends ResourcePresenter
                     */
 
 
-                        $query_DetailPackage = $db->query("INSERT INTO `detail_package` (`id_package`, `day`, `activity`, `id_object`, `description`) VALUES ('" . $id_package . "','" . $day . "','" . $activity_count . "','" . $id_object . "','" . $desc_auto . "');");
+                        $query_DetailPackage = $db->query("INSERT INTO `detail_package` (`id_package`, `day`, `activity`,`activity_type`, `id_object`, `description`) VALUES ('" . $id_package . "','" . $day . "','" . $activity_count . "','" . $act_type . "','" . $id_object . "','" . $desc_auto . "');");
                         // echo "INSERT INTO `detail_package` (`id_package`, `day`, `activity`, `id_object`, `description`) VALUES ('" . $id_package . "','" . $day . "','" . $activity_count . "','" . $id_object . "','USER INPUT');";
                         // echo "<br/>";
                         // $queryList[$m] = $query_DetailPackage;
@@ -1301,11 +1494,6 @@ class Tourism extends ResourcePresenter
                     // $queryList[$m] = $query_ServicePackage;
                     // $m++;
                 }
-
-
-
-
-
 
                 $i++;
             }
@@ -3881,10 +4069,180 @@ class Tourism extends ResourcePresenter
         return view('web/search_tourism', $data);
     }
 
+    public function search_name_menu($search)
+    {
+        $db = \Config\Database::connect();
+        $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, open, close, ticket_price, contact_person FROM tourism_object WHERE name LIKE "%' . $search . '%"');
+        $hasil = array(
+            'type'    => 'FeatureCollection',
+            'features' => array()
+        );
+        if ($this->auth->check()) {
+
+            $log = "login";
+        } else {
+            $log = "logout";
+        }
+
+        foreach ($query->getResultArray() as $row) {
+            $features = array(
+                'type' => 'Feature',
+                'geometry' => json_decode($row['geom']),
+                'properties' => array(
+                    'id' => $row['id'],
+                    'name' => $row['name'],
+                    'address' => $row['address'],
+                    'open' => $row['open'],
+                    'close' => $row['close'],
+                    'ticket_price' => $row['ticket_price'],
+                    'contact_person' => $row['contact_person'],
+                    'x' => $row['x'],
+                    'y' => $row['y']
+                )
+            );
+            array_push($hasil['features'], $features);
+        }
+
+        // 
+        $query_village   = $db->query('SELECT ST_AsGeoJSON(geom) as geom_village FROM village');
+        $geom_village = array(
+            'type'    => 'FeatureCollection',
+            'features' => array()
+        );
+
+        foreach ($query_village->getResultArray() as $row) {
+            $features = array(
+                'type' => 'Feature',
+                'geometry' => json_decode($row['geom_village']),
+                'properties' => array()
+            );
+            array_push($geom_village['features'], $features);
+        }
+
+        $data = [
+
+            'data' => $this->Model->getData(), //find on data
+            'geometry' => $hasil,
+            'village' => $geom_village,
+            'log' => $log,
+            'no_radius' => 'yes'
+
+        ];
+        if (isset($_SESSION['redirect_urlX'])) {
+            $id_user = $_SESSION['redirect_urlX'];
+            $db = \Config\Database::connect();
+            $query = $db->query("SELECT * FROM `auth_groups_users` WHERE user_id='" . $id_user . "' ");
+            $query = $query->getFirstRow();
+            if ($query->group_id == 1) {
+
+                return redirect()->to(site_url());
+            } else {
+            }
+        } else {
+            $id_user = NULL;
+        }
+        return view('web/search_name', $data);
+    }
+
+    public function search_facility_menu($id)
+    {
+        $idx = $id;
+        // Disini search by facility
+        $id = str_replace('CHECK_', "", $id);
+        $id = explode("|", $id);
+        $length = count($id);
+        $i = 0;
+        $generate_query_facility = "";
+
+        while ($i < $length) {
+            $generate_query_facility = $generate_query_facility . "id_facility='" . $id[$i] . "' OR ";
+            $i++;
+        }
+        $generate_query_facility = str_replace("OR id_facility='' OR ", "", $generate_query_facility);
+
+        $hasil = array(
+            'type'    => 'FeatureCollection',
+            'features' => array()
+        );
+
+        $db = \Config\Database::connect();
+        if ($generate_query_facility != "") {
+            $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,tourism_object.name as name,id,address, open, close, ticket_price, contact_person FROM tourism_object LEFT JOIN tourism_facility ON tourism_object.id_category=tourism_facility.id_facility WHERE (' . '' . $generate_query_facility . ')');
+
+
+            foreach ($query->getResultArray() as $row) {
+                $features = array(
+                    'type' => 'Feature',
+                    'geometry' => json_decode($row['geom']),
+                    'properties' => array(
+                        'id' => $row['id'],
+                        'name' => $row['name'],
+                        'address' => $row['address'],
+                        'open' => $row['open'],
+                        'close' => $row['close'],
+                        'ticket_price' => $row['ticket_price'],
+                        'contact_person' => $row['contact_person'],
+                        'x' => $row['x'],
+                        'y' => $row['y']
+                    )
+                );
+                array_push($hasil['features'], $features);
+            }
+        }
+        if ($this->auth->check()) {
+
+            $log = "login";
+        } else {
+            $log = "logout";
+        }
+
+
+
+        // 
+        $query_village   = $db->query('SELECT ST_AsGeoJSON(geom) as geom_village FROM village');
+        $geom_village = array(
+            'type'    => 'FeatureCollection',
+            'features' => array()
+        );
+
+        foreach ($query_village->getResultArray() as $row) {
+            $features = array(
+                'type' => 'Feature',
+                'geometry' => json_decode($row['geom_village']),
+                'properties' => array()
+            );
+            array_push($geom_village['features'], $features);
+        }
+
+        $data = [
+
+            'data' => $this->Model->getData(), //find on data
+            'geometry' => $hasil,
+            'village' => $geom_village,
+            'log' => $log,
+            'no_radius' => 'yes'
+
+        ];
+        if (isset($_SESSION['redirect_urlX'])) {
+            $id_user = $_SESSION['redirect_urlX'];
+            $db = \Config\Database::connect();
+            $query = $db->query("SELECT * FROM `auth_groups_users` WHERE user_id='" . $id_user . "' ");
+            $query = $query->getFirstRow();
+            if ($query->group_id == 1) {
+
+                return redirect()->to(site_url());
+            } else {
+            }
+        } else {
+            $id_user = NULL;
+        }
+        return view('web/search_name_facility', $data);
+    }
+
     public function list_agro()
     {
         $db = \Config\Database::connect();
-        $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, open, close, ticket_price, contact_person FROM tourism_object WHERE id_category="1"');
+        $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, open, close, ticket_price, contact_person FROM tourism_object WHERE tourism_object.id_category="1"');
         $hasil = array(
             'type'    => 'FeatureCollection',
             'features' => array()

@@ -173,6 +173,7 @@
 <?= $this->section('javascript') ?>
 <script>
 	$('#panel').hide();
+	$('#coorAdmin').hide();
 	$('#direction-row').hide();
 	$('#check-nearby-col').hide();
 	$('#result-nearby-col').hide();

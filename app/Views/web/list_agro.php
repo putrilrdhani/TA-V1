@@ -17,8 +17,8 @@
                             </div>
                             <div class="col">
 
-                                <button onclick=" radiusGPS()" data-toggle="tooltip" data-placement="bottom" title="Current Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-location"></i></button>
-                                <button onclick="radiusManual()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-map-marker-alt"></i></button>
+                                <button onclick=" radiusGPS_List()" data-toggle="tooltip" data-placement="bottom" title="Current Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-location"></i></button>
+                                <button onclick="radiusManual_List()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-map-marker-alt"></i></button>
                                 <button onclick="hideElement()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
                             </div>
                         </div>
@@ -81,6 +81,11 @@
                                 </thead>
                             <tbody>
                                 <tr>
+                                    <!-- <td colspan="3">
+                                        <button onclick="mapView('T3')" data-toggle="tooltip" data-placement="bottom" title="Show Marker" class="btn btn-primary">Show on Map</button>
+                                    </td> -->
+                                </tr>
+                                <tr>
                                     <td colspan="3">
                                         <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
                                         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -132,15 +137,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3">Batu Patah Payo merupakan jenis agrowisata yang ada di Kota Solok. Batu Patah Payo merupakan kawasan budidaya bunga krisan. Batu Patah Payo juga memiliki wisata taman bermain anak dengan beberapa spot foto yang instagramable.</td>
 
-                                <tr>
                                     <td>Address </td>
                                     <td colspan="2"><?= $data[0]->address; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Type of Tourism</td>
-                                    <td colspan="2">Agrowisata</td>
+                                    <td colspan="2"><?= $data[0]->c_name; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Open </td>
@@ -220,5 +223,6 @@
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();
     $('#dinamisDistance').hide();
+    $('#coorAdmin').hide();
 </script>
 <?= $this->endSection() ?>

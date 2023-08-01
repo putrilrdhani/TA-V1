@@ -57,70 +57,16 @@
                                     <label for="description">Description</label>
                                     <textarea class="form-control" rows="3" name="description" id="description" placeholder="Description"><?php echo $data[0]->description; ?></textarea>
                                 </div>
-                                <div class="slidercontainer">
+                                <div class="form-group d-flex justify-content-center">
+                                    <div class="row">
 
-                                    <?php
-                                    $countImage = count($data);
-                                    $image_i = 0;
-                                    while ($image_i < $countImage) {
-                                    ?>
+                                        <img class="img img-fluid" style="max-height: 60vh; width:auto" src="<?php echo base_url("upload/" . $data[0]->brosur_url); ?>" /><br />
 
-                                        <!-- Mulai dari sini -->
-                                        <?php
-
-                                        if ($data[$image_i]->brosur_url == NULL) {
-                                        } else {
-                                        ?>
-                                            <div class="showSlide">
-                                                <img class="img img-fluid" src="<?php echo base_url("upload/" . $data[$image_i]->brosur_url); ?>" />
-                                                <div class="contentx"><?php echo $data[$image_i]->name; ?></div>
-                                                <a style="float:right" onclick="deleteImageEvent('<?php echo $data[$image_i]->brosur_url ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
-                                            </div>
-                                        <?php
-                                        }
-                                        ?>
-
-
-
-                                        <!-- Akhir disini -->
-
-                                    <?php
-                                        $image_i++;
-                                    }
-                                    ?>
-
-                                    <!-- Navigation arrows -->
-                                    <a class="left" onclick="nextSlide(-1)"><i class="fa-solid fa-backward"></i>| </a>
-                                    <a class="right" onclick="nextSlide(1)"> |<i class="fa-solid fa-forward"></i></a>
+                                    </div>
+                                    <div class="row">
+                                        <a style="float:right" onclick="deleteImageEvent('<?php echo $data[0]->brosur_url ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
+                                    </div>
                                 </div>
-
-                                <script type="text/javascript">
-                                    var slide_index = 1;
-                                    displaySlides(slide_index);
-
-                                    function nextSlide(n) {
-                                        displaySlides(slide_index += n);
-                                    }
-
-                                    function currentSlide(n) {
-                                        displaySlides(slide_index = n);
-                                    }
-
-                                    function displaySlides(n) {
-                                        var i;
-                                        var slides = document.getElementsByClassName("showSlide");
-                                        if (n > slides.length) {
-                                            slide_index = 1
-                                        }
-                                        if (n < 1) {
-                                            slide_index = slides.length
-                                        }
-                                        for (i = 0; i < slides.length; i++) {
-                                            slides[i].style.display = "none";
-                                        }
-                                        slides[slide_index - 1].style.display = "block";
-                                    }
-                                </script>
                                 <div class="form-group">
                                     <label for="char">Brosur Url</label>
                                     <input type="file" class="form-control" autocomplete="off" name="brosur_url" id="brosur_url" placeholder="Brosur Url" />

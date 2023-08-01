@@ -61,7 +61,7 @@ class Detail_service_package extends BaseController
 	public function create()
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT id_package, name FROM package');
+		$query   = $db->query('SELECT id_package, name FROM package WHERE custom = "0"');
 		$query1 = $db->query('SELECT id_service_package, name FROM service_package');
 		$hasil = array(
 			'type'    => 'FeatureCollection',
@@ -129,10 +129,11 @@ class Detail_service_package extends BaseController
 	}
 
 	//UPDATE
-	public function update($id)
+	public function update($id_package, $id_service_package)
 	{
 		$db = \Config\Database::connect();
 		$query   = $db->query('SELECT * FROM package ');
+		$query1   = $db->query('SELECT * FROM service_package');
 		$hasil_package = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -150,17 +151,32 @@ class Detail_service_package extends BaseController
 			);
 			array_push($hasil_package['features'], $features);
 		}
-		$dataFind = $this->Model->getData($id);
+		$hasil1 = array(
+			'type'    => 'FeatureCollection',
+			'features' => array()
+		);
+		foreach ($query1->getResultArray() as $row) {
+			$features = array(
+				'type' => 'Feature',
+				'properties' => array(
+					'id_service_package' => $row['id_service_package'],
+					'name' => $row['name'],
+				)
+			);
+			array_push($hasil1['features'], $features);
+		}
+		$dataFind = $this->Model->getData($id_package, $id_service_package);
 		if ($dataFind == false) {
 			return redirect()->to(base_url('/Detail_service_package'));
 		}
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Edite Pages',
+			'content' => 'Edit ',
 			'action' => 'detail_service_package/update_action',
-			'data' => $this->Model->getData($id),
+			'data' => $this->Model->getData($id_package, $id_service_package),
 			'status' => 'Visible',
-			'package' => $hasil_package
+			'package' => $hasil_package,
+			'service' => $hasil1
 		];
 		session()->setFlashdata('message', 'Update Record Success');
 		return view('detail_service_package/form_detail_service_package', $data);

@@ -16,7 +16,23 @@ $uri3 = $uri[3] ?? '';
                 <div class="d-flex justify-content-center avatar avatar-xl me-3" id="avatar-sidebar">
                     <img src="<?= base_url('media/photos/pesona_sumpu.png'); ?>" alt="" srcset="">
                 </div>
-                <div class="p-2 d-flex justify-content-center">Hello, Visitor</div>
+
+                <?php
+
+                if (isset($_SESSION)) {
+
+
+                ?>
+                    <div class="p-2 d-flex justify-content-center">Hello, <?php echo $_SESSION['ses_name']; ?></div>
+
+                <?php
+                } else {
+                ?>
+                    <div class="p-2 d-flex justify-content-center">Hello, Visitor</div>
+                <?php
+                }
+                ?>
+
                 <ul class="menu">
 
                     <!-- 

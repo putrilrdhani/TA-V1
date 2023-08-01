@@ -187,7 +187,7 @@
                     '</thead>' +
                     '<tbody>' +
                     '  <tr>' +
-                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-mountain-sun"></i>&nbsp Tourism Object</td>' +
+                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-home"></i>&nbsp Homestay</td>' +
                     // '    <td class="tg-0lax">' + geom_data.features[i].properties['name'] + '</td>' +
                     '  </tr>' +
                     // '  <tr>' +
@@ -208,11 +208,20 @@
                     // '  </tr>' +
 
                     '</tbody>' +
-                    '</table>';
+                    '</table>' +
+                    "<div class='d-flex justify-content-center'><button style='margin:5px;' class='btn btn-outline-primary' onclick='infoList(" +
+                    '"' +
+                    geom_homestay.features[i].properties["id"] +
+                    '"' +
+                    "," +
+                    '"' +
+                    "HOMESTAY" +
+                    '"' +
+                    ")'><i class='fa fa-info-circle'></i></button></div>";
                 markerHomestay_All[i] = new google.maps.Marker({
                     position: posData,
                     map,
-                    title: "Tourism Object",
+                    title: "Homestay",
                     animation: google.maps.Animation.DROP,
                     info: contentString,
                     icon: urlAplikasi + "media/icon/marker_hs.png",
@@ -287,7 +296,7 @@
                     '</thead>' +
                     '<tbody>' +
                     '  <tr>' +
-                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-mountain-sun"></i>&nbsp Tourism Object</td>' +
+                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-utensils"></i>&nbsp Culinary</td>' +
                     // '    <td class="tg-0lax">' + geom_data.features[i].properties['name'] + '</td>' +
                     '  </tr>' +
                     // '  <tr>' +
@@ -308,11 +317,20 @@
                     // '  </tr>' +
 
                     '</tbody>' +
-                    '</table>';
+                    '</table>' +
+                    "<div class='d-flex justify-content-center'><button style='margin:5px;' class='btn btn-outline-primary' onclick='infoList(" +
+                    '"' +
+                    geom_culinary.features[i].properties["id"] +
+                    '"' +
+                    "," +
+                    '"' +
+                    "CULINARY" +
+                    '"' +
+                    ")'><i class='fa fa-info-circle'></i></button></div>";
                 markerCulinary_All[i] = new google.maps.Marker({
                     position: posData,
                     map,
-                    title: "Tourism Object",
+                    title: "Culinary",
                     animation: google.maps.Animation.DROP,
                     info: contentString,
                     icon: urlAplikasi + "media/icon/marker_cp.png",
@@ -386,7 +404,7 @@
                     '</thead>' +
                     '<tbody>' +
                     '  <tr>' +
-                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-mountain-sun"></i>&nbsp Tourism Object</td>' +
+                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-bullhorn"></i>&nbsp Event</td>' +
                     // '    <td class="tg-0lax">' + geom_data.features[i].properties['name'] + '</td>' +
                     '  </tr>' +
                     // '  <tr>' +
@@ -407,11 +425,20 @@
                     // '  </tr>' +
 
                     '</tbody>' +
-                    '</table>';
+                    '</table>' +
+                    "<div class='d-flex justify-content-center'><button style='margin:5px;' class='btn btn-outline-primary' onclick='infoList(" +
+                    '"' +
+                    geom_event.features[i].properties["id"] +
+                    '"' +
+                    "," +
+                    '"' +
+                    "EVENT" +
+                    '"' +
+                    ")'><i class='fa fa-info-circle'></i></button></div>";
                 markerEvent_All[i] = new google.maps.Marker({
                     position: posData,
                     map,
-                    title: "Tourism Object",
+                    title: "Event",
                     animation: google.maps.Animation.DROP,
                     info: contentString,
                     icon: urlAplikasi + "media/icon/marker_ev.png",
@@ -483,7 +510,7 @@
                     '</thead>' +
                     '<tbody>' +
                     '  <tr>' +
-                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-mountain-sun"></i>&nbsp Tourism Object</td>' +
+                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-person-praying"></i>&nbsp Worship</td>' +
                     // '    <td class="tg-0lax">' + geom_data.features[i].properties['name'] + '</td>' +
                     '  </tr>' +
                     // '  <tr>' +
@@ -504,11 +531,20 @@
                     // '  </tr>' +
 
                     '</tbody>' +
-                    '</table>';
+                    '</table>' +
+                    "<div class='d-flex justify-content-center'><button style='margin:5px;' class='btn btn-outline-primary' onclick='infoList(" +
+                    '"' +
+                    geom_worship.features[i].properties["id"] +
+                    '"' +
+                    "," +
+                    '"' +
+                    "WORSHIP" +
+                    '"' +
+                    ")'><i class='fa fa-info-circle'></i></button></div>";
                 markerWorship_All[i] = new google.maps.Marker({
                     position: posData,
                     map,
-                    title: "Tourism Object",
+                    title: "Worship",
                     info: contentString,
                     animation: google.maps.Animation.DROP,
                     icon: urlAplikasi + "media/icon/marker_wp.png",
@@ -583,7 +619,7 @@
                     '</thead>' +
                     '<tbody>' +
                     '  <tr>' +
-                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-mountain-sun"></i>&nbsp Tourism Object</td>' +
+                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-gift"></i>&nbsp Souvenir</td>' +
                     // '    <td class="tg-0lax">' + geom_data.features[i].properties['name'] + '</td>' +
                     '  </tr>' +
                     // '  <tr>' +
@@ -604,11 +640,20 @@
                     // '  </tr>' +
 
                     '</tbody>' +
-                    '</table>';
+                    '</table>' +
+                    "<div class='d-flex justify-content-center'><button style='margin:5px;' class='btn btn-outline-primary' onclick='infoList(" +
+                    '"' +
+                    geom_souvenir.features[i].properties["id"] +
+                    '"' +
+                    "," +
+                    '"' +
+                    "SOUVENIR" +
+                    '"' +
+                    ")'><i class='fa fa-info-circle'></i></button></div>";
                 markerSouvenir_All[i] = new google.maps.Marker({
                     position: posData,
                     map,
-                    title: "Tourism Object",
+                    title: "Souvenir",
                     info: contentString,
                     animation: google.maps.Animation.DROP,
                     icon: urlAplikasi + "media/icon/marker_sp.png",
@@ -674,38 +719,119 @@
                 lat: parseFloat(y),
                 lng: parseFloat(x)
             };
-            contentString =
-                '<table class="table">' +
-                '<thead>' +
-                '  <tr>' +
-                '    <th class="tg-0lax">' + geom_data.features[i].properties['name'] + '</th>' +
-                // '    <th class="tg-0lax">Info</th>' +
-                '  </tr>' +
-                '</thead>' +
-                '<tbody>' +
-                '  <tr>' +
-                '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-mountain-sun"></i>&nbsp Tourism Object</td>' +
-                // '    <td class="tg-0lax">' + geom_data.features[i].properties['name'] + '</td>' +
-                '  </tr>' +
-                // '  <tr>' +
-                // '    <td class="tg-0lax">Address</td>' +
-                // '    <td class="tg-0lax">' + geom_data.features[i].properties['address'] + '</td>' +
-                // '  </tr>' +
-                // '  <tr>' +
-                // '    <td class="tg-0lax">Open</td>' +
-                // '    <td class="tg-0lax">' + geom_data.features[i].properties['open'] + '</td>' +
-                // '  </tr>' +
-                // '  <tr>' +
-                // '    <td class="tg-0lax">Close</td>' +
-                // '    <td class="tg-0lax">' + geom_data.features[i].properties['close'] + '</td>' +
-                // '  </tr>' +
-                // '  <tr>' +
-                // '    <td class="tg-0lax">Ticket Price</td>' +
-                // '    <td class="tg-0lax">' + geom_data.features[i].properties['ticket_price'] + '</td>' +
-                // '  </tr>' +
 
-                '</tbody>' +
-                '</table>' + "<div class='d-flex justify-content-center'><button style='margin:5px;' onclick='infoDetail(" + '"' + geom_data.features[0].properties['id'] + '"' + ")' class='btn btn-outline-primary'><i class='fa fa-info-circle' aria-hidden='true'></i> </button><button style='margin:5px;' onclick='dirrectionPointTemp(" + x + "," + y + ")' class='btn btn-outline-primary'><i class='fa-solid fa-route'></i></button > </div>";
+            <?php
+            if (isset($no_radius)) {
+            ?>
+                contentString =
+                    '<table class="table">' +
+                    '<thead>' +
+                    '  <tr>' +
+                    '    <th class="tg-0lax">' + geom_data.features[i].properties['name'] + '</th>' +
+                    // '    <th class="tg-0lax">Info</th>' +
+                    '  </tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    '  <tr>' +
+                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-mountain-sun"></i>&nbsp Tourism Object</td>' +
+                    // '    <td class="tg-0lax">' + geom_data.features[i].properties['name'] + '</td>' +
+                    '  </tr>' +
+                    // '  <tr>' +
+                    // '    <td class="tg-0lax">Address</td>' +
+                    // '    <td class="tg-0lax">' + geom_data.features[i].properties['address'] + '</td>' +
+                    // '  </tr>' +
+                    // '  <tr>' +
+                    // '    <td class="tg-0lax">Open</td>' +
+                    // '    <td class="tg-0lax">' + geom_data.features[i].properties['open'] + '</td>' +
+                    // '  </tr>' +
+                    // '  <tr>' +
+                    // '    <td class="tg-0lax">Close</td>' +
+                    // '    <td class="tg-0lax">' + geom_data.features[i].properties['close'] + '</td>' +
+                    // '  </tr>' +
+                    // '  <tr>' +
+                    // '    <td class="tg-0lax">Ticket Price</td>' +
+                    // '    <td class="tg-0lax">' + geom_data.features[i].properties['ticket_price'] + '</td>' +
+                    // '  </tr>' +
+
+                    '</tbody>' +
+                    '</table>' + "<div class='d-flex justify-content-center'><button style='margin:5px;' onclick='infoDetail(" + '"' + geom_data.features[i].properties['id'] + '"' + ")' class='btn btn-outline-primary'><i class='fa fa-info-circle' aria-hidden='true'></i> </button><button style='margin:5px;' onclick='dirrectionPointTempNR(" + x + "," + y + ")' class='btn btn-outline-primary'><i class='fa-solid fa-route'></i></button > </div>";
+
+                // Tambahkan tabel ke bagian samping
+                $("#makeTable")
+                    .find("tbody")
+                    .append(
+                        $("<tr>")
+                        .append(
+                            $("<td>").append(
+                                $(
+                                    "<div>" +
+                                    geom_data.features[i].properties["name"] +
+                                    "</div>"
+                                )
+                            )
+                        )
+                        .append(
+                            $("<td width='60px'>").append(
+                                $(
+                                    '<button onclick="showManual(' +
+                                    x +
+                                    "," +
+                                    y +
+                                    "," +
+                                    "'" +
+                                    geom_data.features[i].properties["id"] +
+                                    "'" +
+                                    "," +
+                                    "'" +
+                                    geom_data.features[i].properties["name"] +
+                                    "'" +
+                                    ')" id="show_mark" class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>'
+                                )
+                            )
+                        )
+                        //     .append($('<td>')
+                        //     .append($(' <td><button onclick="mapView('+"'"+dataData.features[0].properties['id']+"'"+')" style="margin-left:5px;" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></td>' )
+
+                        //     )
+                        // )
+                    );
+            <?php
+            } else {
+            ?>
+                contentString =
+                    '<table class="table">' +
+                    '<thead>' +
+                    '  <tr>' +
+                    '    <th class="tg-0lax">' + geom_data.features[i].properties['name'] + '</th>' +
+                    // '    <th class="tg-0lax">Info</th>' +
+                    '  </tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    '  <tr>' +
+                    '    <td class="tg-0lax" style ="text-align:center"><i class="fa-solid fa-mountain-sun"></i>&nbsp Tourism Object</td>' +
+                    // '    <td class="tg-0lax">' + geom_data.features[i].properties['name'] + '</td>' +
+                    '  </tr>' +
+                    // '  <tr>' +
+                    // '    <td class="tg-0lax">Address</td>' +
+                    // '    <td class="tg-0lax">' + geom_data.features[i].properties['address'] + '</td>' +
+                    // '  </tr>' +
+                    // '  <tr>' +
+                    // '    <td class="tg-0lax">Open</td>' +
+                    // '    <td class="tg-0lax">' + geom_data.features[i].properties['open'] + '</td>' +
+                    // '  </tr>' +
+                    // '  <tr>' +
+                    // '    <td class="tg-0lax">Close</td>' +
+                    // '    <td class="tg-0lax">' + geom_data.features[i].properties['close'] + '</td>' +
+                    // '  </tr>' +
+                    // '  <tr>' +
+                    // '    <td class="tg-0lax">Ticket Price</td>' +
+                    // '    <td class="tg-0lax">' + geom_data.features[i].properties['ticket_price'] + '</td>' +
+                    // '  </tr>' +
+
+                    '</tbody>' +
+                    '</table>' + "<div class='d-flex justify-content-center'><button style='margin:5px;' onclick='infoDetail(" + '"' + geom_data.features[i].properties['id'] + '"' + ")' class='btn btn-outline-primary'><i class='fa fa-info-circle' aria-hidden='true'></i> </button><button style='margin:5px;' onclick='dirrectionPointTemp(" + x + "," + y + ")' class='btn btn-outline-primary'><i class='fa-solid fa-route'></i></button > </div>";
+            <?php } ?>
+
             markerArray[i] = new google.maps.Marker({
                 position: posData,
                 map,

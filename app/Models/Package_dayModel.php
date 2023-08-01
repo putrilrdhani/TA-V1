@@ -32,6 +32,8 @@ class Package_dayModel extends Model
         if ($id_package == false) {
             $builder = $this->db->table('package_day');
             $builder->select('id_package, day, description', false);
+            $builder->join('package', 'package.id_package=package_day.id_package');
+            $builder->where('pakcage.custom', "0");
             // $builder->join('event_gallery', 'event.id=event_gallery.id', 'LEFT');
             $query = $builder->get();
             return $query->getResult();

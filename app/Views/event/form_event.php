@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="int">Ticket Price</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="ticket_price" id="ticket_price" placeholder="Ticket Price" value="<?php echo $data[0]->ticket_price; ?>" />
+                                    <input type="number" min="0" class="form-control" autocomplete="off" name="ticket_price" id="ticket_price" placeholder="Ticket Price" value="<?php echo $data[0]->ticket_price; ?>" />
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">Contact Person</label>
@@ -109,7 +109,9 @@
                                                 ?>
                                                     <div class="showSlide">
                                                         <img class="img img-fluid" src="<?php echo base_url("upload/" . $data[$image_i]->url); ?>" />
-                                                        <div class="contentx"><?php echo $data[$image_i]->name; ?></div>
+
+                                                        <a class="left" onclick="nextSlide(-1)"><i class="fa-solid fa-backward"></i>| </a>
+                                                        <a class="right" onclick="nextSlide(1)"> |<i class="fa-solid fa-forward"></i></a>
                                                         <a style="float:right" onclick="deleteImageEvent('<?php echo $data[$image_i]->id_gallery; ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
                                                     </div>
                                                 <?php
@@ -128,7 +130,8 @@
 
                                                             Your browser does not support the video tag.
                                                         </video>
-                                                        <div class="contentx"><?php echo $data[$image_i]->name; ?></div>
+                                                        <a class="left" onclick="nextSlide(-1)"><i class="fa-solid fa-backward"></i>| </a>
+                                                        <a class="right" onclick="nextSlide(1)"> |<i class="fa-solid fa-forward"></i></a>
                                                         <a style="float:right" onclick="deleteVideoEvent('<?php echo $data[$image_i]->id_video; ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
                                                     </div>
                                                 <?php
@@ -143,8 +146,6 @@
                                             ?>
 
                                             <!-- Navigation arrows -->
-                                            <a class="left" onclick="nextSlide(-1)"><i class="fa-solid fa-backward"></i>| </a>
-                                            <a class="right" onclick="nextSlide(1)"> |<i class="fa-solid fa-forward"></i></a>
                                         </div>
 
                                         <script type="text/javascript">
@@ -224,7 +225,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="int">Ticket Price</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="ticket_price" id="ticket_price" placeholder="Ticket Price" value="" />
+                                    <input type="number" min="0" class="form-control" autocomplete="off" name="ticket_price" id="ticket_price" placeholder="Ticket Price" value="" />
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" style="display: none;" required />

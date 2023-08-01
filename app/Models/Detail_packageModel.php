@@ -20,7 +20,7 @@ class Detail_packageModel extends Model
     protected $allowedFields = ['id_package', 'day', 'activity', 'activity_type', 'id_object', 'description'];
 
     // GET ALL DATA
-    public function getData($id_package = false, $day = false)
+    public function getData($id_package = false, $day = false, $activity = false)
     {
         if ($id_package == false) {
             $builder = $this->db->table('detail_package');
@@ -33,6 +33,7 @@ class Detail_packageModel extends Model
         $builder->select('id_package, day, activity, activity_type, id_object, description', false);
         $builder->where('id_package', $id_package);
         $builder->where('day', $day);
+        $builder->where('activity', $activity);
         $query = $builder->get();
         return $query->getResult();
     }

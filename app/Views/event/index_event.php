@@ -62,7 +62,7 @@
                                                 <span class="float-right">
                                                     <a href="<?= base_url('event/read/' . $data[$i]->id_true) ?>"><i class="fa-solid fa-bars"></i></a>
                                                     <a href="<?= base_url('event/update/' . $data[$i]->id_true) ?>"><i style="color:chocolate" class="fas fa-edit"></i></a>
-                                                    <a href="<?= base_url('event/delete/' . $data[$i]->id_true) ?>" onclick="javascript: return confirm('Delete \nAre You Sure ?')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i></a>
+                                                    <a class="deleteStyle" href="<?= base_url('event/delete/' . $data[$i]->id_true) ?>"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i></a>
                                                 </span>
                                             </td>
                                         </tr>

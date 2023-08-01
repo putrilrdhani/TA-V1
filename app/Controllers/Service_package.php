@@ -39,7 +39,7 @@ class Service_package extends BaseController
 	{
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Create Pages',
+			'content' => 'Create',
 			'data' => $this->Model->paginate(5, 'paging'),
 			'pager' => $this->Model->pager
 		];
@@ -51,7 +51,7 @@ class Service_package extends BaseController
 	{
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Read Pages',
+			'content' => 'Read ',
 			'data' => $this->Model->find($id) //find on data
 		];
 		return view('service_package/read_service_package', $data);
@@ -80,7 +80,7 @@ class Service_package extends BaseController
 		}
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Create Pages',
+			'content' => 'Create ',
 			'action' => site_url('service_package/create_action'),
 			'data' =>   [
 				'id_service_package' => set_value('id_service_package'),

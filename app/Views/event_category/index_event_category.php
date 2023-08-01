@@ -50,7 +50,7 @@
                                             <td>
                                                 <span class="float-right">
                                                     <a href="<?= base_url('event_category/update/' . $data[$i]->id_category) ?>"><i style="color:goldenrod" class="fas fa-edit"></i></a>
-                                                    <a href="<?= base_url('event_category/delete/' . $data[$i]->id_category) ?>" onclick="javascript: return confirm('Delete \nAre You Sure ?')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i></a>
+                                                    <a class="deleteStyle" href="<?= base_url('event_category/delete/' . $data[$i]->id_category) ?>"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i></a>
                                                 </span>
                                             </td>
                                         </tr>

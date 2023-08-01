@@ -47,7 +47,7 @@
 
         <div class="col-md-4">
             <div class="card">
-                <div style="margin: 15px; overflow-x:scroll">
+                <div style="margin: 15px;">
                     <div>
                         <table class="table">
                             <thead>
@@ -88,10 +88,24 @@
 
 
 
-
                     </div>
 
+                    <div class="d-flex justify-content-center">
+                        <button onclick="openModal()" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">
+                            Custom Order
+                        </button>
+                        <script>
+                            function openModal() {
+                                $('#myModal').modal('show');
+                            }
 
+                            function closeModal() {
+                                $('#myModal').modal('hide');
+                            }
+                            $("#delete-button").prop("disabled", true);
+                            $("#delete-map").prop("disabled", true);
+                        </script>
+                    </div>
                 </div>
 
 
@@ -101,76 +115,80 @@
             <div class="card" id="userOrder">
                 <!-- Test -->
             </div>
-
-            <div class="card">
-                <div style="margin: 15px;">
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <br />
-                        <h4><b>Custom Order</b></h4>
-                    </div>
-
-                    <div>
-                        <form id="dynamicForm" action="<?= base_url("web/custom_order") ?>" method="post" enctype="multipart/form-data">
-
-                            <h5>Package</h5>
-                            <div class="form-group">
-                                <label for="date">Booking Date</label>
-                                <input type="date" class="form-control" autocomplete="off" name="date" id="date" placeholder="Date" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label for="total_member">Total Member</label>
-                                <input type="number" min="1" class="form-control" autocomplete="off" name="total_member" id="total_member" placeholder="Total member" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label for="comment">Comment</label>
-                                <input type="text" class="form-control" autocomplete="off" name="comment" id="comment" placeholder="Comment" value="" />
-                            </div>
-                            <h5>Package Day</h5>
-                            <div onclick="showPackageDay()" class="btn btn-info">Add Day</div>
-                            <div id="detail_day">
-
-                            </div>
-                            <br />
-                            <h5>Service Package</h5>
-
-
-                            <?php
-
-
-
-                            $count = count($service_package['features']);
-                            $i = 0;
-                            while ($i < $count) {
-                            ?>
-                                <input name="checkbox_service_package_<?php echo $service_package['features'][$i]['properties']['id_service_package'] ?>" type="checkbox" class="radioServicePackage" value="<?php echo $service_package['features'][$i]['properties']['id_service_package'] ?>">
-                                <label for="vehicle1"> <?php echo $service_package['features'][$i]['properties']['name'] ?> </label><br>
-
-                            <?php
-                                $i++;
-                            }
-
-                            ?>
-                            <br />
-
-
-
-
-
-                            <br />
-                            <input type="hidden" id="nameHidden" name="nameHidden"></input>
-                            <div onclick="getNameField()" class="btn btn-info">Lock</div>
-                            <div class="d-flex p-2 bd-highlight">
-                                <div class="form-group">
-                                    <a class="btn btn-sm btn-danger" href="<?= base_url('package') ?>">Cancel</a>
-                                    <button id="submitName" disabled class="btn btn-sm btn-primary" type="submit">SAVE</button>
+            <div class="modal" id="myModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div style="text-align: center; margin-bottom: 20px;">
+                                    <h4><b>Custom Order</b></h4>
                                 </div>
+
+                                <div>
+                                    <form id="dynamicForm" action="<?= base_url("web/custom_order") ?>" method="post" enctype="multipart/form-data" style="margin: 20px;">
+
+                                        <h5>Package</h5>
+
+                                        <div class="form-group">
+                                            <label for="date">Booking Date</label>
+                                            <input type="date" class="form-control" autocomplete="off" name="date" id="date" placeholder="Date" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="total_member">Total Member</label>
+                                            <input type="number" min="1" class="form-control" autocomplete="off" name="total_member" id="total_member" placeholder="Total member" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="comment">Comment</label>
+                                            <input type="text" class="form-control" autocomplete="off" name="comment" id="comment" placeholder="Comment" value="" />
+                                        </div>
+                                        <h5>Package Day</h5>
+                                        <div onclick="showPackageDay()" class="btn btn-info">Add Day</div>
+                                        <div id="detail_day">
+
+                                        </div>
+                                        <br />
+                                        <h5>Service Package</h5>
+
+
+                                        <?php
+
+
+
+                                        $count = count($service_package['features']);
+                                        $i = 0;
+                                        while ($i < $count) {
+                                        ?>
+                                            <input name="checkbox_service_package_<?php echo $service_package['features'][$i]['properties']['id_service_package'] ?>" type="checkbox" class="radioServicePackage" value="<?php echo $service_package['features'][$i]['properties']['id_service_package'] ?>">
+                                            <label for="vehicle1"> <?php echo $service_package['features'][$i]['properties']['name'] ?> </label><br>
+
+                                        <?php
+                                            $i++;
+                                        }
+
+                                        ?>
+                                        <br />
+
+
+
+
+
+                                        <br />
+                                        <input type="hidden" id="nameHidden" name="nameHidden"></input>
+                                        <div onclick="getNameField()" class="btn btn-info">Lock</div>
+                                        <div class="d-flex p-2 bd-highlight">
+                                            <div class="form-group">
+                                                <a class="btn btn-sm btn-danger" href="<?= base_url('package') ?>">Cancel</a>
+                                                <button id="submitName" disabled class="btn btn-sm btn-primary" type="submit">SAVE</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+
                             </div>
-                        </form>
-
-
+                        </div>
                     </div>
-
-
                 </div>
 
 
@@ -187,6 +205,7 @@
     $('#direction-row').hide();
     $("#panel").hide();
     $("#legend").hide();
+    $('#coorAdmin').hide();
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();
 </script>

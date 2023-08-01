@@ -65,7 +65,7 @@ class Booking extends BaseController
     public function read($id_user, $id, $id_package)
     {
         $db = \Config\Database::connect();
-        $query   = $db->query('SELECT * FROM booking WHERE id="' . $id . '"');
+        $query   = $db->query('SELECT id_package, purchase_date,purchase_time,date,total_member,booking.status as status,comment, users.username as username, booking.id as id FROM booking JOIN users ON booking.id= users.id WHERE booking.id="' . $id . '"');
         $hasil = array(
             'type'    => 'FeatureCollection',
             'features' => array()
@@ -79,6 +79,7 @@ class Booking extends BaseController
                     // 'id_booking' => $row['id_booking'],
                     'id_package' => $row['id_package'],
                     'id' => $row['id'],
+                    'username' => $row['username'],
                     'purchase_date' => $row['purchase_date'],
                     'purchase_time' => $row['purchase_time'],
                     'date' => $row['date'],
@@ -186,7 +187,7 @@ class Booking extends BaseController
         $data = [
             'AttributePage' => $this->PageData,
             'content' => 'Read ',
-            'data' => $this->Model->getData($id), //find on data
+            'data' => $this->Model->getData($id, $id_user, $id_package), //find on data
             'user' => $hasil_user,
             'package' => $hasil_package,
             'day' => $hasil_day,

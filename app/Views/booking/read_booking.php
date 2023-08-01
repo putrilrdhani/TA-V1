@@ -26,7 +26,11 @@
 						<tbody>
 							<tr>
 								<th width="15%" style="text-align: left;">User</th>
-								<td>: <?php echo $user['features'][0]['properties']['username'] ?></td>
+								<td>: <?php echo $data[0]->username; ?></td>
+							</tr>
+							<tr>
+								<th width="15%" style="text-align: left;">Contact Person</th>
+								<td>: </td>
 							</tr>
 							<tr>
 								<th width="15%" style="text-align: left;">Purchase Date</th>
@@ -113,6 +117,7 @@
 <?= $this->section('javascript') ?>
 <script>
 	$('#direction-row').hide();
+	$('#coorAdmin').hide();
 	$('#legend').hide();
 	$('#check-nearby-col').hide();
 	$('#result-nearby-col').hide();

@@ -1,20 +1,4 @@
 <style>
-    #map,
-    html,
-    body {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-    }
-
-    #panel {
-        width: 200px;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        float: right;
-        margin: 10px;
-    }
-
     #color-palette {
         clear: both;
     }
@@ -46,12 +30,45 @@
 
     </div>
 
-    <div id="panel">
-        <div id="color-palette"></div>
-        <div>
+
+    <div class="row" id="coorAdmin">
+
+        <div class="col-sm-4">
+
+            <div id="panel">
+
+                <div id="color-palette"></div>
+                <div>
+                    <br />
+                    <button class="btn btn-danger" id="delete-button"><i class="fa-solid fa-draw-polygon"></i></button>
+                    <button class="btn btn-danger" id="delete-map" onclick="initialize()"><i class="fa-solid fa-layer-group"></i></button>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="col-sm-8">
+            <div class="row">
+
+                <div class="col-sm-5">
+                    <div>
+                        <input id="lat_admin" class="form form-control" type="text" name="lat_admin" placeholder="Latitude">
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div>
+                        <input id="lng_admin" class="form form-control" type="text" name="lng_admin" placeholder="Longitude">
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <button onclick="setPositionAdmin()" class="btn btn-info">Set</button>
+                </div>
+            </div>
             <br />
-            <button class="btn btn-danger" id="delete-button"><i class="fa-solid fa-draw-polygon"></i></button>
-            <button class="btn btn-danger" id="delete-map" onclick="initialize()"><i class="fa-solid fa-layer-group"></i></button>
+
 
         </div>
 

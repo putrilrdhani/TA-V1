@@ -92,7 +92,7 @@ if (isset($selectData)) {
 
                         <!-- Isi Disini -->
                         <div class="row content">
-                            <h3><small><?= $content; ?></small></h3>
+                            <h3><small><?= $content; ?> Souvenir Place</small></h3>
                         </div>
                         <form action="<?= base_url($action) ?>" method="post" enctype="multipart/form-data">
                             <?php

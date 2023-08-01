@@ -17,7 +17,12 @@ class Homestay_facilityModel extends Model
     public function getData($id = false)
     {
         if ($id == false) {
-            return $this->findAll();
+
+            $builder = $this->db->table('homestay_facility');
+            $builder->select('id_facility, name', false);
+            // $builder->join('event_gallery', 'event.id=event_gallery.id', 'LEFT');
+            $query = $builder->get();
+            return $query->getResult();
         }
         return $this->db->where($this->primaryKey, $id)->first();
     }

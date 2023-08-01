@@ -2,55 +2,43 @@
 
 <?= $this->section('content') ?>
 
-
 <section class="section">
     <div class="row">
         <!--map-->
-        <div class="card">
-            <div class="card-header">
-                <div class="row align-items-center">
-                    <!-- Javascript untuk  memuat peta -->
-                    <?= $this->include('web/layouts/jsLoad'); ?>
-
-                    <?= $this->include('web/layouts/map-body'); ?>
-                    <!-- Isi Disini -->
-                    <?php
-
-                    // var_dump($finalArray);
-                    // var_dump($finalArray['bulk'][0]);
-                    ?>
-
-                    <div class="row content">
-                        <h3><small><?= $data[0]->name ?></small></h3>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="row content">
+                            <div class="col">
+                                <h3><small><?= $data[0]->name ?></small></h3>
+                            </div>
+                        </div>
                     </div>
                     <table class="table table-borderless">
                         <tbody>
                             <tr>
-                                <th width="15%">Name</th>
+                                <th width="15%" style="text-align: left;">Name</th>
                                 <td>: <?php echo $data[0]->name; ?></td>
                             </tr>
                             <tr>
-                                <th width="15%">Min Capaity</th>
+                                <th width="15%" style="text-align: left;">Min Capacity</th>
                                 <td>: <?php echo $data[0]->min_capaity; ?></td>
                             </tr>
                             <tr>
-                                <th width="15%">Contact Person</th>
+                                <th width="15%" style="text-align: left;">Contact Person</th>
                                 <td>: <?php echo $data[0]->contact_person; ?></td>
                             </tr>
                             <tr>
-                                <th width="15%">Description</th>
+                                <th width="15%" style="text-align: left;">Description</th>
                                 <td>: <?php echo $data[0]->description; ?></td>
                             </tr>
                             <tr>
-                                <th width="15%">Day</th>
+                                <th width="15%" style="text-align: left;">Comment</th>
                                 <td>: <?php echo $data[0]->price; ?></td>
                             </tr>
                             <tr>
-                                <th width="15%">Brosur Url</th>
-                                <td>: <?php echo $data[0]->brosur_url; ?></td>
-                            </tr>
-                            <tr>
-                                <th width="15%">Price</th>
+                                <th width="15%" style="text-align: left;">Status</th>
                                 <td>: <?php echo $data[0]->price; ?></td>
                             </tr>
                             <?php
@@ -61,15 +49,16 @@
 
                             $i = 0;
 
+
                             while ($i < $count_day) {
                             ?>
                                 <tr>
 
-                                    <th width="15%">Hari <?= $package_day['features'][$i]['properties']['day']; ?></th>
-                                    <td></td>
+                                    <th width="15%" style="text-align: left;">Hari <?= $package_day['features'][$i]['properties']['day']; ?></th>
+                                    <td><button class="btn btn-outline-primary" onclick="routeDayShow('<?= $package_day['features'][$i]['properties']['id_package']; ?>',<?= $package_day['features'][$i]['properties']['day']; ?>)">Show Route</button></td>
                                 </tr>
                                 <tr>
-                                    <th width="15%">Activity</th>
+                                    <th width="15%" style="text-align: left;">Activity</th>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -77,16 +66,21 @@
                                     <td>
                                         <?php
                                         $j = 0;
+                                        $num = 1;
 
                                         while ($j < $count_detail) {
 
                                             if ($package_day['features'][$i]['properties']['day'] == $detail_package['features'][$j]['properties']['day']) {
-                                                echo $j + 1, ". ", $detail_package['features'][$j]['properties']['description'] ?><br />
+                                                echo $num . ". " . $detail_package['features'][$j]['properties']['description'] ?><br />
 
 
 
                                     <?php
+                                                $num++;
+                                            } else {
+                                                $num = 1;
                                             }
+
                                             $j++;
                                         }
                                         $i++;
@@ -95,7 +89,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th width="15%">Service</th>
+                                    <th width="15%" style="text-align: left;">Service</th>
                                     <td>: </td>
                                 </tr>
 
@@ -124,58 +118,54 @@
 
 
                     <div class="d-flex p-2 bd-highlight">
-                        <a class="btn btn-sm btn-danger" href="<?= \base_url('package') ?>">back</a>
+                        <a class="btn btn-sm btn-danger" href="<?= \base_url('web/detail_booking') ?>">back</a>
                     </div>
-
+                    <!-- <div>
+                    <a href="#" onclick="print()" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i>&nbsp; Print</a>
+                </div> -->
 
 
                 </div>
             </div>
         </div>
-        <!-- <div class="col-md-4">
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
 
-			<div class="card">
+                        <!-- Javascript untuk  memuat peta -->
+                        <?= $this->include('web/layouts/jsLoad'); ?>
 
-				<div class="table-responsive">
-					<table id="panelRenderX" class="table table-hover mb-0 table-lg">
-						<thead>
-							<tr>
-								<th>Distance (m)</th>
-								<th>Steps</th>
-							</tr>
-						</thead>
-						<tbody id="table-direction">
+                        <?= $this->include('web/layouts/map-body'); ?>
+                        <!-- Isi Disini -->
+                    </div>
+                </div>
+            </div>
 
-						</tbody>
-					</table>
-				</div>
-			</div> -->
-    </div>
+        </div>
     </div>
 
 </section>
 
 <?php
-
-
+// var_dump($finalArray);
 
 $count = count($finalArray['bulk']);
+// echo $count;
 // echo $count;
 $i = 0;
 while ($i < $count) {
     // Setiap dua kali maka data dari koordinat diambil
     $j = $i + 1;
     $k = $count;
-    $description = "";
 
 
     $x = $finalArray['bulk'][$i]['properties']['x'];
     $y = $finalArray['bulk'][$i]['properties']['y'];
     $description = $finalArray['bulk'][$i]['properties']['description'];
 
-
 ?>
-    <?php echo "<script> dirrectionManualPackage( " . $x . ", " . $y . ",'" . $description . "'); </script>" ?>
+    <?php echo "<script> dirrectionManual_User( " . $x . ", " . $y . ",'" . $description . "'); </script>" ?>
 
 <?php
 
@@ -185,23 +175,19 @@ while ($i < $count) {
 
 ?>
 
-<script>
-    $("#color-palette").prop("hidden", true);
-    $("#delete-button").prop("hidden", true);
-    $("#delete-map").prop("hidden", true);
-</script>
 
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>
 <script>
     $('#direction-row').hide();
-    $('#legend').hide();
     $('#panel').hide();
+    $('#legend').hide();
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();
+    $('#coorAdmin').hide();
 </script>
 <script>
-    const myTimeout = setTimeout(routeWayPoints, 2000);
+    // const myTimeout = setTimeout(routeWayPoints_User, 2000);
 </script>
 <?= $this->endSection() ?>

@@ -11,7 +11,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="row">
-                            <h3><small><?= $content; ?> ALL</small></h3>
+                            <h3><small><?= $content; ?></small></h3>
                         </div>
                         <div class="row">
                             <div class="d-flex p-2 bd-highlight">
@@ -27,7 +27,6 @@
                                         <th>Min Capaity</th>
                                         <th>Contact Person</th>
                                         <th>Description</th>
-
                                         <th>Price</th>
                                         <th>Action</th>
                                     </tr>
@@ -41,14 +40,14 @@
                                     while ($count >= $i) {
                                     ?>
                                         <tr>
-                                            <td width="80px" style="word-break: break-all;"><?php
-                                                                                            echo ++$start ?></td>
-                                            <td style="word-break: break-all;"><?= $data[$i]->name ?></td>
-                                            <td style="word-break: break-all;"><?= $data[$i]->min_capaity ?></td>
-                                            <td style="word-break: break-all;"><?= $data[$i]->contact_person ?></td>
-                                            <td style="word-break: break-all;"><?= $data[$i]->description ?></td>
+                                            <td width="80px"><?php
+                                                                echo ++$start ?></td>
+                                            <td><?= $data[$i]->name ?></td>
+                                            <td><?= $data[$i]->min_capaity ?></td>
+                                            <td><?= $data[$i]->contact_person ?></td>
+                                            <td><?= $data[$i]->description ?></td>
 
-                                            <td style="word-break: break-all;"><?= $data[$i]->price ?></td>
+                                            <td><?= $data[$i]->price ?></td>
                                             <td style="width: 80px; word-break:break-all">
                                                 <span class="float-right">
                                                     <a href="<?= base_url('package/read/' . $data[$i]->id_package) ?>"><i class="fa-solid fa-bars"></i></a>
@@ -79,14 +78,18 @@
                             <h3><small>Package Day</small></h3>
                         </div>
                         <div class="row">
+                            <div class="d-flex p-2 bd-highlight">
+                                <a href="<?= base_url('package_day/create') ?>" class="btn btn-sm btn-primary">CREATE PACKAGE DAY</a>
+                            </div>
+                        </div>
+                        <div class="row">
                             <table class="showDataTable" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <!-- <th>Id Package</th> -->
+                                        <th>Package Name</th>
                                         <th>Day</th>
                                         <th>Description</th>
-
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -101,7 +104,7 @@
                                         <tr>
                                             <td width="80px"><?php
                                                                 echo ++$start ?></td>
-                                            <!-- <td><?= $package_day['features'][$i]['properties']['id_package'] ?></td> -->
+                                            <td><?= $package_day['features'][$i]['properties']['package_name'] ?></td>
                                             <td><?= $package_day['features'][$i]['properties']['day'] ?></td>
                                             <td><?= $package_day['features'][$i]['properties']['description'] ?></td>
 
@@ -197,12 +200,18 @@
                             <h3><small>Detail Package</small></h3>
                         </div>
                         <div class="row">
+                            <div class="d-flex p-2 bd-highlight">
+                                <a href="<?= base_url('detail_package/create') ?>" class="btn btn-sm btn-primary"> ADD PACKAGE ACTIVITY</a>
+                            </div>
+                        </div>
+                        <div class="row">
                             <table class="showDataTable" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <!-- <th>Id Package</th> -->
-                                        <th>Ativity</th>
+                                        <th>Package Name</th>
+                                        <th>Day</th>
+                                        <th>Activity</th>
                                         <th>Id</th>
                                         <th>Description</th>
                                         <th>Action</th>
@@ -220,7 +229,8 @@
                                         <tr>
                                             <td width="80px"><?php
                                                                 echo ++$start ?></td>
-                                            <!-- <td><?= $detail_package['features'][$i]['properties']['id_package'] ?></td> -->
+                                            <td><?= $detail_package['features'][$i]['properties']['name'] ?></td>
+                                            <td><?= $detail_package['features'][$i]['properties']['day'] ?></td>
                                             <td><?= $detail_package['features'][$i]['properties']['activity'] ?></td>
                                             <td><?= $detail_package['features'][$i]['properties']['id_object'] ?></td>
                                             <td><?= $detail_package['features'][$i]['properties']['description'] ?></td>
@@ -229,9 +239,8 @@
 
                                             <td style="width: 80px;">
                                                 <span class="float-right">
-                                                    <!-- <a href="<?= base_url('detail_package/read/' . $detail_package['features'][$i]['properties']['id_package'] . "/" . $detail_package['features'][$i]['properties']['day']) ?>"><i class="fa-solid fa-bars"></i></a> -->
-                                                    <a href="<?= base_url('detail_package/update/' . $detail_package['features'][$i]['properties']['id_package'] . "/" . $detail_package['features'][$i]['properties']['day']) ?>"><i style="color:chocolate" class="fas fa-edit"></i></a>
-                                                    <!-- <a href="<?= base_url('detail_package/delete/' . $detail_package['features'][$i]['properties']['id_package'] . "/" . $detail_package['features'][$i]['properties']['day']) ?>" ><i style="color:red" class="fa fa-trash" aria-hidden="true"></i></a> -->
+                                                    <a href="<?= base_url('detail_package/update/' . $detail_package['features'][$i]['properties']['id_package'] . "/" . $detail_package['features'][$i]['properties']['day'] . "/" . $detail_package['features'][$i]['properties']['activity']) ?>"><i style="color:chocolate" class="fas fa-edit"></i></a>
+                                                    <a class="deleteStyle" href="<?= base_url('detail_package/delete/' . $detail_package['features'][$i]['properties']['id_package'] . "/" . $detail_package['features'][$i]['properties']['day'] . "/" . $detail_package['features'][$i]['properties']['activity']) ?>"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i></a>
                                                 </span>
                                             </td>
                                         </tr>
@@ -248,7 +257,62 @@
 
             </div>
         </div>
+        <div class="col-md-12 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="row">
+                            <h3><small>Detail Service Package</small></h3>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex p-2 bd-highlight">
+                                <a href="<?= base_url('detail_service_package/create') ?>" class="btn btn-sm btn-primary">DETAIL SERVICE PACKAGE</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table class="showDataTable" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Service Package</th>
+                                        <th>Package</th>
+                                        <!-- <th>Status</th> -->
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $i = 0;
+                                    $count = count($detail_service_package['features']);
+                                    $count = $count - 1;
+                                    $start = 0;
+                                    while ($count >= $i) {
+                                    ?>
+                                        <tr>
+                                            <td width="80px"><?php
+                                                                echo ++$start ?></td>
+                                            <td><?= $detail_service_package['features'][$i]['properties']['service'] ?></td>
+                                            <td><?= $detail_service_package['features'][$i]['properties']['package'] ?></td>
+                                            <!-- <td><?= $detail_service_package['features'][$i]['properties']['status'] ?></td> -->
+                                            <td style="width: 80px;">
+                                                <span class="float-right">
+                                                    <!-- <a href="<?= base_url('detail_service_package/read/' . $detail_service_package['features'][$i]['properties']['id_service_package'] . "/" . $detail_service_package['features'][$i]['properties']['id_package']) ?>"><i class="fa-solid fa-bars"></i></a> -->
+                                                    <a href="<?= base_url('detail_service_package/update/' . $detail_service_package['features'][$i]['properties']['id_service_package'] . "/" . $detail_service_package['features'][$i]['properties']['id_package']) ?>"><i style="color:chocolate" class="fas fa-edit"></i></a>
+                                                    <a href="<?= base_url('detail_service_package/delete/' . $detail_service_package['features'][$i]['properties']['id_service_package'] . "/" . $detail_service_package['features'][$i]['properties']['id_package']) ?>" onclick="javascript: return confirm('Delete \nAre You Sure ?')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i></a>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php
 
+                                        $i++;
+                                    } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 

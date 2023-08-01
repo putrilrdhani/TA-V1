@@ -194,7 +194,7 @@ class Tourism_objectModel extends Model
         }
         $builder = $this->db->table('tourism_object');
         $builder->select('tourism_object.id AS id_true,tourism_object.name as name, address, open, close, ticket_price, geom, contact_person, tourism_gallery.url as url,tourism_video.url as url_video, id_gallery,id_video, tourism_facility.name as f_name, tourism_object.id_category AS id_category, tourism_category.name as c_name', false);
-        $builder->join('tourism_category', 'tourism_object.id_category=tourism_category.id_category', 'LEST');
+        $builder->join('tourism_category', 'tourism_object.id_category=tourism_category.id_category', 'LEFT');
         $builder->join('tourism_gallery', 'tourism_object.id=tourism_gallery.id', 'LEFT');
         $builder->join('tourism_video', 'tourism_object.id=tourism_video.id', 'LEFT');
         $builder->join('tourism_detail_facility', 'tourism_object.id=tourism_detail_facility.id', 'LEFT');
@@ -209,11 +209,12 @@ class Tourism_objectModel extends Model
     {
         if ($id == false) {
             $builder = $this->db->table('tourism_object');
-            $builder->select('tourism_object.id AS id_true,tourism_video.url as url_video,tourism_object.name as name, address, open, close, ticket_price, geom, contact_person', false);
+            $builder->select('tourism_object.id AS id_true,tourism_video.url as url_video,tourism_object.name as name, address, open, close, ticket_price, geom, contact_person, tourism_category.name as c_name', false);
+            $builder->join('tourism_category', 'tourism_object.id_category=tourism_category.id_category', 'LEFT');
             $builder->join('tourism_gallery', 'tourism_object.id=tourism_gallery.id', 'LEFT');
             $builder->join('tourism_video', 'tourism_object.id=tourism_video.id', 'LEFT');
             // $builder->join('tourism_gallery', 'tourism_object.id=tourism_gallery.id', 'LEFT');
-            $builder->where('id_category', 1);
+            $builder->where('tourism_object.id_category', 1);
             $query = $builder->get();
             return $query->getResult();
             // return $this->findAll();

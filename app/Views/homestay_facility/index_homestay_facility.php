@@ -35,20 +35,31 @@
                                         <th>Name</th>
                                         <th>Action</th>
                                     </tr>
-                                </thead><?php foreach ($data as $value) : ?>
-                                    <tr>
-                                        <td width="80px"><?php $start = 0;
-                                                            echo ++$start ?></td>
-                                        <td><?= $value['name'] ?></td>
-                                        <td>
-                                            <span class="float-right">
-                                                <a href="<?= base_url('homestay_facility/read/' . $value['id_facility']) ?>"><i class="fa-solid fa-bars"></i></a>
-                                                <a href="<?= base_url('homestay_facility/update/' . $value['id_facility']) ?>"><i style="color:chocolate" class="fas fa-edit"></i></a>
-                                                <a href="<?= base_url('homestay_facility/delete/' . $value['id_facility']) ?>" onclick="javascript: return confirm('Delete \nAre You Sure ?')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i></a>
-                                            </span>
-                                        </td>
-                                    <?php endforeach; ?>
-                                    </tbody>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $i = 0;
+                                    $count = count($data);
+                                    $count = $count - 1;
+                                    $start = 0;
+                                    while ($count >= $i) {
+                                    ?>
+                                        <tr>
+                                            <td width="80px"><?php
+                                                                echo ++$start ?></td>
+                                            <td><?= $data[$i]->name ?></td>
+                                            <td>
+                                                <span class="float-right">
+                                                    <!-- <a href="<?= base_url('homestay_facility/read/' . $data[$i]->id_facility) ?>"><i class="fa-solid fa-bars"></i></a> -->
+                                                    <a href="<?= base_url('homestay_facility/update/' . $data[$i]->id_facility) ?>"><i style="color:chocolate" class="fas fa-edit"></i></a>
+                                                    <a class="deleteStyle" href="<?= base_url('homestay_facility/delete/' . $data[$i]->id_facility) ?>"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i></a>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                        $i++;
+                                    } ?>
+                                </tbody>
                             </table>
                         </div>
 

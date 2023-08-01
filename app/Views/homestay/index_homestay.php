@@ -52,7 +52,7 @@
                                     ?>
                                         <tr>
 
-                                            <td width="80px"><?php $start = 0;
+                                            <td width="80px"><?php
                                                                 echo ++$start ?></td>
                                             <td><?= $data[$i]->name ?></td>
                                             <td><?= $data[$i]->contact_person ?></td>

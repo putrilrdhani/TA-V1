@@ -1,14 +1,6 @@
 <?= $this->extend('web/layouts/main_user'); ?>
 
 <?= $this->section('content') ?>
-
-<script>
-    $(document).ready(function() {
-        $("img").click(function() {
-            this.requestFullscreen()
-        })
-    });
-</script>
 <section class="section">
     <div class="row">
         <!--map-->
@@ -66,10 +58,23 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <script>
-                            $("#delete-button").prop("disabled", true);
-                            $("#delete-map").prop("disabled", true);
-                        </script>
+                        <br />
+                        <div class="d-flex justify-content-center">
+                            <button onclick="openModal()" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">
+                                Show Media
+                            </button>
+                            <script>
+                                function openModal() {
+                                    $('#myModal').modal('show');
+                                }
+
+                                function closeModal() {
+                                    $('#myModal').modal('hide');
+                                }
+                                $("#delete-button").prop("disabled", true);
+                                $("#delete-map").prop("disabled", true);
+                            </script>
+                        </div>
                     </div>
                 </div>
 
@@ -86,96 +91,167 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 style="text-align: center;">Gallery</h5>
-                    <div class="row align-items-center">
-                        <div class="col-sm-2"></div>
-                        <div class="slidercontainer">
 
-                            <?php
-                            $countImage = count($data);
-                            $image_i = 0;
-                            while ($image_i < $countImage) {
-                            ?>
-                                <?php
 
-                                if ($data[$image_i]->id_gallery == NULL) {
-                                } else {
-                                ?>
-                                    <div class="showSlide">
-                                        <img class="img img-fluid" src="<?php echo base_url("upload/" . $data[$image_i]->url); ?>" />
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 style="text-align: center;">Media</h5>
+                                    <div class="row align-items-center">
+                                        <div class="col-sm-2"></div>
+                                        <div class="outerLayer">
+                                            <div class="slidercontainer ">
 
+                                                <?php
+                                                $countImage = count($data);
+                                                $image_i = 0;
+                                                while ($image_i < $countImage) {
+                                                ?>
+                                                    <?php
+
+                                                    if ($data[$image_i]->id_gallery == NULL) {
+                                                    } else {
+                                                    ?>
+                                                        <div class="showSlide">
+                                                            <div class="d-flex justify-content-center">
+                                                                <img class="img img-fluid" style="max-height: 60vh; width:auto" src="<?php echo base_url("upload/" . $data[$image_i]->url); ?>" />
+
+                                                            </div>
+
+                                                        </div>
+                                                    <?php
+                                                    }
+                                                    ?>
+
+                                                    <?php
+
+                                                    if ($data[$image_i]->id_video == NULL) {
+                                                    } else {
+                                                    ?>
+                                                        <div class="showSlide">
+
+                                                            <video style="max-height: 60vh; width:auto" controls>
+                                                                <source src="<?php echo base_url("upload/" . $data[$image_i]->url_video); ?>" type="video/mp4">
+
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                            <div class="contentx"><?php echo $data[$image_i]->name; ?></div>
+
+                                                        </div>
+                                                    <?php
+                                                    }
+                                                    ?>
+
+                                                <?php
+                                                    $image_i++;
+                                                }
+                                                ?>
+
+                                                <!-- Navigation arrows -->
+                                                <a class="left" onclick="nextSlide(-1)"><i class="fa-solid fa-chevron-left" style="color: grey;"></i></a>
+                                                <a class="right" onclick="nextSlide(1)"><i class="fa-solid fa-chevron-right" style="color: grey;"></i></a>
+
+                                            </div>
+                                        </div>
+
+                                        <script type="text/javascript">
+                                            var slide_index = 1;
+                                            displaySlides(slide_index);
+
+                                            function nextSlide(n) {
+                                                displaySlides(slide_index += n);
+                                            }
+
+                                            function currentSlide(n) {
+                                                displaySlides(slide_index = n);
+                                            }
+
+                                            function displaySlides(n) {
+                                                var i;
+                                                var slides = document.getElementsByClassName("showSlide");
+                                                if (n > slides.length) {
+                                                    slide_index = 1
+                                                }
+                                                if (n < 1) {
+                                                    slide_index = slides.length
+                                                }
+                                                for (i = 0; i < slides.length; i++) {
+                                                    slides[i].style.display = "none";
+                                                }
+                                                slides[slide_index - 1].style.display = "block";
+                                            }
+                                        </script>
                                     </div>
-                                <?php
-                                }
-                                ?>
-
-                                <?php
-
-                                if ($data[$image_i]->id_video == NULL) {
-                                } else {
-                                ?>
-                                    <div class="showSlide">
-
-                                        <video width="100%" height="100%" controls>
-                                            <source src="<?php echo base_url("upload/" . $data[$image_i]->url_video); ?>" type="video/mp4">
-
-                                            Your browser does not support the video tag.
-                                        </video>
-                                        <div class="contentx"><?php echo $data[$image_i]->name; ?></div>
-
-                                    </div>
-                                <?php
-                                }
-                                ?>
-
-                            <?php
-                                $image_i++;
-                            }
-                            ?>
-
-                            <!-- Navigation arrows -->
-                            <a class="left" onclick="nextSlide(-1)">
-                                < </a>
-
-                                    <a class="right" onclick="nextSlide(1)">></a>
-
+                                    <div class="col-sm-2"></div>
+                                </div>
+                            </div>
                         </div>
 
-                        <script type="text/javascript">
-                            var slide_index = 1;
-                            displaySlides(slide_index);
+                        <button onclick="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
-                            function nextSlide(n) {
-                                displaySlides(slide_index += n);
-                            }
 
-                            function currentSlide(n) {
-                                displaySlides(slide_index = n);
-                            }
-
-                            function displaySlides(n) {
-                                var i;
-                                var slides = document.getElementsByClassName("showSlide");
-                                if (n > slides.length) {
-                                    slide_index = 1
-                                }
-                                if (n < 1) {
-                                    slide_index = slides.length
-                                }
-                                for (i = 0; i < slides.length; i++) {
-                                    slides[i].style.display = "none";
-                                }
-                                slides[slide_index - 1].style.display = "block";
-                            }
-                        </script>
                     </div>
-                    <div class="col-sm-2"></div>
+
+                    <style>
+                        .outerLayer {
+                            position: relative;
+                            height: 100%;
+                        }
+
+                        .outerLayer a {
+                            position: absolute;
+                            top: calc(50% - 0.5em);
+                        }
+
+                        .outerLayer a.right {
+                            right: 0;
+                        }
+
+
+                        .outerLayer a.left {
+                            left: 0;
+                        }
+
+                        a {
+                            text-decoration: none;
+                            display: inline-block;
+                            padding: 8px 16px;
+                        }
+
+                        .right:hover {
+                            background-color: #ddd;
+                            color: black;
+                        }
+
+                        .left:hover {
+                            background-color: #ddd;
+                            color: black;
+                        }
+
+                        .left {
+                            color: black;
+                        }
+
+                        .right {
+                            color: black;
+                        }
+
+                        .round {
+                            border-radius: 50%;
+                        }
+                    </style>
+
+
+
                 </div>
             </div>
         </div>
+
+
 
 
     </div>
@@ -191,6 +267,7 @@
 <?= $this->section('javascript') ?>
 <script>
     $('#direction-row').hide();
+    $('#coorAdmin').hide();
     $('#panel').hide();
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();

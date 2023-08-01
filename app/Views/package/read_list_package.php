@@ -40,10 +40,6 @@
                                 <td>: <?php echo $data[0]->description; ?></td>
                             </tr>
                             <tr>
-                                <th width="15%">Day</th>
-                                <td>: <?php echo $data[0]->price; ?></td>
-                            </tr>
-                            <tr>
                                 <th width="15%">Brosur Url</th>
                                 <td>: <?php echo $data[0]->brosur_url; ?></td>
                             </tr>
@@ -63,8 +59,8 @@
                             ?>
                                 <tr>
 
-                                    <th width="15%">Hari <?= $package_day['features'][$i]['properties']['day']; ?></th>
-                                    <td></td>
+                                    <th width="15%" style="text-align: left;">Hari <?= $package_day['features'][$i]['properties']['day']; ?></th>
+                                    <td><button class="btn btn-outline-primary" onclick="routeDayShow('<?= $package_day['features'][$i]['properties']['id_package']; ?>',<?= $package_day['features'][$i]['properties']['day']; ?>)">Show Route</button></td>
                                 </tr>
                                 <tr>
                                     <th width="15%">Activity</th>
@@ -79,7 +75,7 @@
                                         while ($j < $count_detail) {
 
                                             if ($package_day['features'][$i]['properties']['day'] == $detail_package['features'][$j]['properties']['day']) {
-                                                echo $j + 1, ". ", $detail_package['features'][$j]['properties']['description'] ?><br />
+                                                echo $detail_package['features'][$j]['properties']['description'] ?><br />
 
 
 
@@ -105,7 +101,7 @@
                                         while ($j < $count_detail_service) {
 
 
-                                            echo $j + 1, ". ", $detail_service_package['features'][$j]['properties']['name'] ?><br />
+                                            echo $detail_service_package['features'][$j]['properties']['name'] ?><br />
 
                                         <?php
                                             $j++;
@@ -191,6 +187,7 @@ while ($i < $count) {
 <script>
     $('#direction-row').hide();
     $('#check-nearby-col').hide();
+    $('#coorAdmin').hide();
     $('#result-nearby-col').hide();
 </script>
 <script>

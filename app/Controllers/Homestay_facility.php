@@ -57,7 +57,7 @@ class Homestay_facility extends BaseController
 	{
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Create',
+			'content' => 'Create ',
 			'action' => site_url('homestay_facility/create_action'),
 			'data' =>   [
 				'id_facility' => set_value('id_facility'),
@@ -112,7 +112,7 @@ class Homestay_facility extends BaseController
 		}
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Edite Pages',
+			'content' => 'Edit ',
 			'action' => 'homestay_facility/update_action',
 			'data' => $this->Model->find($id),
 		];

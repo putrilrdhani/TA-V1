@@ -47,7 +47,7 @@ class Event_category extends BaseController
 		$data = [
 			'AttributePage' => $this->PageData,
 			'content' => 'Read',
-			'data' => $this->Model->find($id) //find on data
+			'data' => $this->Model->getData($id) //find on data
 		];
 		return view('event_category/read_event_category', $data);
 	}
@@ -59,10 +59,7 @@ class Event_category extends BaseController
 			'AttributePage' => $this->PageData,
 			'content' => 'Create',
 			'action' => site_url('event_category/create_action'),
-			'data' =>   [
-				'id_category' => set_value('id_category'),
-				'name' => set_value('name'),
-			]
+
 		];
 		return view('event_category/form_event_category', $data);
 	}
@@ -81,7 +78,7 @@ class Event_category extends BaseController
 
 		$db = \Config\Database::connect();
 
-		$query   = $db->query("select MAX(CAST(REPLACE(REPLACE(id_category , 'EC', ''), '', '') as SIGNED)) as max from event_category");
+		$query   = $db->query("select MAX(CAST(REPLACE(REPLACE(id_category , 'C', ''), '', '') as SIGNED)) as max from event_category");
 		$count = $query->getNumRows();
 		$id = 0;
 		if ($count == 0) {

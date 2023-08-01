@@ -166,6 +166,7 @@
 <script>
 	$('#panel').hide();
 	$('#direction-row').hide();
+	$('#coorAdmin').hide();
 	$('#check-nearby-col').hide();
 	$('#result-nearby-col').hide();
 </script>

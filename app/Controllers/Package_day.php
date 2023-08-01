@@ -39,7 +39,7 @@ class Package_day extends BaseController
 	{
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Create Pages',
+			'content' => 'Create',
 			'data' => $this->Model->paginate(5, 'paging'),
 			'pager' => $this->Model->pager
 		];
@@ -61,7 +61,7 @@ class Package_day extends BaseController
 	public function create()
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT * FROM package ');
+		$query   = $db->query('SELECT * FROM package WHERE package.custom = "0"');
 		$hasil_package = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -81,7 +81,7 @@ class Package_day extends BaseController
 		}
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Create Pages',
+			'content' => 'Create ',
 			'action' => site_url('package_day/create_action'),
 			'data' =>   [
 				'id_package' => set_value('id_package'),
@@ -146,7 +146,7 @@ class Package_day extends BaseController
 		}
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Edite Pages',
+			'content' => 'Edit ',
 			'action' => 'package_day/update_action',
 			'data' => $this->Model->getSpecial($id_package, $day),
 			'package' => $hasil_package,

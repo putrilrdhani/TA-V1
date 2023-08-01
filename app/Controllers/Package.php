@@ -55,10 +55,10 @@ class Package extends BaseController
 	public function index()
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT * FROM package_day');
+		$query   = $db->query('SELECT *, package_day.description as day_desc FROM package_day JOIN package ON package.id_package=package_day.id_package WHERE package.custom = 0');
 		$query1   = $db->query('SELECT * FROM service_package');
-		$query2   = $db->query('SELECT * FROM detail_package');
-		$query3   = $db->query('SELECT * FROM detail_service_package');
+		$query2   = $db->query('SELECT *, detail_package.description AS dss FROM detail_package JOIN package ON package.id_package=detail_package.id_package WHERE package.custom = 0');
+		$query3   = $db->query('SELECT *, service_package.name as service_name, package.name as package_name FROM detail_service_package JOIN package ON package.id_package=detail_service_package.id_package JOIN service_package ON detail_service_package.id_service_package = service_package.id_service_package WHERE package.custom = "0"');
 
 		$hasil = array(
 			'type'    => 'FeatureCollection',
@@ -69,8 +69,9 @@ class Package extends BaseController
 				'type' => 'Feature',
 				'properties' => array(
 					'id_package' => $row['id_package'],
+					'package_name' => $row['name'],
 					'day' => $row['day'],
-					'description' => $row['description'],
+					'description' => $row['day_desc'],
 				)
 			);
 			array_push($hasil['features'], $features);
@@ -102,7 +103,8 @@ class Package extends BaseController
 					'activity' => $row['activity'],
 					'activity_type' => $row['activity_type'],
 					'id_object' => $row['id_object'],
-					'description' => $row['description'],
+					'description' => $row['dss'],
+					'name' => $row['name'],
 				)
 			);
 			array_push($hasil2['features'], $features);
@@ -117,6 +119,8 @@ class Package extends BaseController
 				'properties' => array(
 					'id_service_package' => $row['id_service_package'],
 					'id_package' => $row['id_package'],
+					'package' => $row['package_name'],
+					'service' => $row['service_name'],
 					'status' => $row['status'],
 				)
 			);
@@ -939,7 +943,7 @@ class Package extends BaseController
 			if (!in_array($ext, $allowed)) {
 				$statusUpload = "EMPTY";
 			} else {
-				// $dataBerkas->move('upload/', $fileName);
+				$dataBerkas->move('upload/', $fileName);
 				$statusUpload = "SUCCESS";
 			}
 		}
@@ -1006,7 +1010,7 @@ class Package extends BaseController
 
 
 							if ($tempActivityStart == $dayArrayT[$tempActivityStart]) {
-								$query_DetailPackage = "INSERT INTO `detail_package` (`id_package`, `day`, `activity`, `id_object`, `description`) VALUES ('" . $id_package . "', '" . $dayArray[$tempActivityStart] . "',  '" . $getValue . "', '[DETAIL-select|" . $tempActivityStart . "]', '[DETAIL-description|" . $tempActivityStart . "]');";
+								$query_DetailPackage = "INSERT INTO `detail_package` (`id_package`, `day`, `activity`,`activity_type`, `id_object`, `description`) VALUES ('" . $id_package . "', '" . $dayArray[$tempActivityStart] . "',  '" . $getValue . "', '[ATYPE]', '[DETAIL-select|" . $tempActivityStart . "]', '[DETAIL-description|" . $tempActivityStart . "]');";
 								// echo $query_DetailPackage . "<br/>";
 
 							}
@@ -1027,6 +1031,7 @@ class Package extends BaseController
 						// echo "[DETAIL-select|" . $tempActivityEnd . "]" . $getValue;
 						// $queryTemp = str_replace($seacrhString, "TEST", $query_DetailPackage);
 						$query_DetailPackage = str_replace($seacrhString, $getValue, $query_DetailPackage);
+
 						// echo $seacrhString;
 						// echo $query_DetailPackage . "<br/>";
 						// echo "TEMP:" . $queryTemp . "<br/>";
@@ -1039,15 +1044,39 @@ class Package extends BaseController
 					} else if (str_contains($getData[$x], 'select_object_' . $tempDay)) {
 
 
+
+
+
+
+
 						$tempActivity = explode("_", $getData[$x]);
 						$tempActivityStart = $tempActivity[1];
 						$tempActivityEnd = $tempActivity[2];
 						$getValue = $this->request->getVar($getData[$x]);
+						$activity_type = "";
+
+						// Check Activity Type
+						// T, S, E, H, C, W
+						if (str_contains($getValue, 'T')) {
+							$activity_type = "T";
+						} else if (str_contains($getValue, 'S')) {
+							$activity_type = "S";
+						} else if (str_contains($getValue, 'E')) {
+							$activity_type = "E";
+						} else if (str_contains($getValue, 'H')) {
+							$activity_type = "H";
+						} else if (str_contains($getValue, 'C')) {
+							$activity_type = "C";
+						} else if (str_contains($getValue, 'W')) {
+							$activity_type = "W";
+						}
 						// echo $getValue . "<br/>";
 						$seacrhString = "[DETAIL-select|" . $tempActivityEnd . "]";
 						// echo "[DETAIL-select|" . $tempActivityEnd . "]" . $getValue;
 						$queryTemp = str_replace($seacrhString, "TEST", $query_DetailPackage);
 						$query_DetailPackage = str_replace($seacrhString, $getValue, $query_DetailPackage);
+						$query_DetailPackage = str_replace("[ATYPE]", $activity_type, $query_DetailPackage);
+
 						// echo $query_DetailPackage . "<br/>";
 						// echo "TEMP:" . $queryTemp . "<br/>";
 						// $query_DetailPackage = str_replace("[DETAIL-select|" . $tempActivityEnd . "]", "TEST", $query_DetailPackage);
@@ -1063,7 +1092,7 @@ class Package extends BaseController
 			} else if (str_contains($getData[$i], 'checkbox_service_package')) {
 
 				$getValue = $this->request->getVar($getData[$i]);
-				$query_ServicePackage = "INSERT INTO `detail_service_package` (`id_service_package`, `id_package`) VALUES ('" . $getValue . "', '" . $id_package . "');";
+				$query_ServicePackage = "INSERT INTO `detail_service_package` (`id_service_package`, `id_package`, `status`) VALUES ('" . $getValue . "', '" . $id_package . "','1');";
 				$queryList[$m] = $query_ServicePackage;
 				$m++;
 			}

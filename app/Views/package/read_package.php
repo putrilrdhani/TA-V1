@@ -38,10 +38,6 @@
 									<td>: <?php echo $data[0]->description; ?></td>
 								</tr>
 								<tr>
-									<th width="15%" style="text-align: left;">Day</th>
-									<td>: <?php echo $package_day['features'][0]['properties']['day']; ?></td>
-								</tr>
-								<tr>
 									<th width="15%" style="text-align: left;">Price</th>
 									<td>: <?php echo $data[0]->price; ?></td>
 								</tr>
@@ -59,7 +55,7 @@
 									<tr>
 
 										<th width="15%" style="text-align: left;">Hari <?= $package_day['features'][$i]['properties']['day']; ?></th>
-										<td></td>
+										<td><button class="btn btn-outline-primary" onclick="routeDayShow('<?= $package_day['features'][$i]['properties']['id_package']; ?>',<?= $package_day['features'][$i]['properties']['day']; ?>)">Show Route</button></td>
 									</tr>
 									<tr>
 										<th width="15%" style="text-align: left;">Activity</th>
@@ -70,15 +66,17 @@
 										<td>
 											<?php
 											$j = 0;
-
+											$num = 1;
 											while ($j < $count_detail) {
 
 												if ($package_day['features'][$i]['properties']['day'] == $detail_package['features'][$j]['properties']['day']) {
-													echo $j + 1, ". ", $detail_package['features'][$j]['properties']['description'] ?><br />
-
-
+													echo $num, ". ", $detail_package['features'][$j]['properties']['description'] ?><br />
 
 										<?php
+
+													$num++;
+												} else {
+													$num = 1;
 												}
 												$j++;
 											}
@@ -100,7 +98,7 @@
 											while ($j < $count_detail_service) {
 
 
-												echo $j + 1, ". ", $detail_service_package['features'][$j]['properties']['name'] ?><br />
+												echo $detail_service_package['features'][$j]['properties']['name'] ?><br />
 
 											<?php
 												$j++;
@@ -126,15 +124,13 @@
 				</div>
 			</div>
 			<div class="row>">
-				<div class="row">
-					<div class="card">
-						<div class="card-header">
-							<h5 style="text-align: center;">Brosur</h5>
-							<div class="row align-items-center">
+				<div class="card">
+					<div class="card-header">
+						<h5 style="text-align: center;">Brosur</h5>
+						<div class="row align-items-center">
 
-								<img class="img img-fluid" src="<?php echo base_url("upload/" . $data[0]->brosur_url); ?>" />
+							<img class="img img-fluid" src="<?php echo base_url("upload/" . $data[0]->brosur_url); ?>" />
 
-							</div>
 						</div>
 					</div>
 				</div>
@@ -154,25 +150,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div class="col-md-4">
-
-			<div class="card">
-
-				<div class="table-responsive">
-					<table id="panelRenderX" class="table table-hover mb-0 table-lg">
-						<thead>
-							<tr>
-								<th>Distance (m)</th>
-								<th>Steps</th>
-							</tr>
-						</thead>
-						<tbody id="table-direction">
-
-						</tbody>
-					</table>
-				</div>
-			</div> -->
-	</div>
 	</div>
 
 </section>
@@ -213,6 +190,7 @@ while ($i < $count) {
 	$('#panel').hide();
 	$('#legend').hide();
 	$('#check-nearby-col').hide();
+	$('#coorAdmin').hide();
 	$('#result-nearby-col').hide();
 </script>
 <script>

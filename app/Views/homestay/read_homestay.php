@@ -163,6 +163,7 @@
 	$('#panel').hide();
 	$('#direction-row').hide();
 	$('#check-nearby-col').hide();
+	$('#coorAdmin').hide();
 	$('#result-nearby-col').hide();
 </script>
 <?= $this->endSection() ?>

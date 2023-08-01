@@ -159,7 +159,7 @@ class Worship_place extends BaseController
 
 		];
 
-		$idx = "WP" . $id;
+		$idx = "W" . $id;
 		$namex = $this->request->getVar('name');
 		$addressx = $this->request->getVar('address');
 		$area_sizex = $this->request->getVar('area_size');

@@ -163,7 +163,7 @@ class Tourism_object extends BaseController
 		];
 
 
-		$idx = "TO" . $id;
+		$idx = "T" . $id;
 		$namex = $this->request->getVar('name');
 		$addressx = $this->request->getVar('address');
 		$openx = $this->request->getVar('open');

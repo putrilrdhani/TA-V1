@@ -62,10 +62,33 @@
                                         }
                                         ?>
                                     </select>
+
                                 </div>
                                 <div class="form-group">
+                                    <label for="varchar">Service Name</label>
+                                    <input disabled class="form form-control" value="<?= $data[0]->service_name ?>">
+                                    <label for="varchar">Package Name</label>
+                                    <input disabled class="form form-control" value="<?= $data[0]->name ?>">
                                     <label for="varchar">Status</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="status" id="status" placeholder="Status" value="<?php echo $data[0]->status; ?>" />
+                                    <select class="form form-control" name="status" id="status">
+                                        <?php
+
+                                        if ($data[0]->status == 0) {
+                                        ?>
+
+                                            <option selected value="0">Logistic, Accomodation not included</option>
+                                            <option value="1">Logistic, Accomodation included</option>
+                                        <?php
+                                        } else {
+
+                                        ?> <option value="0">Logistic, Accomodation not included</option>
+                                            <option selected value="1">Logistic, Accomodation included</option>
+                                        <?php
+                                        }
+                                        ?>
+
+                                    </select>
+
                                 </div>
                                 <input id="id_service_package" class="form-control" type="text" name="id_service_package" style="display:none;" value="<?= $data[0]->id_service_package ?>">
 
@@ -112,7 +135,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">Status</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="status" id="status" placeholder="Status" value="" />
+                                    <select class="form form-control" name="status" id="status">
+
+
+                                        <option value="0">Logistic, Accomodation not included</option>
+                                        <option value="1">Logistic, Accomodation included</option>
+
+
+                                    </select>
                                 </div>
 
 

@@ -43,8 +43,7 @@
                             ?>
 
                                 <div class="form-group">
-                                    <label for="varchar">Activity Type</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="activity_type" id="activity_type" placeholder="Activity Type" value="<?php echo $data[0]->activity_type; ?>" />
+                                    <input style="display: none;" type="text" class="form-control" autocomplete="off" name="activity_type" id="activity_type" placeholder="Activity Type" value="<?php echo $data[0]->activity_type; ?>" />
                                 </div>
                                 <div class="form-group">
 
@@ -53,7 +52,7 @@
 
                                 <div class="form-group">
                                     <label for="varchar">ID Object</label>
-                                    <select name="id_object" class="form-control">
+                                    <select onchange="changeActivityType()" id="get_id_object" name="id_object" class="form-control">
                                         <?php
 
                                         $i = 0;
@@ -231,7 +230,7 @@
                                         $count = $count - 1;
                                         while ($i <= $count) {
                                         ?>
-                                            <option value="<?php echo $package_day['features'][$i]['properties']['id_package'] ?>-<?php echo $package_day['features'][$i]['properties']['day'] ?>">Paket : <?php echo $package_day['features'][$i]['properties']['id_package'] ?> [Hari <?php echo $package_day['features'][$i]['properties']['day'] ?>]</option>
+                                            <option value="<?php echo $package_day['features'][$i]['properties']['id_package'] ?>-<?php echo $package_day['features'][$i]['properties']['day'] ?>">Paket : <?php echo $package_day['features'][$i]['properties']['name'] ?> [Hari <?php echo $package_day['features'][$i]['properties']['day'] ?>]</option>
 
                                         <?php
                                             $i++;
@@ -246,12 +245,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="varchar">Activity Type</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="activity_type" id="activity_type" placeholder="Activity Type" value="" />
+
+                                    <input style="display:none" type="text" class="form-control" autocomplete="off" name="activity_type" id="activity_type" placeholder="Activity Type" value="<?php echo $tourism_object['features'][0]['properties']['id'][0] ?>" />
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">ID Object</label>
-                                    <select name="id_object" class="form-control">
+                                    <select onchange="changeActivityType()" id="get_id_object" name="id_object" class="form-control">
                                         <?php
 
                                         $i = 0;

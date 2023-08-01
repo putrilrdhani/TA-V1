@@ -94,7 +94,7 @@ if (isset($selectData)) {
 
 
                         <div class="row content">
-                            <h1><?= $content; ?></h1>
+                            <h1><?= $content; ?> Homestay</h1>
 
                         </div>
                         <form action="<?= base_url($action) ?>" method="post" enctype="multipart/form-data">
@@ -102,7 +102,10 @@ if (isset($selectData)) {
 
                             if (isset($data[0]->id_true)) {
                             ?>
-                                <!-- Ini Untuk Edit -->
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" />
+                                </div>
                                 <div class="form-group">
                                     <label for="varchar">Name</label>
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="<?php echo $data[0]->name; ?>" required />
@@ -113,14 +116,11 @@ if (isset($selectData)) {
                                 </div>
                                 <div class="form-group">
                                     <label for="int">Capacity</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="<?php echo $data[0]->capacity; ?>" />
+                                    <input type="number" min="0" class="form-control" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="<?php echo $data[0]->capacity; ?>" />
                                 </div>
                                 <div class="form-group">
                                     <label for="int">Price</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="price" id="price" placeholder="Price" value="<?php echo $data[0]->price; ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" style="display: none;" required />
+                                    <input type="number" min="0" class="form-control" autocomplete="off" name="price" id="price" placeholder="Price" value="<?php echo $data[0]->price; ?>" />
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">Owner</label>
@@ -210,6 +210,9 @@ if (isset($selectData)) {
                                 <!-- Ini untuk create -->
 
                                 <div class="form-group">
+                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" required />
+                                </div>
+                                <div class="form-group">
                                     <label for="varchar">Name</label>
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="" required />
                                 </div>
@@ -219,14 +222,11 @@ if (isset($selectData)) {
                                 </div>
                                 <div class="form-group">
                                     <label for="int">Capacity</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="" />
+                                    <input type="number" min="0" class="form-control" autocomplete="off" name="capacity" id="capacity" placeholder="Capacity" value="" />
                                 </div>
                                 <div class="form-group">
                                     <label for="int">Price</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="price" id="price" placeholder="Price" value="" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" style="display: none;" required />
+                                    <input type="number" min="0" class="form-control" autocomplete="off" name="price" id="price" placeholder="Price" value="" />
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">Owner</label>

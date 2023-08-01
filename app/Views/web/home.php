@@ -80,7 +80,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Agrotourism Batu Patah Payo</h5>
                     <p class="card-text">Agrowisata Payo merupakan salah satu kawasan wisata unggulan di Kota Solok, yang terletak di Kelurahan Tanah Garam Kecamatan Lubuk Sikarah. Kawasan ini berada di ketinggian gugusan bukit barisan memiliki hawa sejuk dan segar khas pebukitan. Hamparan sawah solok yang membentang indah dengan latar belakang gunung talang yang berdiri dengan anggun. Tidak hanya itu, pengunjung juga akan dimanjakan dengan pemandangan danau singkarak yang sangat mempesona.</p>
-                    <a href="<?= base_url('web/detail/TO3'); ?>" class="btn btn-primary">Information</a>
+                    <a href="<?= base_url('web/detail/T3'); ?>" class="btn btn-primary">Information</a>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Payo Nature</h5>
                     <p class="card-text">Payo Nature merupakan objek wisata lain yang terdapat di kampung wisata payo. Dengan pemandangan alam yang memukau, bentangan sawah di Kota Solok dan indahnya Danau Singkarak dapat dilihat dari Payo Nature. Payo Nature merupakan tempat yang cocok untuk melepas penat dalam hiruk pikuk kehidupan.</p>
-                    <a href="<?= base_url('web/detail/TO1'); ?>" class="btn btn-primary">Information</a>
+                    <a href="<?= base_url('web/detail/T1'); ?>" class="btn btn-primary">Information</a>
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Puncak Bidadari</h5>
                     <p class="card-text">Puncak Bidadari merupakan objek wisata olahraga yang disediakan untuk kegiatan paralayang. Selain itu Puncak Bidadari juga disiapkan sebagai lokasi take off olahraga paralayang tingkat Sumatera Barat. </p>
-                    <a href="<?= base_url('web/detail/TO2'); ?>" class="btn btn-primary">Information</a>
+                    <a href="<?= base_url('web/detail/T2'); ?>" class="btn btn-primary">Information</a>
                 </div>
             </div>
         </div>

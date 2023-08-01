@@ -86,7 +86,7 @@ class Homestay extends BaseController
 	{
 		$data = [
 			'AttributePage' => $this->PageData,
-			'content' => 'Create Pages',
+			'content' => 'Create',
 			'action' => site_url('homestay/create_action'),
 			'data' =>   [
 				'id' => set_value('id'),
@@ -124,7 +124,7 @@ class Homestay extends BaseController
 		}
 
 
-		$id = $id;
+		$id = "H" . $id;
 		$name = $this->request->getVar('name');
 		$address = $this->request->getVar('address');
 		$contact_person = $this->request->getVar('contact_person');

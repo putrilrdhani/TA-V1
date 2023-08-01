@@ -91,12 +91,15 @@ if (isset($selectData)) {
 
                         <!-- Isi Disini -->
                         <div class="row content">
-                            <h3><small><?= $content; ?></small></h3>
+                            <h3><small><?= $content; ?> Tourism Object</small></h3>
                         </div>
                         <form action="<?= base_url($action) ?>" method="post" enctype="multipart/form-data">
                             <?php
                             if (isset($data[0]->id_true)) {
                             ?>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" required />
+                                </div>
                                 <div class="form-group">
                                     <label for="varchar">Name</label>
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="<?php echo $data[0]->name; ?>" required />
@@ -114,94 +117,95 @@ if (isset($selectData)) {
                                     <input type="int" class="form-control" autocomplete="off" name="ticket_price" id="ticket_price" placeholder="Ticket Price" value="<?php echo $data[0]->ticket_price; ?>" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" style="display: none;" required />
-                                </div>
-                                <div class="form-group">
                                     <label for="varchar">Contact Person</label>
                                     <input type="text" class="form-control" autocomplete="off" name="contact_person" id="contact_person" placeholder="Contact Person" value="<?php echo $data[0]->contact_person; ?>" />
                                 </div>
 
                                 <div class="row">
                                     <div class="col-sm-2"></div>
-                                    <div class="slidercontainer">
+                                    <div class="col-sm-8">
+                                        <div class="slidercontainer">
 
-                                        <?php
-                                        $countImage = count($data);
-                                        $image_i = 0;
-                                        while ($image_i < $countImage) {
-                                        ?>
                                             <?php
-
-                                            if ($data[$image_i]->id_gallery == NULL) {
-                                            } else {
+                                            $countImage = count($data);
+                                            $image_i = 0;
+                                            while ($image_i < $countImage) {
                                             ?>
-                                                <div class="showSlide">
-                                                    <img class="img img-fluid" src="<?php echo base_url("upload/" . $data[$image_i]->url); ?>" />
-                                                    <a style="float:right" onclick="deleteImageTourism('<?php echo $data[$image_i]->id_gallery; ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
-                                                </div>
+                                                <?php
+
+                                                if ($data[$image_i]->id_gallery == NULL) {
+                                                } else {
+                                                ?>
+                                                    <div class="showSlide">
+                                                        <img class="img img-fluid" src="<?php echo base_url("upload/" . $data[$image_i]->url); ?>" />
+                                                        <a style="float:right" onclick="deleteImageTourism('<?php echo $data[$image_i]->id_gallery; ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
+                                                    </div>
+                                                <?php
+                                                }
+                                                ?>
+
+                                                <?php
+
+                                                if ($data[$image_i]->id_video == NULL) {
+                                                } else {
+                                                ?>
+                                                    <div class="showSlide">
+
+                                                        <video width="100%" height="100%" controls>
+                                                            <source src="<?php echo base_url("upload/" . $data[$image_i]->url_video); ?>" type="video/mp4">
+
+                                                            Your browser does not support the video tag.
+                                                        </video>
+                                                        <a style="float:right" onclick="deleteVideoTourism('<?php echo $data[$image_i]->id_video; ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
+                                                    </div>
+                                                <?php
+                                                }
+                                                ?>
+
+
+
+
                                             <?php
+                                                $image_i++;
                                             }
                                             ?>
 
-                                            <?php
+                                            <!-- Navigation arrows -->
+                                            <a class="left" onclick="nextSlide(-1)"><i class="fa-solid fa-backward"></i>| </a>
+                                            <a class="right" onclick="nextSlide(1)"> |<i class="fa-solid fa-forward"></i></a>
+                                        </div>
+                                        <script type="text/javascript">
+                                            var slide_index = 1;
+                                            displaySlides(slide_index);
 
-                                            if ($data[$image_i]->id_video == NULL) {
-                                            } else {
-                                            ?>
-                                                <div class="showSlide">
-
-                                                    <video width="100%" height="100%" controls>
-                                                        <source src="<?php echo base_url("upload/" . $data[$image_i]->url_video); ?>" type="video/mp4">
-
-                                                        Your browser does not support the video tag.
-                                                    </video>
-                                                    <a style="float:right" onclick="deleteVideoTourism('<?php echo $data[$image_i]->id_video; ?>')"><i style="color:red" class="fa fa-trash" aria-hidden="true"></i> </a>
-                                                </div>
-                                            <?php
+                                            function nextSlide(n) {
+                                                displaySlides(slide_index += n);
                                             }
-                                            ?>
 
+                                            function currentSlide(n) {
+                                                displaySlides(slide_index = n);
+                                            }
 
-
-
-                                        <?php
-                                            $image_i++;
-                                        }
-                                        ?>
-
-                                        <!-- Navigation arrows -->
-                                        <a class="left" onclick="nextSlide(-1)"><i class="fa-solid fa-backward"></i>| </a>
-                                        <a class="right" onclick="nextSlide(1)"> |<i class="fa-solid fa-forward"></i></a>
+                                            function displaySlides(n) {
+                                                var i;
+                                                var slides = document.getElementsByClassName("showSlide");
+                                                if (n > slides.length) {
+                                                    slide_index = 1
+                                                }
+                                                if (n < 1) {
+                                                    slide_index = slides.length
+                                                }
+                                                for (i = 0; i < slides.length; i++) {
+                                                    slides[i].style.display = "none";
+                                                }
+                                                slides[slide_index - 1].style.display = "block";
+                                            }
+                                        </script>
+                                        <div class="col-sm-2"></div>
                                     </div>
 
-                                    <script type="text/javascript">
-                                        var slide_index = 1;
-                                        displaySlides(slide_index);
 
-                                        function nextSlide(n) {
-                                            displaySlides(slide_index += n);
-                                        }
 
-                                        function currentSlide(n) {
-                                            displaySlides(slide_index = n);
-                                        }
-
-                                        function displaySlides(n) {
-                                            var i;
-                                            var slides = document.getElementsByClassName("showSlide");
-                                            if (n > slides.length) {
-                                                slide_index = 1
-                                            }
-                                            if (n < 1) {
-                                                slide_index = slides.length
-                                            }
-                                            for (i = 0; i < slides.length; i++) {
-                                                slides[i].style.display = "none";
-                                            }
-                                            slides[slide_index - 1].style.display = "block";
-                                        }
-                                    </script>
-                                    <div class="col-sm-2"></div>
                                 </div>
 
                                 <div class="form-group">
@@ -212,6 +216,9 @@ if (isset($selectData)) {
                             <?php
                             } else {
                             ?>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" required />
+                                </div>
                                 <div class="form-group">
                                     <label for="varchar">Name</label>
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="" required />
@@ -227,9 +234,6 @@ if (isset($selectData)) {
                                 <div class="form-group">
                                     <label for="int">Ticket Price</label>
                                     <input type="int" class="form-control" autocomplete="off" name="ticket_price" id="ticket_price" placeholder="Ticket Price" value="" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" style="display: none;" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">Contact Person</label>

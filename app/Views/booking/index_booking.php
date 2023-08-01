@@ -22,6 +22,7 @@
                                             <th>No</th>
                                             <th>Purchase Date</th>
                                             <th>Purchase Time</th>
+                                            <th>User</th>
                                             <th>Date</th>
                                             <th>Total Member</th>
                                             <th>Status</th>
@@ -42,6 +43,7 @@
                                                                                                 echo ++$start ?></td>
                                                 <td style="word-break: break-all;"><?= $data[$i]->purchase_date ?></td>
                                                 <td style="word-break: break-all;"><?= $data[$i]->purchase_time ?></td>
+                                                <td style="word-break: break-all;"><?= $data[$i]->username ?></td>
                                                 <td style="word-break: break-all;"><?= $data[$i]->booking_date ?></td>
                                                 <td style="word-break: break-all;"><?= $data[$i]->total_member ?></td>
                                                 <td style="word-break: break-all;">

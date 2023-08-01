@@ -1,16 +1,6 @@
 <?= $this->extend('web/layouts/main_admin'); ?>
 
 <?= $this->section('content') ?>
-
-
-
-<script>
-	$(document).ready(function() {
-		$("img").click(function() {
-			this.requestFullscreen()
-		})
-	});
-</script>
 <section class="section">
 	<div class="row">
 		<!--map-->
@@ -69,23 +59,26 @@
 							</tbody>
 						</table>
 						<br />
+						<div class="d-flex justify-content-center">
+							<button onclick="openModal()" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">
+								Show gallery
+							</button>
+							<script>
+								function openModal() {
+									$('#myModal').modal('show');
+								}
 
-						<!-- ButtonModal -->
+								function closeModal() {
+									$('#myModal').modal('hide');
+								}
+								$("#delete-button").prop("disabled", true);
+								$("#delete-map").prop("disabled", true);
+							</script>
+						</div>
 
-						<button onclick="openModal()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-							Show gallery
-						</button>
-						<script>
-							function openModal() {
-								$('#myModal').modal('show');
-							}
-
-							function closeModal() {
-								$('#myModal').modal('hide');
-							}
-							$("#delete-button").prop("disabled", true);
-							$("#delete-map").prop("disabled", true);
-						</script>
+						<div class="d-flex p-2 bd-highlight">
+							<a class="btn btn-danger" href="<?= \base_url('tourism_object') ?>">Back</a>
+						</div>
 					</div>
 				</div>
 
@@ -102,15 +95,9 @@
 				</div>
 			</div>
 		</div>
-
-
-		<div class="modal" style="width: 100%;" id="myModal">
+		<div class="modal" style="width: 100%; height:90hv" id="myModal">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-
-
-
-					<!-- Modal body -->
 					<div class="modal-body">
 						<div class="col-md-12">
 							<div class="card">
@@ -167,10 +154,8 @@
 												?>
 
 												<!-- Navigation arrows -->
-												<a class="left" onclick="nextSlide(-1)">
-													< </a>
-
-														<a class="right" onclick="nextSlide(1)">></a>
+												<a class="left" onclick="nextSlide(-1)"><i class="fa-solid fa-chevron-left" style="color: grey;"></i></a>
+												<a class="right" onclick="nextSlide(1)"><i class="fa-solid fa-chevron-right" style="color: grey;"></i></a>
 
 											</div>
 										</div>
@@ -228,6 +213,10 @@
 							right: 0;
 						}
 
+						.outerLayer a.left {
+							left: 0;
+						}
+
 						a {
 							text-decoration: none;
 							display: inline-block;
@@ -245,12 +234,10 @@
 						}
 
 						.left {
-							background-color: #f1f1f1;
 							color: black;
 						}
 
 						.right {
-							background-color: #f1f1f1;
 							color: black;
 						}
 
@@ -281,6 +268,7 @@
 <?= $this->section('javascript') ?>
 <script>
 	$('#direction-row').hide();
+	$('#coorAdmin').hide();
 	$('#panel').hide();
 	$('#check-nearby-col').hide();
 	$('#result-nearby-col').hide();
