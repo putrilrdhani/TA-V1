@@ -46,7 +46,7 @@
 										$count = count($data_facility);
 										$count = $count - 1;
 										$i = 0;
-										while ($i < $count) {
+										while ($i <= $count) {
 										?>
 											<br />
 											<?php echo $data_facility[$i]->name; ?>
@@ -141,7 +141,7 @@
 
 																Your browser does not support the video tag.
 															</video>
-															<div class="contentx"><?php echo $data[$image_i]->name; ?></div>
+															<!-- <div class="contentx"><?php echo $data[$image_i]->name; ?></div> -->
 
 														</div>
 													<?php

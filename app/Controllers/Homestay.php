@@ -46,7 +46,7 @@ class Homestay extends BaseController
 	public function read($id)
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, open, close, price, owner FROM homestay WHERE id = "' . $id . '"');
+		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, price, owner FROM homestay WHERE id = "' . $id . '"');
 		$hasil = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -64,8 +64,8 @@ class Homestay extends BaseController
 					'address' => $row['address'],
 					'contact_person' => $row['contact_person'],
 					'capacity' => $row['capacity'],
-					'open' => $row['open'],
-					'close' => $row['close'],
+					// 'open' => $row['open'],
+					// 'close' => $row['close'],
 					'price' => $row['price'],
 					'owner' => $row['owner'],
 				)
@@ -94,8 +94,8 @@ class Homestay extends BaseController
 				'address' => set_value('address'),
 				'contact_person' => set_value('contact_person'),
 				'capacity' => set_value('capacity'),
-				'open' => set_value('open'),
-				'close' => set_value('close'),
+				// 'open' => set_value('open'),
+				// 'close' => set_value('close'),
 				'price' => set_value('price'),
 				'geom' => set_value('geom'),
 				'owner' => set_value('owner'),
@@ -129,8 +129,8 @@ class Homestay extends BaseController
 		$address = $this->request->getVar('address');
 		$contact_person = $this->request->getVar('contact_person');
 		$capacity = $this->request->getVar('capacity');
-		$open = $this->request->getVar('open');
-		$close = $this->request->getVar('close');
+		// $open = $this->request->getVar('open');
+		// $close = $this->request->getVar('close');
 		$price = $this->request->getVar('price');
 		$geom = $this->request->getVar('geom');
 		$owner = $this->request->getVar('owner');
@@ -147,7 +147,7 @@ class Homestay extends BaseController
 		}
 
 		$db = \Config\Database::connect();
-		$query   = $db->query("INSERT INTO `homestay` (`id`, `name`, `address`, `contact_person`, `capacity`, `open`, `close`, `price`, `geom`, `owner`) VALUES ('" . $id . "', '" . $name . "', '" . $address . "', '" . $contact_person . "', '" . $capacity . "', '" . $open . "', '" . $close . "', '" . $price . "', ST_GeomFromText('" . $geom . "',0), '" . $owner . "'); ");
+		$query   = $db->query("INSERT INTO `homestay` (`id`, `name`, `address`, `contact_person`, `capacity`, `price`, `geom`, `owner`) VALUES ('" . $id . "', '" . $name . "', '" . $address . "', '" . $contact_person . "', '" . $capacity . "','" . $price . "', ST_GeomFromText('" . $geom . "',0), '" . $owner . "'); ");
 		if ($statusUpload == "EMPTY") {
 		} else {
 
@@ -220,7 +220,7 @@ class Homestay extends BaseController
 	public function update($id)
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, open, close, price, owner FROM homestay WHERE id="' . $id . '"');
+		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, price, owner FROM homestay WHERE id="' . $id . '"');
 		$hasil = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -238,8 +238,8 @@ class Homestay extends BaseController
 					'address' => $row['address'],
 					'contact_person' => $row['contact_person'],
 					'capacity' => $row['capacity'],
-					'open' => $row['open'],
-					'close' => $row['close'],
+					// 'open' => $row['open'],
+					// 'close' => $row['close'],
 					'price' => $row['price'],
 					'owner' => $row['owner'],
 				)
@@ -281,8 +281,8 @@ class Homestay extends BaseController
 			'address' => $this->request->getVar('address'),
 			'contact_person' => $this->request->getVar('contact_person'),
 			'capacity' => $this->request->getVar('capacity'),
-			'open' => $this->request->getVar('open'),
-			'close' => $this->request->getVar('close'),
+			// 'open' => $this->request->getVar('open'),
+			// 'close' => $this->request->getVar('close'),
 			'price' => $this->request->getVar('price'),
 			'geom' => $this->request->getVar('geom'),
 			'owner' => $this->request->getVar('owner'),
@@ -292,8 +292,8 @@ class Homestay extends BaseController
 		$addressx = $this->request->getVar('address');
 		$contact_personx = $this->request->getVar('contact_person');
 		$capacityx = $this->request->getVar('capacity');
-		$openx = $this->request->getVar('open');
-		$closex = $this->request->getVar('close');
+		// $openx = $this->request->getVar('open');
+		// $closex = $this->request->getVar('close');
 		$price = $this->request->getVar('price');
 		$geomx = $this->request->getVar('geom');
 		$ownerx = $this->request->getVar('owner');
@@ -314,7 +314,7 @@ class Homestay extends BaseController
 		// // Uplaod sampai sini
 		// $this->Model->save($data);
 		$db = \Config\Database::connect();
-		$query   = $db->query("UPDATE `homestay` SET `name` = '" . $namex . "', `address` = '" . $addressx . "', `contact_person` = '" . $contact_personx . "', `capacity` = '" . $capacityx . "', `open` = '" . $openx . "', `close` = '" . $closex . "', `price` = '" . $price . "', `geom` = ST_GeomFromText('" . $geomx . "',0), `owner` = '" . $ownerx . "' WHERE `homestay`.`id` = '" . $idx . "';");
+		$query   = $db->query("UPDATE `homestay` SET `name` = '" . $namex . "', `address` = '" . $addressx . "', `contact_person` = '" . $contact_personx . "', `capacity` = '" . $capacityx . "', `price` = '" . $price . "', `geom` = ST_GeomFromText('" . $geomx . "',0), `owner` = '" . $ownerx . "' WHERE `homestay`.`id` = '" . $idx . "';");
 		if ($statusUpload == "EMPTY") {
 		} else {
 
@@ -347,8 +347,8 @@ class Homestay extends BaseController
 		$this->form_validation->set_rules('address', 'address', 'trim|required');
 		$this->form_validation->set_rules('contact_person', 'contact person', 'trim|required');
 		$this->form_validation->set_rules('capacity', 'capacity', 'trim|required|numeric');
-		$this->form_validation->set_rules('open', 'open', 'trim|required');
-		$this->form_validation->set_rules('close', 'close', 'trim|required');
+		// $this->form_validation->set_rules('open', 'open', 'trim|required');
+		// $this->form_validation->set_rules('close', 'close', 'trim|required');
 		$this->form_validation->set_rules('price', 'price', 'trim|required|numeric');
 		$this->form_validation->set_rules('geom', 'geom', 'trim|required');
 		$this->form_validation->set_rules('owner', 'owner', 'trim|required');

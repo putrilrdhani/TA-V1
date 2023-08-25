@@ -100,15 +100,15 @@ if (isset($selectData)) {
                             if (isset($data[0]->id_true)) {
                             ?>
                                 <div class="form-group">
+                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" required />
+                                </div>
+                                <div class="form-group">
                                     <label for="varchar">Name</label>
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="<?php echo $data[0]->name; ?>" />
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">Contact Person</label>
                                     <input type="text" class="form-control" autocomplete="off" name="contact_person" id="contact_person" placeholder="Contact Person" value="<?php echo $data[0]->contact_person; ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" style="display: none;" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="time">Open</label>
@@ -187,7 +187,11 @@ if (isset($selectData)) {
                             <?php
                             } else {
 
-                            ?><div class="form-group">
+                            ?>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" required />
+                                </div>
+                                <div class="form-group">
                                     <label for="varchar">Name</label>
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="" required />
                                 </div>
@@ -198,9 +202,6 @@ if (isset($selectData)) {
                                 <div class="form-group">
                                     <label for="varchar">Owner</label>
                                     <input type="text" class="form-control" autocomplete="off" name="owner" id="owner" placeholder="Owner" value="" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" style="display: none;" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="time">Open</label>

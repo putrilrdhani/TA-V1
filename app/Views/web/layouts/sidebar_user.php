@@ -19,7 +19,7 @@ $uri3 = $uri[3] ?? '';
 
                 <?php
 
-                if (isset($_SESSION)) {
+                if (isset($_SESSION['ses_name'])) {
 
 
                 ?>

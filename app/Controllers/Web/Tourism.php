@@ -1913,7 +1913,7 @@ class Tourism extends ResourcePresenter
 
         if ($type == "WORSHIP") {
             $db = \Config\Database::connect();
-            $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id,address, area_size, building_size, last_renovation, capacity FROM worship_place WHERE id = "' . $id . '"');
+            $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id,address, capacity FROM worship_place WHERE id = "' . $id . '"');
             $hasil = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -1929,10 +1929,10 @@ class Tourism extends ResourcePresenter
                         'x' => $row['x'],
                         'y' => $row['y'],
                         'address' => $row['address'],
-                        'area_size' => $row['area_size'],
-                        'building_size' => $row['building_size'],
+                        // 'area_size' => $row['area_size'],
+                        // 'building_size' => $row['building_size'],
                         'capacity' => $row['capacity'],
-                        'last_renovation' => $row['last_renovation'],
+                        // 'last_renovation' => $row['last_renovation'],
                     )
                 );
                 array_push($hasil['features'], $features);
@@ -1952,7 +1952,7 @@ class Tourism extends ResourcePresenter
         } else if ($type == "SOUVENIR") {
 
             $db = \Config\Database::connect();
-            $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, open, close, employee, owner FROM souvenir_place WHERE id = "' . $id . '"');
+            $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, open, close, owner FROM souvenir_place WHERE id = "' . $id . '"');
             $hasil = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -1969,10 +1969,10 @@ class Tourism extends ResourcePresenter
                         'y' => $row['y'],
                         'address' => $row['address'],
                         'contact_person' => $row['contact_person'],
-                        'capacity' => $row['capacity'],
+                        // 'capacity' => $row['capacity'],
                         'open' => $row['open'],
                         'close' => $row['close'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'owner' => $row['owner'],
                     )
                 );
@@ -2024,7 +2024,7 @@ class Tourism extends ResourcePresenter
             ];
         } else if ($type == "CULINARY") {
             $db = \Config\Database::connect();
-            $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, open, close, employee, owner FROM culinary WHERE id = "' . $id . '"');
+            $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, open, close, owner FROM culinary WHERE id = "' . $id . '"');
             $hasil = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -2044,7 +2044,7 @@ class Tourism extends ResourcePresenter
                         'capacity' => $row['capacity'],
                         'open' => $row['open'],
                         'close' => $row['close'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'owner' => $row['owner'],
                     )
                 );
@@ -2060,7 +2060,7 @@ class Tourism extends ResourcePresenter
             ];
         } else if ($type == "HOMESTAY") {
             $db = \Config\Database::connect();
-            $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, open, close, price, owner FROM homestay WHERE id = "' . $id . '"');
+            $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, price, owner FROM homestay WHERE id = "' . $id . '"');
             $hasil = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -2078,8 +2078,8 @@ class Tourism extends ResourcePresenter
                         'address' => $row['address'],
                         'contact_person' => $row['contact_person'],
                         'capacity' => $row['capacity'],
-                        'open' => $row['open'],
-                        'close' => $row['close'],
+                        // 'open' => $row['open'],
+                        // 'close' => $row['close'],
                         'price' => $row['price'],
                         'owner' => $row['owner'],
                     )
@@ -2412,16 +2412,16 @@ class Tourism extends ResourcePresenter
                 $generate_query_facility = $generate_query_facility . "id_facility='" . $text[$j] . "' OR ";
             } else {
                 if ($text[$j] == "O-worship") {
-                    $generate_query_worship =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,area_size,id_category, building_size,capacity,last_renovation FROM worship_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_worship =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity FROM worship_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-souvenir") {
-                    $generate_query_souvenir =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close, employee FROM souvenir_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_souvenir =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person, owner, open, close FROM souvenir_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-event") {
                     $generate_query_event =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,id_category,date_start,date_end,ticket_price, description,contact_person FROM event WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-culinary") {
-                    $generate_query_culinary =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close, employee FROM culinary WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_culinary =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close FROM culinary WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-homestay") {
 
-                    $generate_query_homestay =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close FROM homestay WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_homestay =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner FROM homestay WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 }
             }
             $j++;
@@ -2505,10 +2505,10 @@ class Tourism extends ResourcePresenter
                         'id' => $row['id'],
                         'name' => $row['name'],
                         'address' => $row['address'],
-                        'area_size' => $row['area_size'],
-                        'building_size' => $row['building_size'],
+                        // 'area_size' => $row['area_size'],
+                        // 'building_size' => $row['building_size'],
                         'capacity' => $row['capacity'],
-                        'last_renovation' => $row['last_renovation'],
+                        // 'last_renovation' => $row['last_renovation'],
                         'x' => $row['x'],
                         'y' => $row['y']
                     )
@@ -2530,10 +2530,10 @@ class Tourism extends ResourcePresenter
                         'name' => $row['name'],
                         'address' => $row['address'],
                         'contact_person' => $row['contact_person'],
-                        'capacity' => $row['capacity'],
+                        // 'capacity' => $row['capacity'],
                         'open' => $row['open'],
                         'close' => $row['close'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'owner' => $row['owner'],
                         'x' => $row['x'],
                         'y' => $row['y']
@@ -2583,7 +2583,7 @@ class Tourism extends ResourcePresenter
                         'capacity' => $row['capacity'],
                         'open' => $row['open'],
                         'close' => $row['close'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'owner' => $row['owner'],
                         'x' => $row['x'],
                         'y' => $row['y']
@@ -2607,8 +2607,8 @@ class Tourism extends ResourcePresenter
                         'address' => $row['address'],
                         'contact_person' => $row['contact_person'],
                         'capacity' => $row['capacity'],
-                        'open' => $row['open'],
-                        'close' => $row['close'],
+                        // 'open' => $row['open'],
+                        // 'close' => $row['close'],
                         'owner' => $row['owner'],
                         'x' => $row['x'],
                         'y' => $row['y']
@@ -2718,16 +2718,16 @@ class Tourism extends ResourcePresenter
                 $generate_query_facility = $generate_query_facility . "id_facility='" . $text[$j] . "' OR ";
             } else {
                 if ($text[$j] == "O-worship") {
-                    $generate_query_worship =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,area_size,id_category, building_size,capacity,last_renovation FROM worship_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_worship =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity FROM worship_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-souvenir") {
-                    $generate_query_souvenir =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close, employee FROM souvenir_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_souvenir =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, contact_person, owner, open, close FROM souvenir_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-event") {
                     $generate_query_event =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,id_category,date_start,date_end,ticket_price, description,contact_person FROM event WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-culinary") {
-                    $generate_query_culinary =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close, employee FROM culinary WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_culinary =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close FROM culinary WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-homestay") {
 
-                    $generate_query_homestay =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close FROM homestay WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_homestay =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner FROM homestay WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 }
             }
             $j++;
@@ -2814,10 +2814,10 @@ class Tourism extends ResourcePresenter
                         'id' => $row['id'],
                         'name' => $row['name'],
                         'address' => $row['address'],
-                        'area_size' => $row['area_size'],
-                        'building_size' => $row['building_size'],
+                        // 'area_size' => $row['area_size'],
+                        // 'building_size' => $row['building_size'],
                         'capacity' => $row['capacity'],
-                        'last_renovation' => $row['last_renovation'],
+                        // 'last_renovation' => $row['last_renovation'],
                         'x' => $row['x'],
                         'y' => $row['y']
                     )
@@ -2839,10 +2839,10 @@ class Tourism extends ResourcePresenter
                         'name' => $row['name'],
                         'address' => $row['address'],
                         'contact_person' => $row['contact_person'],
-                        'capacity' => $row['capacity'],
+                        // 'capacity' => $row['capacity'],
                         'open' => $row['open'],
                         'close' => $row['close'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'owner' => $row['owner'],
                         'x' => $row['x'],
                         'y' => $row['y']
@@ -2892,7 +2892,7 @@ class Tourism extends ResourcePresenter
                         'capacity' => $row['capacity'],
                         'open' => $row['open'],
                         'close' => $row['close'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'owner' => $row['owner'],
                         'x' => $row['x'],
                         'y' => $row['y']
@@ -2915,8 +2915,8 @@ class Tourism extends ResourcePresenter
                         'address' => $row['address'],
                         'contact_person' => $row['contact_person'],
                         'capacity' => $row['capacity'],
-                        'open' => $row['open'],
-                        'close' => $row['close'],
+                        // 'open' => $row['open'],
+                        // 'close' => $row['close'],
                         'owner' => $row['owner'],
                         'x' => $row['x'],
                         'y' => $row['y']
@@ -3026,15 +3026,15 @@ class Tourism extends ResourcePresenter
                 $generate_query_facility = $generate_query_facility . "id_facility='" . $text[$j] . "' OR ";
             } else {
                 if ($text[$j] == "O-worship") {
-                    $generate_query_worship =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,area_size,id_category, building_size,capacity,last_renovation FROM worship_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_worship =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity FROM worship_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-souvenir") {
-                    $generate_query_souvenir =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close, employee FROM souvenir_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_souvenir =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, contact_person, owner, open, close FROM souvenir_place WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-event") {
                     $generate_query_event =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,id_category,date_start,date_end,ticket_price, description,contact_person FROM event WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-culinary") {
-                    $generate_query_culinary =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close, employee FROM culinary WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_culinary =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close FROM culinary WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 } else if ($text[$j] == "O-homestay") {
-                    $generate_query_homestay =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner, open, close FROM homestay WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
+                    $generate_query_homestay =  'SELECT ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) as distance, ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,capacity, contact_person, owner FROM homestay WHERE ST_Distance_Sphere(ST_GeomFromText(CONCAT("POINT(",ST_X(ST_Centroid(geom))," ", ST_Y(ST_Centroid(geom)),")")) , ST_GeomFromText(CONCAT("POINT(",' . $dataGPS[1] . '," ", ' . $dataGPS[0] . ',")")) ) <=' . $radius . ' ';
                 }
             }
             $j++;
@@ -3115,10 +3115,10 @@ class Tourism extends ResourcePresenter
                         'id' => $row['id'],
                         'name' => $row['name'],
                         'address' => $row['address'],
-                        'area_size' => $row['area_size'],
-                        'building_size' => $row['building_size'],
+                        // 'area_size' => $row['area_size'],
+                        // 'building_size' => $row['building_size'],
                         'capacity' => $row['capacity'],
-                        'last_renovation' => $row['last_renovation'],
+                        // 'last_renovation' => $row['last_renovation'],
                         'x' => $row['x'],
                         'y' => $row['y']
                     )
@@ -3140,10 +3140,10 @@ class Tourism extends ResourcePresenter
                         'name' => $row['name'],
                         'address' => $row['address'],
                         'contact_person' => $row['contact_person'],
-                        'capacity' => $row['capacity'],
+                        // 'capacity' => $row['capacity'],
                         'open' => $row['open'],
                         'close' => $row['close'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'owner' => $row['owner'],
                         'x' => $row['x'],
                         'y' => $row['y']
@@ -3193,7 +3193,7 @@ class Tourism extends ResourcePresenter
                         'capacity' => $row['capacity'],
                         'open' => $row['open'],
                         'close' => $row['close'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'owner' => $row['owner'],
                         'x' => $row['x'],
                         'y' => $row['y']
@@ -3217,8 +3217,8 @@ class Tourism extends ResourcePresenter
                         'address' => $row['address'],
                         'contact_person' => $row['contact_person'],
                         'capacity' => $row['capacity'],
-                        'open' => $row['open'],
-                        'close' => $row['close'],
+                        // 'open' => $row['open'],
+                        // 'close' => $row['close'],
                         'owner' => $row['owner'],
                         'x' => $row['x'],
                         'y' => $row['y']
@@ -3352,7 +3352,7 @@ class Tourism extends ResourcePresenter
             }
 
             // Worship Geom
-            $query_w   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, area_size, building_size, capacity, last_renovation FROM worship_place ');
+            $query_w   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, capacity FROM worship_place ');
             $hasil_w = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3366,10 +3366,10 @@ class Tourism extends ResourcePresenter
                         'id' => $row['id'],
                         'name' => $row['name'],
                         'address' => $row['address'],
-                        'area_size' => $row['area_size'],
-                        'building_size' => $row['building_size'],
+                        // 'area_size' => $row['area_size'],
+                        // 'building_size' => $row['building_size'],
                         'capacity' => $row['capacity'],
-                        'last_renovation' => $row['last_renovation'],
+                        // 'last_renovation' => $row['last_renovation'],
                         'x' => $row['x'],
                         'y' => $row['y']
                     )
@@ -3379,7 +3379,7 @@ class Tourism extends ResourcePresenter
 
             // Souvenir All
 
-            $query_s   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, capacity,contact_person,owner,employee,open,close FROM souvenir_place ');
+            $query_s   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, contact_person,owner,open,close FROM souvenir_place ');
             $hasil_s = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3393,10 +3393,10 @@ class Tourism extends ResourcePresenter
                         'id' => $row['id'],
                         'name' => $row['name'],
                         'address' => $row['address'],
-                        'capacity' => $row['capacity'],
+                        // 'capacity' => $row['capacity'],
                         'contact_person' => $row['contact_person'],
                         'owner' => $row['owner'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'x' => $row['x'],
                         'y' => $row['y'],
                         'open' => $row['open'],
@@ -3437,7 +3437,7 @@ class Tourism extends ResourcePresenter
             }
 
             // Culinary All
-            $query_c   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,open,close,employee,owner FROM culinary ');
+            $query_c   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,open,close,owner FROM culinary ');
             $hasil_c = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3457,7 +3457,7 @@ class Tourism extends ResourcePresenter
                         'close' => $row['close'],
                         'x' => $row['x'],
                         'y' => $row['y'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'owner' => $row['owner'],
 
 
@@ -3467,7 +3467,7 @@ class Tourism extends ResourcePresenter
             }
 
             // Homestay
-            $query_h   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,open,close,price,owner FROM homestay ');
+            $query_h   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,price,owner FROM homestay ');
             $hasil_h = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3483,8 +3483,8 @@ class Tourism extends ResourcePresenter
                         'address' => $row['address'],
                         'cotact_person' => $row['contact_person'],
                         'capacity' => $row['capacity'],
-                        'open' => $row['open'],
-                        'close' => $row['close'],
+                        // 'open' => $row['open'],
+                        // 'close' => $row['close'],
                         'x' => $row['x'],
                         'y' => $row['y'],
                         'price' => $row['price'],
@@ -3574,7 +3574,7 @@ class Tourism extends ResourcePresenter
             }
 
             // Worship Geom
-            $query_w   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, area_size, building_size, capacity, last_renovation FROM worship_place ');
+            $query_w   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, capacity FROM worship_place ');
             $hasil_w = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3588,10 +3588,10 @@ class Tourism extends ResourcePresenter
                         'id' => $row['id'],
                         'name' => $row['name'],
                         'address' => $row['address'],
-                        'area_size' => $row['area_size'],
-                        'building_size' => $row['building_size'],
+                        // 'area_size' => $row['area_size'],
+                        // 'building_size' => $row['building_size'],
                         'capacity' => $row['capacity'],
-                        'last_renovation' => $row['last_renovation'],
+                        // 'last_renovation' => $row['last_renovation'],
                         'x' => $row['x'],
                         'y' => $row['y']
                     )
@@ -3601,7 +3601,7 @@ class Tourism extends ResourcePresenter
 
             // Souvenir All
 
-            $query_s   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, capacity,contact_person,owner,employee,open,close FROM souvenir_place ');
+            $query_s   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, contact_person,owner,open,close FROM souvenir_place ');
             $hasil_s = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3615,10 +3615,10 @@ class Tourism extends ResourcePresenter
                         'id' => $row['id'],
                         'name' => $row['name'],
                         'address' => $row['address'],
-                        'capacity' => $row['capacity'],
+                        // 'capacity' => $row['capacity'],
                         'contact_person' => $row['contact_person'],
                         'owner' => $row['owner'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'x' => $row['x'],
                         'y' => $row['y'],
                         'open' => $row['open'],
@@ -3659,7 +3659,7 @@ class Tourism extends ResourcePresenter
             }
 
             // Culinary All
-            $query_c   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,open,close,employee,owner FROM culinary ');
+            $query_c   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,open,close,owner FROM culinary ');
             $hasil_c = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3679,7 +3679,7 @@ class Tourism extends ResourcePresenter
                         'close' => $row['close'],
                         'x' => $row['x'],
                         'y' => $row['y'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'owner' => $row['owner'],
 
 
@@ -3689,7 +3689,7 @@ class Tourism extends ResourcePresenter
             }
 
             // Homestay
-            $query_h   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,open,close,price,owner FROM homestay ');
+            $query_h   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,price,owner FROM homestay ');
             $hasil_h = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3705,8 +3705,8 @@ class Tourism extends ResourcePresenter
                         'address' => $row['address'],
                         'cotact_person' => $row['contact_person'],
                         'capacity' => $row['capacity'],
-                        'open' => $row['open'],
-                        'close' => $row['close'],
+                        // 'open' => $row['open'],
+                        // 'close' => $row['close'],
                         'x' => $row['x'],
                         'y' => $row['y'],
                         'price' => $row['price'],
@@ -3814,7 +3814,7 @@ class Tourism extends ResourcePresenter
             }
 
             // Worship Geom
-            $query_w   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, area_size, building_size, capacity, last_renovation FROM worship_place ');
+            $query_w   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, capacity FROM worship_place ');
             $hasil_w = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3828,10 +3828,10 @@ class Tourism extends ResourcePresenter
                         'id' => $row['id'],
                         'name' => $row['name'],
                         'address' => $row['address'],
-                        'area_size' => $row['area_size'],
-                        'building_size' => $row['building_size'],
+                        // 'area_size' => $row['area_size'],
+                        // 'building_size' => $row['building_size'],
                         'capacity' => $row['capacity'],
-                        'last_renovation' => $row['last_renovation'],
+                        // 'last_renovation' => $row['last_renovation'],
                         'x' => $row['x'],
                         'y' => $row['y']
                     )
@@ -3841,7 +3841,7 @@ class Tourism extends ResourcePresenter
 
             // Souvenir All
 
-            $query_s   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, capacity,contact_person,owner,employee,open,close FROM souvenir_place ');
+            $query_s   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address, contact_person,owner,open,close FROM souvenir_place ');
             $hasil_s = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3855,10 +3855,10 @@ class Tourism extends ResourcePresenter
                         'id' => $row['id'],
                         'name' => $row['name'],
                         'address' => $row['address'],
-                        'capacity' => $row['capacity'],
+                        // 'capacity' => $row['capacity'],
                         'contact_person' => $row['contact_person'],
                         'owner' => $row['owner'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'x' => $row['x'],
                         'y' => $row['y'],
                         'open' => $row['open'],
@@ -3899,7 +3899,7 @@ class Tourism extends ResourcePresenter
             }
 
             // Culinary All
-            $query_c   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,open,close,employee,owner FROM culinary ');
+            $query_c   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,open,close,owner FROM culinary ');
             $hasil_c = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3919,7 +3919,7 @@ class Tourism extends ResourcePresenter
                         'close' => $row['close'],
                         'x' => $row['x'],
                         'y' => $row['y'],
-                        'employee' => $row['employee'],
+                        // 'employee' => $row['employee'],
                         'owner' => $row['owner'],
 
 
@@ -3929,7 +3929,7 @@ class Tourism extends ResourcePresenter
             }
 
             // Homestay
-            $query_h   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,open,close,price,owner FROM homestay ');
+            $query_h   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,name,id,address,contact_person,capacity,price,owner FROM homestay ');
             $hasil_h = array(
                 'type'    => 'FeatureCollection',
                 'features' => array()
@@ -3945,8 +3945,8 @@ class Tourism extends ResourcePresenter
                         'address' => $row['address'],
                         'cotact_person' => $row['contact_person'],
                         'capacity' => $row['capacity'],
-                        'open' => $row['open'],
-                        'close' => $row['close'],
+                        // 'open' => $row['open'],
+                        // 'close' => $row['close'],
                         'x' => $row['x'],
                         'y' => $row['y'],
                         'price' => $row['price'],
@@ -4155,38 +4155,44 @@ class Tourism extends ResourcePresenter
         $generate_query_facility = "";
 
         while ($i < $length) {
-            $generate_query_facility = $generate_query_facility . "id_facility='" . $id[$i] . "' OR ";
+            $generate_query_facility = $generate_query_facility . "tourism_facility.id_facility='" . $id[$i] . "' OR ";
             $i++;
         }
-        $generate_query_facility = str_replace("OR id_facility='' OR ", "", $generate_query_facility);
+        $generate_query_facility = str_replace("OR tourism_facility.id_facility='' OR ", "", $generate_query_facility);
 
         $hasil = array(
             'type'    => 'FeatureCollection',
             'features' => array()
         );
+        $id_count = array();
 
         $db = \Config\Database::connect();
         if ($generate_query_facility != "") {
-            $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,tourism_object.name as name,id,address, open, close, ticket_price, contact_person FROM tourism_object LEFT JOIN tourism_facility ON tourism_object.id_category=tourism_facility.id_facility WHERE (' . '' . $generate_query_facility . ')');
+            $query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,ST_X(ST_centroid(geom)) as x,ST_Y(ST_centroid(geom)) as y,tourism_object.name as name,tourism_object.id as id,address, open, close, ticket_price, contact_person FROM tourism_object LEFT JOIN tourism_detail_facility ON tourism_object.id=tourism_detail_facility.id LEFT JOIN tourism_facility ON tourism_detail_facility.id_facility=tourism_facility.id_facility WHERE (' . '' . $generate_query_facility . ')');
 
 
             foreach ($query->getResultArray() as $row) {
-                $features = array(
-                    'type' => 'Feature',
-                    'geometry' => json_decode($row['geom']),
-                    'properties' => array(
-                        'id' => $row['id'],
-                        'name' => $row['name'],
-                        'address' => $row['address'],
-                        'open' => $row['open'],
-                        'close' => $row['close'],
-                        'ticket_price' => $row['ticket_price'],
-                        'contact_person' => $row['contact_person'],
-                        'x' => $row['x'],
-                        'y' => $row['y']
-                    )
-                );
-                array_push($hasil['features'], $features);
+
+                if (in_array($row['id'], $id_count)) {
+                } else {
+                    $features = array(
+                        'type' => 'Feature',
+                        'geometry' => json_decode($row['geom']),
+                        'properties' => array(
+                            'id' => $row['id'],
+                            'name' => $row['name'],
+                            'address' => $row['address'],
+                            'open' => $row['open'],
+                            'close' => $row['close'],
+                            'ticket_price' => $row['ticket_price'],
+                            'contact_person' => $row['contact_person'],
+                            'x' => $row['x'],
+                            'y' => $row['y']
+                        )
+                    );
+                    array_push($hasil['features'], $features);
+                    array_push($id_count, $row['id']);
+                }
             }
         }
         if ($this->auth->check()) {

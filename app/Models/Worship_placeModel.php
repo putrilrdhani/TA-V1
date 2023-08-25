@@ -28,7 +28,7 @@ class Worship_placeModel extends Model
         }
 
         $builder = $this->db->table('worship_place');
-        $builder->select('worship_place.id AS id_true, name, address, area_size, building_size, capacity, last_renovation, geom, url,id_gallery', false);
+        $builder->select('worship_place.id AS id_true, name, address, capacity, geom, url,id_gallery', false);
         $builder->join('worship_gallery', 'worship_place.id=worship_gallery.id', 'LEFT');
         $builder->where($this->primaryKey, $id);
         $query = $builder->get();

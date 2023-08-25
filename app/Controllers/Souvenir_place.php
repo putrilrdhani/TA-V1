@@ -46,7 +46,7 @@ class Souvenir_place extends BaseController
 	public function read($id)
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, open, close, employee, owner FROM souvenir_place WHERE id = "' . $id . '"');
+		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, open, close, owner FROM souvenir_place WHERE id = "' . $id . '"');
 		$hasil = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -63,10 +63,10 @@ class Souvenir_place extends BaseController
 					'y' => $row['y'],
 					'address' => $row['address'],
 					'contact_person' => $row['contact_person'],
-					'capacity' => $row['capacity'],
+					// 'capacity' => $row['capacity'],
 					'open' => $row['open'],
 					'close' => $row['close'],
-					'employee' => $row['employee'],
+					// 'employee' => $row['employee'],
 					'owner' => $row['owner'],
 				)
 			);
@@ -85,7 +85,7 @@ class Souvenir_place extends BaseController
 	public function create()
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,name,id, address, contact_person, capacity, open, close, employee, owner FROM souvenir_place');
+		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,name,id, address, contact_person, open, close, owner FROM souvenir_place');
 		$hasil = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -100,10 +100,10 @@ class Souvenir_place extends BaseController
 					'name' => $row['name'],
 					'address' => $row['address'],
 					'contact_person' => $row['contact_person'],
-					'capacity' => $row['capacity'],
+					// 'capacity' => $row['capacity'],
 					'open' => $row['open'],
 					'close' => $row['close'],
-					'employee' => $row['employee'],
+					// 'employee' => $row['employee'],
 					'owner' => $row['owner'],
 				)
 			);
@@ -117,11 +117,11 @@ class Souvenir_place extends BaseController
 				'id' => set_value('id'),
 				'name' => set_value('name'),
 				'address' => set_value('address'),
-				'capacity' => set_value('capacity'),
+				// 'capacity' => set_value('capacity'),
 				'contact_person' => set_value('contact_person'),
 				'owner' => set_value('owner'),
 				'geom' => set_value('geom'),
-				'employee' => set_value('employee'),
+				// 'employee' => set_value('employee'),
 				'open' => set_value('open'),
 				'close' => set_value('close'),
 			],
@@ -157,11 +157,11 @@ class Souvenir_place extends BaseController
 			'id' => $this->request->getVar('id'),
 			'name' => $this->request->getVar('name'),
 			'address' => $this->request->getVar('address'),
-			'capacity' => $this->request->getVar('capacity'),
+			// 'capacity' => $this->request->getVar('capacity'),
 			'contact_person' => $this->request->getVar('contact_person'),
 			'owner' => $this->request->getVar('owner'),
 			'geom' => $this->request->getVar('geom'),
-			'employee' => $this->request->getVar('employee'),
+			// 'employee' => $this->request->getVar('employee'),
 			'open' => $this->request->getVar('open'),
 			'close' => $this->request->getVar('close'),
 
@@ -169,11 +169,11 @@ class Souvenir_place extends BaseController
 		$idx = "SP" . $id;
 		$namex = $this->request->getVar('name');
 		$addressx = $this->request->getVar('address');
-		$capacityx = $this->request->getVar('capacity');
+		// $capacityx = $this->request->getVar('capacity');
 		$contact_personx = $this->request->getVar('contact_person');
 		$ownerx = $this->request->getVar('owner');
 		$geomx = $this->request->getVar('geom');
-		$employeex = $this->request->getVar('employee');
+		// $employeex = $this->request->getVar('employee');
 		$openx = $this->request->getVar('open');
 		$closex = $this->request->getVar('close');
 
@@ -188,7 +188,7 @@ class Souvenir_place extends BaseController
 		}
 
 		$db = \Config\Database::connect();
-		$query   = $db->query("INSERT INTO `souvenir_place` (`id`, `name`, `address`, `capacity`, `contact_person`, `owner`, `geom`, `employee`, `open`, `close`) VALUES ('" . $idx . "', '" . $namex . "', '" . $addressx . "', '" . $capacityx . "', '" . $contact_personx . "', '" . $ownerx . "', ST_GeomFromText('" . $geomx . "',0), '" . $employeex . "', '" . $openx . "', '" . $closex . "');");
+		$query   = $db->query("INSERT INTO `souvenir_place` (`id`, `name`, `address`, `contact_person`, `owner`, `geom`, `open`, `close`) VALUES ('" . $idx . "', '" . $namex . "', '" . $addressx . "', '" . $contact_personx . "', '" . $ownerx . "', ST_GeomFromText('" . $geomx . "',0),'" . $openx . "', '" . $closex . "');");
 
 		if ($statusUpload == "EMPTY") {
 		} else {
@@ -204,7 +204,7 @@ class Souvenir_place extends BaseController
 	public function update($id)
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y, name,id, address, contact_person, capacity, open, close, employee, owner FROM souvenir_place WHERE id ="' . $id . '"');
+		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y, name,id, address, contact_person, open, close, owner FROM souvenir_place WHERE id ="' . $id . '"');
 		$hasil = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -221,10 +221,10 @@ class Souvenir_place extends BaseController
 					'y' => $row['y'],
 					'address' => $row['address'],
 					'contact_person' => $row['contact_person'],
-					'capacity' => $row['capacity'],
+					// 'capacity' => $row['capacity'],
 					'open' => $row['open'],
 					'close' => $row['close'],
-					'employee' => $row['employee'],
+					// 'employee' => $row['employee'],
 					'owner' => $row['owner'],
 				)
 			);
@@ -263,22 +263,22 @@ class Souvenir_place extends BaseController
 			'id' => $this->request->getVar('id'),
 			'name' => $this->request->getVar('name'),
 			'address' => $this->request->getVar('address'),
-			'capacity' => $this->request->getVar('capacity'),
+			// 'capacity' => $this->request->getVar('capacity'),
 			'contact_person' => $this->request->getVar('contact_person'),
 			'owner' => $this->request->getVar('owner'),
 			'geom' => $this->request->getVar('geom'),
-			'employee' => $this->request->getVar('employee'),
+			// 'employee' => $this->request->getVar('employee'),
 			'open' => $this->request->getVar('open'),
 			'close' => $this->request->getVar('close'),
 		];
 		$idx = $this->request->getVar('id');
 		$namex = $this->request->getVar('name');
 		$addressx = $this->request->getVar('address');
-		$capacityx = $this->request->getVar('capacity');
+		// $capacityx = $this->request->getVar('capacity');
 		$contact_personx = $this->request->getVar('contact_person');
 		$ownerx = $this->request->getVar('owner');
 		$geomx = $this->request->getVar('geom');
-		$employeex = $this->request->getVar('employee');
+		// $employeex = $this->request->getVar('employee');
 		$openx = $this->request->getVar('open');
 		$closex = $this->request->getVar('close');
 		if ($_FILES['url']['error'] == 4 || ($_FILES['url']['size'] == 0 && $_FILES['url']['error'] == 0)) {
@@ -292,7 +292,7 @@ class Souvenir_place extends BaseController
 		}
 
 		$db = \Config\Database::connect();
-		$query   = $db->query("UPDATE `souvenir_place` SET `name` = '" . $namex . "', `address` = '" . $addressx . "', `capacity` = '" . $capacityx . "', `contact_person` = '" . $contact_personx . "', `owner` = '" . $ownerx . "', `employee` = '" . $employeex . "', `open` = '" . $openx . "', `close` = '" . $closex . "', `geom` = ST_GeomFromText('" . $geomx . "',0) WHERE `souvenir_place`.`id` = '" . $idx . "';");
+		$query   = $db->query("UPDATE `souvenir_place` SET `name` = '" . $namex . "', `address` = '" . $addressx . "', `contact_person` = '" . $contact_personx . "', `owner` = '" . $ownerx . "', `open` = '" . $openx . "', `close` = '" . $closex . "', `geom` = ST_GeomFromText('" . $geomx . "',0) WHERE `souvenir_place`.`id` = '" . $idx . "';");
 
 		if ($statusUpload == "EMPTY") {
 		} else {

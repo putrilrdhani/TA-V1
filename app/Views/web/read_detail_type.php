@@ -169,20 +169,12 @@ if ($type == "WORSHIP") {
                                             <td>: <?php echo $data[0]->address; ?></td>
                                         </tr>
                                         <tr>
-                                            <th width="15%" style="text-align: left;">Capacity</th>
-                                            <td>: <?php echo $data[0]->capacity; ?></td>
-                                        </tr>
-                                        <tr>
                                             <th width="15%" style="text-align: left;">Contact Person</th>
                                             <td>: <?php echo $data[0]->contact_person; ?></td>
                                         </tr>
                                         <tr>
                                             <th width="15%" style="text-align: left;">Owner</th>
                                             <td>: <?php echo $data[0]->owner; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th width="15%" style="text-align: left;">Employee</th>
-                                            <td>: <?php echo $data[0]->employee; ?></td>
                                         </tr>
                                         <tr>
                                             <th width="15%" style="text-align: left;">Open</th>
@@ -376,7 +368,7 @@ if ($type == "WORSHIP") {
 
                                                     Your browser does not support the video tag.
                                                 </video>
-                                                <div class="contentx"><?php echo $data[$image_i]->name; ?></div>
+                                                <!-- <div class="contentx"><?php echo $data[$image_i]->name; ?></div> -->
 
                                             </div>
                                         <?php
@@ -481,10 +473,6 @@ if ($type == "WORSHIP") {
                                         <tr>
                                             <th width="15%" style="text-align: left;">Close</th>
                                             <td>: <?php echo $data[0]->close; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th width="15%" style="text-align: left;">Employee</th>
-                                            <td>: <?php echo $data[0]->employee; ?></td>
                                         </tr>
                                         <tr>
                                             <th width="15%" style="text-align: left;">Owner</th>
@@ -670,9 +658,9 @@ if ($type == "WORSHIP") {
                                 </table>
                                 <div class="col-sm-2"></div>
                             </div>
-                            <div class="d-flex p-2 bd-highlight">
+                            <!-- <div class="d-flex p-2 bd-highlight">
                                 <a class="btn btn-sm btn-danger" href="<?= \base_url('homestay') ?>">back</a>
-                            </div>
+                            </div> -->
 
                             <script>
                                 $("#delete-button").prop("disabled", true);

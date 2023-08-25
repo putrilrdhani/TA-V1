@@ -46,7 +46,7 @@ class Worship_place extends BaseController
 	public function read($id)
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id,address, area_size, building_size, last_renovation, capacity FROM worship_place WHERE id = "' . $id . '"');
+		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id,address, capacity FROM worship_place WHERE id = "' . $id . '"');
 		$hasil = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -62,10 +62,10 @@ class Worship_place extends BaseController
 					'x' => $row['x'],
 					'y' => $row['y'],
 					'address' => $row['address'],
-					'area_size' => $row['area_size'],
-					'building_size' => $row['building_size'],
+					// 'area_size' => $row['area_size'],
+					// 'building_size' => $row['building_size'],
 					'capacity' => $row['capacity'],
-					'last_renovation' => $row['last_renovation'],
+					// 'last_renovation' => $row['last_renovation'],
 				)
 			);
 			array_push($hasil['features'], $features);
@@ -83,7 +83,7 @@ class Worship_place extends BaseController
 	public function create()
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,name,id,address, area_size, building_size, last_renovation, capacity FROM worship_place');
+		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,name,id,address, capacity FROM worship_place');
 		$hasil = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -97,10 +97,10 @@ class Worship_place extends BaseController
 					'id' => $row['id'],
 					'name' => $row['name'],
 					'address' => $row['address'],
-					'area_size' => $row['area_size'],
-					'building_size' => $row['building_size'],
+					// 'area_size' => $row['area_size'],
+					// 'building_size' => $row['building_size'],
 					'capacity' => $row['capacity'],
-					'last_renovation' => $row['last_renovation'],
+					// 'last_renovation' => $row['last_renovation'],
 				)
 			);
 			array_push($hasil['features'], $features);
@@ -115,10 +115,10 @@ class Worship_place extends BaseController
 				'id' => set_value('id'),
 				'name' => set_value('name'),
 				'address' => set_value('address'),
-				'area_size' => set_value('area_size'),
-				'building_size' => set_value('building_size'),
+				// 'area_size' => set_value('area_size'),
+				// 'building_size' => set_value('building_size'),
 				'capacity' => set_value('capacity'),
-				'last_renovation' => set_value('last_renovation'),
+				// 'last_renovation' => set_value('last_renovation'),
 				'geom' => set_value('geom'),
 			],
 			'status' => "Not Visible",
@@ -151,10 +151,10 @@ class Worship_place extends BaseController
 			'id' => $this->request->getVar('id'),
 			'name' => $this->request->getVar('name'),
 			'address' => $this->request->getVar('address'),
-			'area_size' => $this->request->getVar('area_size'),
-			'building_size' => $this->request->getVar('building_size'),
+			// 'area_size' => $this->request->getVar('area_size'),
+			// 'building_size' => $this->request->getVar('building_size'),
 			'capacity' => $this->request->getVar('capacity'),
-			'last_renovation' => $this->request->getVar('last_renovation'),
+			// 'last_renovation' => $this->request->getVar('last_renovation'),
 			'geom' => $this->request->getVar('geom'),
 
 		];
@@ -162,10 +162,10 @@ class Worship_place extends BaseController
 		$idx = "W" . $id;
 		$namex = $this->request->getVar('name');
 		$addressx = $this->request->getVar('address');
-		$area_sizex = $this->request->getVar('area_size');
-		$building_sizex = $this->request->getVar('building_size');
+		// $area_sizex = $this->request->getVar('area_size');
+		// $building_sizex = $this->request->getVar('building_size');
 		$capacityx = $this->request->getVar('capacity');
-		$last_renovationx = $this->request->getVar('last_renovation');
+		// $last_renovationx = $this->request->getVar('last_renovation');
 		$geomx = $this->request->getVar('geom');
 
 
@@ -204,7 +204,7 @@ class Worship_place extends BaseController
 	public function update($id)
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id,address, area_size, building_size, last_renovation, capacity FROM worship_place WHERE id="' . $id . '"');
+		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id,address, capacity FROM worship_place WHERE id="' . $id . '"');
 		$hasil = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -220,10 +220,10 @@ class Worship_place extends BaseController
 					'x' => $row['x'],
 					'y' => $row['y'],
 					'address' => $row['address'],
-					'area_size' => $row['area_size'],
-					'building_size' => $row['building_size'],
+					// 'area_size' => $row['area_size'],
+					// 'building_size' => $row['building_size'],
 					'capacity' => $row['capacity'],
-					'last_renovation' => $row['last_renovation'],
+					// 'last_renovation' => $row['last_renovation'],
 				)
 			);
 			array_push($hasil['features'], $features);
@@ -262,19 +262,19 @@ class Worship_place extends BaseController
 			'id' => $this->request->getVar('id'),
 			'name' => $this->request->getVar('name'),
 			'address' => $this->request->getVar('address'),
-			'area_size' => $this->request->getVar('area_size'),
-			'building_size' => $this->request->getVar('building_size'),
+			// 'area_size' => $this->request->getVar('area_size'),
+			// 'building_size' => $this->request->getVar('building_size'),
 			'capacity' => $this->request->getVar('capacity'),
-			'last_renovation' => $this->request->getVar('last_renovation'),
+			// 'last_renovation' => $this->request->getVar('last_renovation'),
 			'geom' => $this->request->getVar('geom'),
 		];
 		$idx = $this->request->getVar('id');
 		$namex = $this->request->getVar('name');
 		$addressx = $this->request->getVar('address');
-		$area_sizex = $this->request->getVar('area_size');
-		$building_sizex = $this->request->getVar('building_size');
+		// $area_sizex = $this->request->getVar('area_size');
+		// $building_sizex = $this->request->getVar('building_size');
 		$capacityx = $this->request->getVar('capacity');
-		$last_renovationx = $this->request->getVar('last_renovation');
+		// $last_renovationx = $this->request->getVar('last_renovation');
 		$geomx = $this->request->getVar('geom');
 		if ($_FILES['url']['error'] == 4 || ($_FILES['url']['size'] == 0 && $_FILES['url']['error'] == 0)) {
 			// cover_image is empty (and not an error), or no file was uploaded

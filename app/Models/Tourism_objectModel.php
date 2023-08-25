@@ -34,7 +34,7 @@ class Tourism_objectModel extends Model
     {
         if ($id == false) {
             $builder = $this->db->table('worship_place');
-            $builder->select('worship_place.id AS id_true, name, address, area_size, building_size, capacity, last_renovation, geom, id_category', false);
+            $builder->select('worship_place.id AS id_true, name, address, capacity, geom', false);
             // $builder->join('worship_gallery', 'worship_place.id=worship_gallery.id', 'LEFT');
             $query = $builder->get();
             return $query->getResult();
@@ -42,7 +42,7 @@ class Tourism_objectModel extends Model
         }
 
         $builder = $this->db->table('worship_place');
-        $builder->select('worship_place.id AS id_true, name, address, area_size, building_size, capacity, last_renovation, geom, url,id_category, id_gallery', false);
+        $builder->select('worship_place.id AS id_true, name, address, capacity, geom, url, id_gallery', false);
         $builder->join('worship_gallery', 'worship_place.id=worship_gallery.id', 'LEFT');
         $builder->where("worship_place.id", $id);
         $query = $builder->get();
@@ -53,14 +53,14 @@ class Tourism_objectModel extends Model
     {
         if ($id == false) {
             $builder = $this->db->table('souvenir_place');
-            $builder->select('souvenir_place.id AS id_true, name, address, capacity, contact_person, owner, geom, employee, open, close', false);
+            $builder->select('souvenir_place.id AS id_true, name, address, contact_person, owner, geom, open, close', false);
             // $builder->join('souvenir_gallery', 'souvenir_place.id=souvenir_gallery.id', 'LEFT');
             $query = $builder->get();
             return $query->getResult();
             // return $this->findAll();
         }
         $builder = $this->db->table('souvenir_place');
-        $builder->select('souvenir_place.id AS id_true, name, address, capacity, contact_person, owner, geom, employee, open, close, url, id_gallery', false);
+        $builder->select('souvenir_place.id AS id_true, name, address, contact_person, owner, geom, open, close, url, id_gallery', false);
         $builder->join('souvenir_gallery', 'souvenir_place.id=souvenir_gallery.id', 'LEFT');
         $builder->where("souvenir_place.id", $id);
         $query = $builder->get();
@@ -98,7 +98,7 @@ class Tourism_objectModel extends Model
             //     ->select('culinary.*')
             //     ->findAll();
             $builder = $this->db->table('culinary');
-            $builder->select('culinary.id AS id_true, culinary.name as name, address, contact_person, capacity, open, close, employee, geom, owner', false);
+            $builder->select('culinary.id AS id_true, culinary.name as name, address, contact_person, capacity, open, close, geom, owner', false);
             // $builder->join('culinary_gallery', 'culinary.id=culinary_gallery.id', 'LEFT');
             // $builder->join('culinary_facility', 'culinary.id=culinary_facility.id_culinary', 'LEFT');
             $query = $builder->get();
@@ -109,7 +109,7 @@ class Tourism_objectModel extends Model
         // ->join('culinary_gallery', 'culinary.id=culinary_gallery.id', 'LEFT')
         // ->where($this->primaryKey, $id)->first();
         $builder = $this->db->table('culinary');
-        $builder->select('culinary.id AS id_true, culinary.name as name, address, contact_person, capacity, open, close, employee, geom, owner, url, id_gallery', false);
+        $builder->select('culinary.id AS id_true, culinary.name as name, address, contact_person, capacity, open, close, geom, owner, url, id_gallery', false);
         $builder->join('culinary_gallery', 'culinary.id=culinary_gallery.id', 'LEFT');
         // $builder->join('culinary_detail_facility', 'culinary.id=culinary_detail_facility.id', 'LEFT');
         // $builder->join('culinary_facility', 'culinary_detail_facility.id_facility=culinary_facility.id_facility', 'LEFT');
@@ -129,7 +129,7 @@ class Tourism_objectModel extends Model
             //     ->select('culinary.*')
             //     ->findAll();
             $builder = $this->db->table('homestay');
-            $builder->select('homestay.id AS id_true, homestay.name as name, address, contact_person, capacity, open, close, price, geom, owner', false);
+            $builder->select('homestay.id AS id_true, homestay.name as name, address, contact_person, capacity, price, geom, owner', false);
             // $builder->join('homestay_gallery', 'culinary.id=culinary_gallery.id', 'LEFT');
             // $builder->join('culinary_facility', 'culinary.id=culinary_facility.id_culinary', 'LEFT');
             $query = $builder->get();
@@ -140,7 +140,7 @@ class Tourism_objectModel extends Model
         // ->join('culinary_gallery', 'culinary.id=culinary_gallery.id', 'LEFT')
         // ->where($this->primaryKey, $id)->first();
         $builder = $this->db->table('homestay');
-        $builder->select('homestay.id AS id_true, homestay.name as name, address, contact_person, capacity, open, close, price, geom, owner, url, homestay_facility.name as namex,id_gallery', false);
+        $builder->select('homestay.id AS id_true, homestay.name as name, address, contact_person, capacity, price, geom, owner, url, homestay_facility.name as namex,id_gallery', false);
         $builder->join('homestay_gallery', 'homestay.id=homestay_gallery.id', 'LEFT');
         $builder->join('homestay_detail_facility', 'homestay.id=homestay_detail_facility.id', 'LEFT');
         $builder->join('homestay_facility', 'homestay_detail_facility.id_facility=homestay_facility.id_facility', 'LEFT');

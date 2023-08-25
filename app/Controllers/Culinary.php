@@ -47,7 +47,7 @@ class Culinary extends BaseController
 	public function read($id)
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, open, close, employee, owner FROM culinary WHERE id = "' . $id . '"');
+		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom, St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y,name,id, address, contact_person, capacity, open, close, owner FROM culinary WHERE id = "' . $id . '"');
 		$hasil = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -67,7 +67,7 @@ class Culinary extends BaseController
 					'capacity' => $row['capacity'],
 					'open' => $row['open'],
 					'close' => $row['close'],
-					'employee' => $row['employee'],
+					// 'employee' => $row['employee'],
 					'owner' => $row['owner'],
 				)
 			);
@@ -158,7 +158,7 @@ class Culinary extends BaseController
 			'capacity' => $this->request->getVar('capacity'),
 			'open' => $this->request->getVar('open'),
 			'close' => $this->request->getVar('close'),
-			'employee' => $this->request->getVar('employee'),
+			// 'employee' => $this->request->getVar('employee'),
 			'geom' => $this->request->getVar('geom'),
 			'owner' => $this->request->getVar('owner'),
 
@@ -171,7 +171,7 @@ class Culinary extends BaseController
 		$capacityx = $this->request->getVar('capacity');
 		$openx = $this->request->getVar('open');
 		$closex = $this->request->getVar('close');
-		$employeex = $this->request->getVar('employee');
+		// $employeex = $this->request->getVar('employee');
 		$geomx = $this->request->getVar('geom');
 		$ownerx = $this->request->getVar('owner');
 
@@ -190,7 +190,7 @@ class Culinary extends BaseController
 
 		// Uplaod sampai sini
 
-		$query   = $db->query("INSERT INTO `culinary` (`id`, `name`, `address`, `contact_person`, `capacity`, `open`, `close`, `employee`, `geom`, `owner`) VALUES ('" . $idx . "', '" . $namex . "', '" . $addressx . "', '" . $contact_personx . "', '" . $capacityx . "', '" . $openx . "', '" . $closex . "', '" . $employeex . "', ST_GeomFromText('" . $geomx . "',0), '" . $ownerx . "')");
+		$query   = $db->query("INSERT INTO `culinary` (`id`, `name`, `address`, `contact_person`, `capacity`, `open`, `close`, `geom`, `owner`) VALUES ('" . $idx . "', '" . $namex . "', '" . $addressx . "', '" . $contact_personx . "', '" . $capacityx . "', '" . $openx . "', '" . $closex . "', ST_GeomFromText('" . $geomx . "',0), '" . $ownerx . "')");
 		// Query Upload
 		if ($statusUpload == "EMPTY") {
 		} else {
@@ -206,7 +206,7 @@ class Culinary extends BaseController
 	public function update($id)
 	{
 		$db = \Config\Database::connect();
-		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y, name,id, address, contact_person, capacity, open, close, employee, owner FROM culinary WHERE id="' . $id . '"');
+		$query   = $db->query('SELECT ST_AsGeoJSON(geom) as geom,St_X(ST_Centroid(geom)) as x, St_Y(ST_Centroid(geom)) as y, name,id, address, contact_person, capacity, open, close, owner FROM culinary WHERE id="' . $id . '"');
 		$hasil = array(
 			'type'    => 'FeatureCollection',
 			'features' => array()
@@ -226,7 +226,7 @@ class Culinary extends BaseController
 					'capacity' => $row['capacity'],
 					'open' => $row['open'],
 					'close' => $row['close'],
-					'employee' => $row['employee'],
+					// 'employee' => $row['employee'],
 					'owner' => $row['owner'],
 				)
 			);
@@ -321,7 +321,7 @@ class Culinary extends BaseController
 			'capacity' => $this->request->getVar('capacity'),
 			'open' => $this->request->getVar('open'),
 			'close' => $this->request->getVar('close'),
-			'employee' => $this->request->getVar('employee'),
+			// 'employee' => $this->request->getVar('employee'),
 			'geom' => $this->request->getVar('geom'),
 			'owner' => $this->request->getVar('owner'),
 		];
@@ -332,7 +332,7 @@ class Culinary extends BaseController
 		$capacityx = $this->request->getVar('capacity');
 		$openx = $this->request->getVar('open');
 		$closex = $this->request->getVar('close');
-		$employeex = $this->request->getVar('employee');
+		// $employeex = $this->request->getVar('employee');
 		$geomx = $this->request->getVar('geom');
 		$ownerx = $this->request->getVar('owner');
 		if ($_FILES['url']['error'] == 4 || ($_FILES['url']['size'] == 0 && $_FILES['url']['error'] == 0)) {
@@ -352,7 +352,7 @@ class Culinary extends BaseController
 		// // Uplaod sampai sini
 		// $this->Model->save($data);
 		$db = \Config\Database::connect();
-		$query   = $db->query("UPDATE `culinary` SET `name` = '" . $namex . "', `address` = '" . $addressx . "', `contact_person` = '" . $contact_personx . "', `capacity` = '" . $capacityx . "', `open` = '" . $openx . "', `close` = '" . $closex . "', `employee` = '" . $employeex . "', `geom` = ST_GeomFromText('" . $geomx . "',0), `owner` = '" . $ownerx . "' WHERE `culinary`.`id` = '" . $idx . "';");
+		$query   = $db->query("UPDATE `culinary` SET `name` = '" . $namex . "', `address` = '" . $addressx . "', `contact_person` = '" . $contact_personx . "', `capacity` = '" . $capacityx . "', `open` = '" . $openx . "', `close` = '" . $closex . "', `geom` = ST_GeomFromText('" . $geomx . "',0), `owner` = '" . $ownerx . "' WHERE `culinary`.`id` = '" . $idx . "';");
 		if ($statusUpload == "EMPTY") {
 		} else {
 

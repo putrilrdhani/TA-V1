@@ -39,6 +39,9 @@
                             ?>
                                 <!-- Ini Untuk Edit -->
                                 <div class="form-group">
+                                    <input type="text" class="form-control hide" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" required />
+                                </div>
+                                <div class="form-group">
                                     <label for="varchar">Name</label>
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="<?php echo $data[0]->name; ?>" required />
                                 </div>
@@ -53,9 +56,6 @@
                                 <div class="form-group">
                                     <label for="time">Close</label>
                                     <input type="time" class="form-control" autocomplete="off" name="close" id="close" placeholder="Close" value="<?php echo $data[0]->close; ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control hide" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" style="display: none;" required />
                                 </div>
 
                                 <div class="row">
@@ -141,6 +141,9 @@
                                 <!-- Ini untuk create -->
 
                                 <div class="form-group">
+                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" required />
+                                </div>
+                                <div class="form-group">
                                     <label for="varchar">Name</label>
                                     <input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Name" value="" required />
                                 </div>
@@ -155,9 +158,6 @@
                                 <div class="form-group">
                                     <label for="time">Close</label>
                                     <input type="time" class="form-control" autocomplete="off" name="close" id="close" placeholder="Close" value="" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" autocomplete="off" name="geom" id="geom" placeholder="Geom" value="" style="display: none;" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">Image</label>

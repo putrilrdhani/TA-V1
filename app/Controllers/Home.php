@@ -111,7 +111,7 @@ class Home extends BaseController
         //     return redirect()->to($redirectURL);
         // }
         if ($this->auth->check()) {
-            return redirect()->route('villages');
+            return redirect()->route('tourism_object');
         } else {
             return view('landing_page');
         }
