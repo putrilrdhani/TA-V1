@@ -16,6 +16,9 @@ $uri3 = $uri[3] ?? '';
                 <div class="d-flex justify-content-center avatar avatar-xl me-3" id="avatar-sidebar">
                     <img src="<?= base_url('media/photos/pesona_sumpu.png'); ?>" alt="" srcset="">
                 </div>
+                <script>
+                    let dataSessionJS = "false";
+                </script>
 
                 <?php
 
@@ -23,6 +26,9 @@ $uri3 = $uri[3] ?? '';
 
 
                 ?>
+                    <script>
+                        dataSessionJS = "true"
+                    </script>
                     <div class="p-2 d-flex justify-content-center">Hello, <?php echo $_SESSION['ses_name']; ?></div>
 
                 <?php
@@ -167,7 +173,7 @@ $uri3 = $uri[3] ?? '';
                     ?>
                         <li class="sidebar-item" id="rg-list">
                             <a href="<?= base_url('web/detail_booking'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-basket-shopping"></i><span>My Booking</span>
+                                <i class="fa-solid fa-basket-shopping"></i><span>My Package Booking</span>
                             </a>
                         </li>
                         <li class="sidebar-item" id="rg-list">

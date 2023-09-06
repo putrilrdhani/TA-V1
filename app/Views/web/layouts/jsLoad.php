@@ -9,6 +9,7 @@ if (isset($data[0]->geom)) {
         console.log("JS LOAD BERHASIL")
 
         function callAfterPut() {
+            console.log("INI BENAR-BENAR DIPANGGIL");
             let geom = <?php echo json_encode($geometry); ?>;
 
 
@@ -62,6 +63,39 @@ if (isset($data[0]->geom)) {
             );
 
 
+            if (typeView == "SOUVENIR") {
+                map.data.setStyle({
+                    clickable: false,
+                    fillColor: 'red',
+                    strokeWeight: 1
+                });
+            } else if (typeView == "CULINARY") {
+                map.data.setStyle({
+                    clickable: false,
+                    fillColor: '#8C001A',
+                    strokeWeight: 1
+                });
+            } else if (typeView == "EVENT") {
+                map.data.setStyle({
+                    clickable: false,
+                    fillColor: 'red',
+                    strokeWeight: 1
+                });
+            } else if (typeView == "WORSHIP") {
+                map.data.setStyle({
+                    clickable: false,
+                    fillColor: 'green',
+                    strokeWeight: 1
+                });
+            } else if (typeView == "HOMESTAY") {
+                map.data.setStyle({
+                    clickable: false,
+                    fillColor: 'orange',
+                    strokeWeight: 1
+                });
+            }
+
+
             console.log(geom['features'][0].properties.x);
             if (geom['features'][0].properties.x != "") {
                 let x = parseFloat(geom['features'][0].properties.x);
@@ -88,6 +122,7 @@ if (isset($data[0]->geom)) {
     ?>
         <script>
             let digitasiDB;
+            let typeView = "";
             console.log("JS LOAD BERHASIL")
 
             function callAfterPut() {
@@ -141,7 +176,11 @@ if (isset($data[0]->geom)) {
                 digitasiDB = map.data.addGeoJson(
                     geom
                 );
+
+
+
                 putCounter = 1;
+
             }
         </script>
 
@@ -152,6 +191,7 @@ if (isset($data[0]->geom)) {
         <script>
             function callAfterPut() {
                 console.log("data kosong");
+
             }
         </script>
 
@@ -161,4 +201,17 @@ if (isset($data[0]->geom)) {
 
 <?php
 }
+?>
+
+<?php
+
+if (isset($type)) {
+?>
+    <script>
+        typeView = "<?php echo $type ?>";
+    </script>
+
+<?php
+}
+
 ?>

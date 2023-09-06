@@ -124,10 +124,10 @@
                     <!-- Buat day dulu -->
                     <!--  -->
 
-
+                    <!-- 
                     <div class="d-flex p-2 bd-highlight">
                         <a class="btn btn-sm btn-danger" href="<?= \base_url('package') ?>">back</a>
-                    </div>
+                    </div> -->
 
 
 

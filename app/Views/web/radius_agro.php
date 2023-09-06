@@ -15,6 +15,7 @@
                         <div class="row" style="margin-left: 10px">
                             <button onclick=" radiusGPS()" data-toggle="tooltip" data-placement="bottom" title="Current Location" style="width:auto;float:left;margin:5px;" class="btn btn-info"><i class="fas fa-location"></i></button>
                             <button onclick="radiusManual()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-info"><i class="fas fa-map-marker-alt"></i></button>
+                            <button onclick="showHover()" disabled id="info_hover" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></button>
                             <div class="col-sm-5"> <input onchange="radiusChange()" type="range" min="0" max="10000" value="0" class="form-range" id="customRadius" style="margin-top: 10px;"></div>
                             <div class="col-sm-4"> <input onchange="radiusChangeType()" id="typeRadius" type="number" max="10000" class="form-control" placeholder="Meter"></div>
 

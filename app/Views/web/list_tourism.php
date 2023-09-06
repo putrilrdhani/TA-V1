@@ -19,38 +19,39 @@
                                 <button onclick=" radiusGPS_List()" data-toggle="tooltip" data-placement="bottom" title="Current Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-location"></i></button>
                                 <button onclick="radiusManual_List()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-map-marker-alt"></i></button>
                                 <button onclick="hideElement()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                                <button onclick="showHover()" disabled id="info_hover" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></button>
                             </div>
                         </div>
-
-                        <!-- Tambahkan ini -->
-                        <?= $this->include('web/layouts/map-body'); ?>
-
-                        <!-- Javascript untuk  memuat peta -->
-                        <?= $this->include('web/layouts/jsUser'); ?>
-
-                        <!-- Isi Disini -->
-                        <div class="row content">
-
-                        </div>
-
-                        <div class="col-sm-2"></div>
                     </div>
-                    <div class="d-flex p-2 bd-highlight">
+
+                    <!-- Tambahkan ini -->
+                    <?= $this->include('web/layouts/map-body'); ?>
+
+                    <!-- Javascript untuk  memuat peta -->
+                    <?= $this->include('web/layouts/jsUser'); ?>
+
+                    <!-- Isi Disini -->
+                    <div class="row content">
 
                     </div>
 
-                    <script>
-                        // $("#delete-button").prop("disabled", true);
-                        // $("#delete-map").prop("disabled", true);
-                        $("#delete-button").hide();
-                        $("#delete-map").hide();
-                    </script>
+                    <div class="col-sm-2"></div>
+                </div>
+                <div class="d-flex p-2 bd-highlight">
 
                 </div>
+
+                <script>
+                    // $("#delete-button").prop("disabled", true);
+                    // $("#delete-map").prop("disabled", true);
+                    $("#delete-button").hide();
+                    $("#delete-map").hide();
+                </script>
+
             </div>
-
-
         </div>
+
+
         <div class="col-md-4">
             <div class="card">
                 <div style="margin: 15px;">

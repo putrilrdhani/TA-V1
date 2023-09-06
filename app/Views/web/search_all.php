@@ -31,36 +31,37 @@ if (isset($search)) {
 
                                 <button onclick=" radiusGPS_List()" data-toggle="tooltip" data-placement="bottom" title="Current Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-location"></i></button>
                                 <button onclick="radiusManual_List()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-map-marker-alt"></i></button>
-                                <button onclick="hideElement()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                                <button onclick="hideElement()" data-toggle="tooltip" data-placement="bottom" title="Legend" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                                <button onclick="showHover()" disabled id="info_hover" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></button>
                             </div>
                         </div>
-
-                        <!-- Tambahkan ini -->
-                        <?= $this->include('web/layouts/map-body'); ?>
-
-                        <!-- Javascript untuk  memuat peta -->
-                        <?= $this->include('web/layouts/jsUser'); ?>
-
-                        <!-- Isi Disini -->
-                        <div class="row content">
-
-                        </div>
-
-                        <div class="col-sm-2"></div>
                     </div>
-                    <div class="d-flex p-2 bd-highlight">
+
+                    <!-- Tambahkan ini -->
+                    <?= $this->include('web/layouts/map-body'); ?>
+
+                    <!-- Javascript untuk  memuat peta -->
+                    <?= $this->include('web/layouts/jsUser'); ?>
+
+                    <!-- Isi Disini -->
+                    <div class="row content">
 
                     </div>
 
-                    <script>
-                        // $("#delete-button").prop("disabled", true);
-                        // $("#delete-map").prop("disabled", true);
-                        $("#panel").hide();
-                        $("#delete-button").hide();
-                        $("#delete-map").hide();
-                    </script>
+                    <div class="col-sm-2"></div>
+                </div>
+                <div class="d-flex p-2 bd-highlight">
 
                 </div>
+
+                <script>
+                    // $("#delete-button").prop("disabled", true);
+                    // $("#delete-map").prop("disabled", true);
+                    $("#panel").hide();
+                    $("#delete-button").hide();
+                    $("#delete-map").hide();
+                </script>
+
             </div>
 
 
@@ -99,31 +100,31 @@ if (isset($search)) {
                                 <tr>
                                     <td style="width: 80%;"><i class="fas fa-person-praying" style="color: green;"></i>&nbsp; &nbsp; <b>Worship</b></td>
                                     <td>
-                                        <button onclick="showWorship_All()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                                        <button onclick="showWorship_All()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i id="worship-eye" class="fas fa-eye"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 80%;"><i class="fas fa-gift" style="color:palevioletred;"></i>&nbsp; &nbsp; <b>Souvenir</b></td>
                                     <td>
-                                        <button onclick="showSouvenir_All()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                                        <button onclick="showSouvenir_All()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i id="souvenir-eye" class="fas fa-eye"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 80%;"><i class="fas fa-bullhorn" style="color: aqua;"></i>&nbsp; &nbsp; <b>Event</b></td>
                                     <td>
-                                        <button onclick="showEvent_All()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                                        <button onclick="showEvent_All()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i id="event-eye" class="fas fa-eye"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 80%;"><i class="fas fa-utensils" style="color: red;"></i>&nbsp; &nbsp; <b>Culinary</b></td>
                                     <td>
-                                        <button onclick="showCulinary_All()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                                        <button onclick="showCulinary_All()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i id="culinary-eye" class="fas fa-eye"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 80%;"><i class="fas fa-home" style="color: orange;"></i>&nbsp; &nbsp; <b>Homestay</b></td>
                                     <td>
-                                        <button onclick="showHomestay_All()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                                        <button onclick="showHomestay_All()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i id="homestay-eye" class="fas fa-eye"></i></button>
                                     </td>
                                 </tr>
                             </tbody>

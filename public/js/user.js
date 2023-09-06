@@ -364,17 +364,25 @@ function dirrectionManual_User(x, y, des) {
 }
 
 function buyPackage(id) {
-  // Order package
-  $("#userOrder").empty();
-  $("#userOrder").append(
-    "<div  style='margin: 15px;'><input type='text' style='display:none' id='id_package_order' value='" +
-      id +
-      "' class='form form-control'><b>Total member</b><br/><input type='number' min='1' id='total_member_manual' class='form form-control'><br/><b>Comment</b><br/><input type='text' id='comment_manual' class='form form-control'><br/><b>Booking Date</b><input type='date' id='date_manual' class='form form-control'> <br/><button onclick ='processOrder(" +
-      '"' +
-      id +
-      '"' +
-      ")' class='btn btn-info'>Order</button></div>"
-  );
+  // Check Session Data first
+  if (dataSessionJS == "false") {
+    Swal.fire("Login Required!");
+  } else {
+    // Order package
+
+    $("#userOrder").empty();
+    $("#userOrder").append(
+      "<div  style='margin: 15px;'><input type='text' style='display:none' id='id_package_order' value='" +
+        id +
+        "' class='form form-control'><b>Total member</b><br/><input type='number' min='1' id='total_member_manual' class='form form-control'><br/><b>Comment</b><br/><input type='text' id='comment_manual' class='form form-control'><br/><b>Booking Date</b><input type='date' id='date_manual'  class='form form-control'> <br/><button onclick ='processOrder(" +
+        '"' +
+        id +
+        '"' +
+        ")' class='btn btn-info'>Order</button></div>"
+    );
+
+    dateLimit();
+  }
 }
 
 function print(print) {
@@ -3979,7 +3987,7 @@ function initialize() {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     disableDefaultUI: true,
     zoomControl: true,
-    mapTypeId: "satellite",
+    mapTypeId: "roadmap",
 
     zoomControl: true,
     mapTypeControl: true,
@@ -3993,6 +4001,26 @@ function initialize() {
   map.setOptions({ styles: styles["hide"] });
   const iconBase = urlAplikasi + "media/icon/";
   const icons = {
+    payo: {
+      name: "Tanah Garam",
+      icon: iconBase + "payo.png",
+    },
+    solok: {
+      name: "Solok",
+      icon: iconBase + "solok.png",
+    },
+    sumbar: {
+      name: "Sumatera Barat",
+      icon: iconBase + "sumbar.png",
+    },
+    batas: {
+      name: "Batas Kota",
+      icon: iconBase + "bataskota.png",
+    },
+    bataskel: {
+      name: "Batas Kelurahan",
+      icon: iconBase + "bataskel.png",
+    },
     culinary: {
       name: "Culinary",
       icon: iconBase + "marker_cp.png",
@@ -4877,7 +4905,24 @@ function dirrectionManual(x, y, lat_y, lng_x) {
   countDirection = countDirection + 1;
 }
 
+function showHover() {
+  $("#info_hover").prop("disabled", true);
+  data_layer_3.setStyle({
+    clickable: true,
+    fillColor: "yellow",
+    strokeWeight: 1,
+    strokeColor: "blue",
+  });
+}
+
 function radiusManual_List() {
+  $("#info_hover").prop("disabled", false);
+  data_layer_3.setStyle({
+    clickable: false,
+    fillColor: "yellow",
+    strokeWeight: 1,
+    strokeColor: "blue",
+  });
   Swal.fire({
     title: "Click on the map to add the position manually",
     allowOutsideClick: () => {
@@ -4963,7 +5008,7 @@ function radiusManual_List() {
 
     infoWindow = new google.maps.InfoWindow();
 
-    infoWindow.setContent("Position<br/>" + lat_t + "<br/>" + lng_t);
+    infoWindow.setContent("Position<br/>" + lat_t + "<br/>" + lng_t + "<br/> ");
     // infoWindow.open(map);
 
     infoWindow.open(map, manualmarker[0]);
@@ -5156,6 +5201,13 @@ function radiusGPS() {
 }
 
 function radiusManual_NR() {
+  $("#info_hover").prop("disabled", false);
+  data_layer_3.setStyle({
+    clickable: false,
+    fillColor: "yellow",
+    strokeWeight: 1,
+    strokeColor: "blue",
+  });
   Swal.fire({
     title: "Click on the map to add the position manually",
     allowOutsideClick: () => {
@@ -5252,6 +5304,13 @@ function radiusManual_NR() {
 }
 
 function radiusManual() {
+  $("#info_hover").prop("disabled", false);
+  data_layer_3.setStyle({
+    clickable: false,
+    fillColor: "yellow",
+    strokeWeight: 1,
+    strokeColor: "blue",
+  });
   Swal.fire({
     title: "Click on the map to add the position manually",
     allowOutsideClick: () => {

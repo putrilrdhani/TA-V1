@@ -37,20 +37,8 @@ if ($type == "WORSHIP") {
                                             <td>: <?php echo $data[0]->address; ?></td>
                                         </tr>
                                         <tr>
-                                            <th width="15%" style="text-align: left;">Area Size</th>
-                                            <td>: <?php echo $data[0]->area_size; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th width="15%" style="text-align: left;">Building Size</th>
-                                            <td>: <?php echo $data[0]->building_size; ?></td>
-                                        </tr>
-                                        <tr>
                                             <th width="15%" style="text-align: left;">Capacity</th>
                                             <td>: <?php echo $data[0]->capacity; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th width="15%" style="text-align: left;">Last Renovation</th>
-                                            <td>: <?php echo $data[0]->last_renovation; ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -144,6 +132,7 @@ if ($type == "WORSHIP") {
 <?php
 } else if ($type == "SOUVENIR") {
 ?>
+
     <section class="section">
         <div class="row">
             <!--map-->

@@ -117,9 +117,9 @@
                     <!--  -->
 
 
-                    <div class="d-flex p-2 bd-highlight">
+                    <!-- <div class="d-flex p-2 bd-highlight">
                         <a class="btn btn-sm btn-danger" href="<?= \base_url('web/detail_booking') ?>">back</a>
-                    </div>
+                    </div> -->
                     <!-- <div>
                     <a href="#" onclick="print()" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i>&nbsp; Print</a>
                 </div> -->

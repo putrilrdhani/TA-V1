@@ -19,15 +19,20 @@
                                         <button onclick="radiusGPS()" data-toggle="tooltip" data-placement="bottom" title="Current Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-location"></i></button>
                                         <button onclick="radiusManual()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-map-marker-alt"></i></button>
 
-                                        <button onclick="hideElement()" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                                        <button onclick="hideElement()" data-toggle="tooltip" data-placement="bottom" title="Legend" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                                        <button onclick="showHover()" disabled id="info_hover" data-toggle="tooltip" data-placement="bottom" title="Manual Location" style="width:auto;float:left;margin:5px;" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></button>
                                     </div>
-                                    <div class="col d-flex"><input onchange="radiusChangeTypeTourism()" id="typeRadius" type="number" max="10000" class="form-control" placeholder="Meter">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <input onchange="radiusChangeTourism()" type="range" min="0" max="10000" value="0" class="form-range" id="customRadius" style="margin-top: 10px;">
                                 </div>
 
+
+                            </div>
+
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col d-flex" style="width: 30%;"><input onchange="radiusChangeTypeTourism()" id="typeRadius" type="number" max="10000" class="form-control" placeholder="Meter">
+                            </div>
+                            <div class="col d-flex">
+                                <input onchange="radiusChangeTourism()" type="range" min="0" max="10000" value="0" class="form-range" id="customRadius" style="margin-top: 10px;">
                             </div>
                         </div>
                         <!-- <div class="row">

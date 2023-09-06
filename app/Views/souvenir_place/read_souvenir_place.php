@@ -78,8 +78,6 @@
 										<div class="row">
 											<div class="col">
 												<a class="left" onclick="nextSlide(-1)"><i class="fa-solid fa-backward"></i>| </a>
-											</div>
-											<div class="col justify-content-right">
 												<a class="right" onclick="nextSlide(1)"> |<i class="fa-solid fa-forward"></i></a>
 											</div>
 										</div>

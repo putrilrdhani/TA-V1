@@ -96,7 +96,11 @@
                         </button>
                         <script>
                             function openModal() {
-                                $('#myModal').modal('show');
+                                if (dataSessionJS == "false") {
+                                    Swal.fire("Login Required!");
+                                } else {
+                                    $('#myModal').modal('show');
+                                }
                             }
 
                             function closeModal() {
@@ -123,6 +127,9 @@
                                 <div style="text-align: center; margin-bottom: 20px;">
                                     <h4><b>Custom Order</b></h4>
                                 </div>
+
+
+
 
                                 <div>
                                     <form id="dynamicForm" action="<?= base_url("web/custom_order") ?>" method="post" enctype="multipart/form-data" style="margin: 20px;">
@@ -177,11 +184,54 @@
                                         <div onclick="getNameField()" class="btn btn-info">Lock</div>
                                         <div class="d-flex p-2 bd-highlight">
                                             <div class="form-group">
-                                                <a class="btn btn-sm btn-danger" href="<?= base_url('package') ?>">Cancel</a>
+                                                <a class="btn btn-sm btn-danger" onclick="closeModal()">Cancel</a>
                                                 <button id="submitName" disabled class="btn btn-sm btn-primary" type="submit">SAVE</button>
                                             </div>
                                         </div>
                                     </form>
+
+                                    <script>
+                                        let todayOut;
+
+                                        function dateLimit_1() {
+                                            let today = new Date();
+                                            var dd = today.getDate();
+                                            var mm = today.getMonth() + 1; //January is 0!
+                                            var yyyy = today.getFullYear();
+
+                                            if (mm < 10) {
+                                                mm = "0" + mm;
+                                                console.log(mm);
+                                            }
+
+                                            today = yyyy + "-" + mm + "-" + dd;
+
+
+                                            todayOut = today;
+                                            document.getElementById("date").setAttribute("min", todayOut);
+                                        }
+
+                                        function dateLimit() {
+                                            let today = new Date();
+                                            var dd = today.getDate();
+                                            var mm = today.getMonth() + 1; //January is 0!
+                                            var yyyy = today.getFullYear();
+
+                                            if (mm < 10) {
+                                                mm = "0" + mm;
+                                                console.log(mm);
+                                            }
+
+                                            today = yyyy + "-" + mm + "-" + dd;
+
+
+                                            todayOut = today;
+                                            document.getElementById("date_manual").setAttribute("min", todayOut);
+
+                                        }
+
+                                        dateLimit_1();
+                                    </script>
 
 
                                 </div>
